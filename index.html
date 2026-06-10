@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amelia's by EAT — Platform Preview</title>
+<style>
+  :root { --ink:#241f17; --ink2:#6b6253; --cream:#f9f6e4; --olive:#5b6b3a; --gold:#9a7b2e; --line:#e4ddc7; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:var(--cream); line-height:1.55; }
+  .wrap { max-width:920px; margin:0 auto; padding:48px 22px 80px; }
+  header { border-bottom:1px solid var(--line); padding-bottom:24px; margin-bottom:32px; }
+  h1 { font-size:2rem; margin:0 0 6px; }
+  .lede { color:var(--ink2); margin:0 0 18px; max-width:60ch; }
+  .note { background:#fffdf2; border:1px solid var(--line); border-left:4px solid var(--gold); padding:12px 16px; border-radius:4px; color:var(--ink2); font-size:.92rem; }
+  .note b { color:var(--ink); }
+  a { color:var(--olive); }
+  h2 { font-size:1.05rem; letter-spacing:.04em; text-transform:uppercase; color:var(--gold); margin:36px 0 12px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; }
+  .card { display:block; padding:12px 14px; background:#fff; border:1px solid var(--line); border-radius:6px; text-decoration:none; color:var(--ink); font-weight:600; transition:border-color .15s, transform .1s; }
+  .card:hover { border-color:var(--olive); transform:translateY(-1px); }
+  .repo { font-weight:600; }
+  footer { margin-top:48px; color:var(--ink2); font-size:.85rem; border-top:1px solid var(--line); padding-top:18px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Amelia's by EAT — Platform</h1>
+      <p class="lede">Restaurant digital platform: website, online ordering, reservations, payments, QR feedback, and an admin dashboard. PHP 8 + MySQL.</p>
+      <p class="note"><b>Static preview.</b> GitHub Pages can't run PHP, so the links below are the design <b>mockups</b>, not the live app. The working app runs on PHP hosting. Source: <a class="repo" href="https://github.com/2KTay/amelias-platform">github.com/2KTay/amelias-platform</a>.</p>
+    </header>
+
+    <h2>Design spec</h2>
+    <div class="grid">
+      <a class="card" href="docs/superpowers/specs/2026-06-02-amelias-platform-design.html">Full platform design spec</a>
+    </div>
+
+    <h2>Customer-facing mockups</h2>
+    <div class="grid">
+      <a class="card" href="docs/superpowers/specs/mockups/home.html">Home</a>
+      <a class="card" href="docs/superpowers/specs/mockups/menu.html">Menu</a>
+      <a class="card" href="docs/superpowers/specs/mockups/item.html">Item detail</a>
+      <a class="card" href="docs/superpowers/specs/mockups/cart.html">Cart</a>
+      <a class="card" href="docs/superpowers/specs/mockups/checkout.html">Checkout</a>
+      <a class="card" href="docs/superpowers/specs/mockups/order-confirmation.html">Order confirmation</a>
+      <a class="card" href="docs/superpowers/specs/mockups/reserve.html">Reserve</a>
+      <a class="card" href="docs/superpowers/specs/mockups/market.html">Market</a>
+      <a class="card" href="docs/superpowers/specs/mockups/catering.html">Catering</a>
+      <a class="card" href="docs/superpowers/specs/mockups/giftcards.html">Gift cards</a>
+      <a class="card" href="docs/superpowers/specs/mockups/wineclub.html">Wine club</a>
+      <a class="card" href="docs/superpowers/specs/mockups/supper.html">Sunday supper</a>
+      <a class="card" href="docs/superpowers/specs/mockups/feedback.html">QR feedback</a>
+      <a class="card" href="docs/superpowers/specs/mockups/story.html">Our story</a>
+      <a class="card" href="docs/superpowers/specs/mockups/location.html">Location</a>
+      <a class="card" href="docs/superpowers/specs/mockups/purveyors.html">Purveyors</a>
+      <a class="card" href="docs/superpowers/specs/mockups/careers.html">Careers</a>
+      <a class="card" href="docs/superpowers/specs/mockups/account.html">Account</a>
+      <a class="card" href="docs/superpowers/specs/mockups/auth.html">Sign in</a>
+    </div>
+
+    <h2>Admin dashboard mockups</h2>
+    <div class="grid">
+      <a class="card" href="docs/superpowers/specs/mockups/admin-dashboard.html">Dashboard</a>
+      <a class="card" href="docs/superpowers/specs/mockups/admin-orders.html">Orders</a>
+      <a class="card" href="docs/superpowers/specs/mockups/admin-menu.html">Menu</a>
+      <a class="card" href="docs/superpowers/specs/mockups/admin-inventory.html">Inventory</a>
+      <a class="card" href="docs/superpowers/specs/mockups/admin-reservations.html">Reservations</a>
+      <a class="card" href="docs/superpowers/specs/mockups/admin-customers.html">Customers</a>
+      <a class="card" href="docs/superpowers/specs/mockups/admin-feedback.html">Feedback</a>
+      <a class="card" href="docs/superpowers/specs/mockups/admin-reports.html">Reports</a>
+      <a class="card" href="docs/superpowers/specs/mockups/admin-content.html">Content</a>
+      <a class="card" href="docs/superpowers/specs/mockups/admin-media.html">Media</a>
+      <a class="card" href="docs/superpowers/specs/mockups/admin-settings.html">Settings</a>
+      <a class="card" href="docs/superpowers/specs/mockups/admin-users.html">Users</a>
+      <a class="card" href="docs/superpowers/specs/mockups/admin-team.html">Team</a>
+      <a class="card" href="docs/superpowers/specs/mockups/admin-login.html">Admin login</a>
+    </div>
+
+    <footer>
+      Static design preview · built with GitHub Pages · the live PHP app is deployed separately.
+    </footer>
+  </div>
+</body>
+</html>
