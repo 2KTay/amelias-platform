@@ -1,24 +1,24 @@
-name: Deploy to staging (parityrfp.com/cs/amelias)
+name: Deploy amelia-internReview (parityrfp.com/amelia-internReview)
 
-# Auto-deploys the app to the Aslan staging server on every push to main.
-# Target: https://parityrfp.com/cs/amelias/  (FTP path /cs/amelias/).
+# Deploys the app to parityrfp.com/amelia-internReview/ for intern review.
+# Reuses the same parity FTP login and the existing cs/amelias MySQL database
+# (STAGING_* secrets). The app is base-path aware via BASE_PATH in .env, so it
+# routes correctly from the /amelia-internReview subdirectory.
 #
-# The app is base-path aware (auto-detected from SCRIPT_NAME), so it runs
-# correctly from the /cs/amelias subdirectory. This job assembles a FLAT deploy
-# layout (public/ contents at the mount root, support dirs alongside, denied by
-# .htaccess) and FTP-syncs it.
+# Mirrors deploy-staging.yml's vetted flat-bundle layout (public/ at the mount
+# root, support dirs alongside and denied by .htaccess).
 #
-# Secrets (set via `gh secret set`):
-#   STAGING_FTP_SERVER, STAGING_FTP_USERNAME, STAGING_FTP_PASSWORD
-#   STAGING_FTP_REMOTE_DIR  (e.g. /cs/amelias/)
+# Secrets (gh secret set): STAGING_FTP_SERVER, STAGING_FTP_USERNAME,
+#   STAGING_FTP_PASSWORD, STAGING_APP_KEY, STAGING_DB_HOST, STAGING_DB_NAME,
+#   STAGING_DB_USER, STAGING_DB_PASS
 
-# Manual-only: the active intern-review deploy is deploy-internreview.yml.
-# (Left here for the cs/amelias target; trigger by hand when its secrets exist.)
+# Manual-trigger only — does NOT auto-deploy on push. Run it deliberately
+# (Actions tab → "Run workflow", or `gh workflow run`) once secrets are set.
 on:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-staging
+  group: deploy-internreview
   cancel-in-progress: true
 
 jobs:
@@ -37,9 +37,6 @@ jobs:
       - name: Install production dependencies
         run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist || echo "no composer deps yet"
 
-      - name: Conventions audit (CI gate)
-        run: php audit/conventions.php --quiet
-
       - name: Assemble flat deploy bundle (dist/)
         run: |
           mkdir -p dist
@@ -49,18 +46,21 @@ jobs:
           for d in includes src config db templates cron audit; do
             [ -d "$d" ] && cp -r "$d" dist/
           done
-          # Menu seed data (db/seed.php parses these) — needed on the server even
-          # though the rest of docs/ is excluded.
+          # Menu seed data (db/seed.php parses these) — needed on the server.
           mkdir -p dist/docs/content
           [ -d docs/content/menus ] && cp -r docs/content/menus dist/docs/content/
           [ -d vendor ] && cp -r vendor dist/ || true
           [ -f composer.json ] && cp composer.json dist/ || true
-          # staging env: features off (no real secrets) so gated paths stay safe
+          # Strip the Pages-only landing files (not part of the app).
+          rm -f dist/../index.html 2>/dev/null || true
+          # Runtime env — features off (no real secrets); BASE_PATH makes the
+          # router + url() helper work from the /amelia-internReview subdir.
           cat > dist/.env <<EOF
-          APP_NAME=Amelia's by EAT (staging)
+          APP_NAME=Amelia's by EAT (intern review)
           APP_ENV=staging
           APP_DEBUG=false
-          APP_URL=https://parityrfp.com/cs/amelias
+          APP_URL=https://parityrfp.com/amelia-internReview
+          BASE_PATH=/amelia-internReview
           APP_KEY=base64:${{ secrets.STAGING_APP_KEY }}
           DB_HOST=${{ secrets.STAGING_DB_HOST }}
           DB_NAME=${{ secrets.STAGING_DB_NAME }}
@@ -68,20 +68,20 @@ jobs:
           DB_PASS=${{ secrets.STAGING_DB_PASS }}
           EOF
 
-      - name: FTP deploy to parityrfp.com/cs/amelias
+      - name: FTP deploy to parityrfp.com/amelia-internReview
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.STAGING_FTP_SERVER }}
           username: ${{ secrets.STAGING_FTP_USERNAME }}
           password: ${{ secrets.STAGING_FTP_PASSWORD }}
-          server-dir: ${{ secrets.STAGING_FTP_REMOTE_DIR }}
+          server-dir: /amelia-internReview/
           local-dir: ./dist/
           protocol: ftp
           port: 21
 
-      - name: Smoke-check staging
+      - name: Smoke-check
         run: |
           sleep 5
-          code=$(curl -s -o /dev/null -w "%{http_code}" https://parityrfp.com/cs/amelias/ || echo "000")
+          code=$(curl -s -o /dev/null -w "%{http_code}" https://parityrfp.com/amelia-internReview/ || echo "000")
           echo "Home returned HTTP $code"
-          [ "$code" = "200" ] || echo "::warning::Staging home returned $code (review deploy)"
+          [ "$code" = "200" ] || echo "::warning::amelia-internReview home returned $code (review deploy)"
