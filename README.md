@@ -5,11 +5,13 @@ online ordering/menu, reservations, payments, QR feedback → Google Reviews,
 and an admin dashboard. Built on PHP 8+, MySQL/MariaDB, deployed on
 GoDaddy/cPanel.
 
-## 🔗 Live (staging / parity)
+## 🔗 GitHub Pages
 
-**https://TBD-new-parity-link/** _(placeholder — update with the new parity URL)_
+**https://2ktay.github.io/amelias-platform/**
 
-This is the active parity environment — the latest build of the platform.
+> ⚠️ Static landing page only. GitHub Pages cannot run PHP, so this is **not**
+> the working ordering/menu/cart app — that requires PHP hosting (cPanel /
+> staging). Use this link for a static preview of the project.
 
 ## Stack
 
