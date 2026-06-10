@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Purveyors — Amelia's by EAT</title>
+<!--
+  PURVEYORS — public sub-page on approved v3 design system.
+  Source-to-plate: ethos + named local partners. Shared CSS (brand-v3.css).
+  Display Fraunces (provisional Audrey stand-in), body Montserrat.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-v3.css">
+<style>
+  /* page-specific tweaks only */
+  .ethos{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,6vw,72px);align-items:center}
+  .ethos .kicker{display:block;margin-bottom:10px}
+  .ethos h2{font-size:clamp(2rem,4.4vw,3.2rem)}
+  .ethos p{color:var(--ink-2);margin:16px 0 0}
+  .ethos__note{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink);font-size:1.3rem;margin-top:24px;line-height:1.3}
+  .purv__head{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;line-height:1.15;display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+  .purv__where{font-family:'Fraunces',serif;font-style:italic;font-size:.95rem;color:var(--gold-ink);white-space:nowrap}
+  .purv__body p{color:var(--ink-2);font-size:.95rem;margin:10px 0 0}
+  .purv__tie{display:block;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);margin-top:14px}
+  .purv__more{grid-column:1/-1;background:var(--ink);color:var(--cream);border-radius:var(--r);
+    padding:clamp(28px,4vw,44px);text-align:center}
+  .purv__more h3{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.2rem);color:var(--cream);margin:0}
+  .purv__more p{color:#dcd7c6;max-width:46ch;margin:12px auto 0;font-size:1rem}
+  @media(max-width:980px){.ethos{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<header class="nav"><div class="nav__in">
+  <a href="home-v3.html" aria-label="Amelia's by EAT — home"><img class="nav__logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></a>
+  <nav class="nav__links" id="navlinks">
+    <a class="lnk" href="menu.html">Menu</a>
+    <a class="lnk" href="market.html">Market</a>
+    <a class="lnk" href="wineclub.html">Wine Club</a>
+    <a class="lnk" href="supper.html">Sunday Supper</a>
+    <a class="lnk" href="catering.html">Catering</a>
+    <a class="lnk" href="story.html">Our Story</a>
+    <a class="btn" href="reserve.html">Reserve</a>
+    <a class="btn btn--solid" href="menu.html">Order</a>
+  </nav>
+  <button class="nav__burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('navlinks');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <img src="../../../../images/banner-alternate-1536x1024.jpg" alt="Bright daylight spread of fresh greens, plated dishes and pastel glassware on cream linen">
+  <div class="page-hero__in">
+    <h1>Our Purveyors</h1>
+    <p>Thoughtful care in the kitchen begins with thoughtful care at the source. We build our menu around the people who grow, bake, and raise it.</p>
+  </div>
+</section>
+
+<!-- ETHOS -->
+<section class="section"><div class="container">
+  <div class="ethos">
+    <div>
+      <span class="kicker">Source to plate</span>
+      <h2 class="disp">The good stuff starts upstream</h2>
+    </div>
+    <div>
+      <p>Everything we serve carries the work of someone we know. We prioritize local farmers and artisan growers — the bakers, dairies, and ranchers of the great state 48 — because the freshest, most honest ingredients come from people who care as much as we do.</p>
+      <p>Scratch-made, seed-oil free, no preservatives, grass-fed and organic where it counts. When a vegetable travels a few miles instead of a few thousand, you can taste the difference, and so can your family.</p>
+      <p class="ethos__note">Meet a few of the Arizona makers behind the menu.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- PURVEYORS GRID -->
+<section class="section section--soft"><div class="container">
+  <div class="head"><h2 class="disp">Who we work with</h2><p>A short list of the partners whose work shows up on your plate, day in and day out.</p></div>
+
+  <div class="grid grid--3">
+
+    <article class="card">
+      <div class="card__body purv__body">
+        <div class="purv__head"><span>Noble Bread</span><span class="purv__where">Phoenix</span></div>
+        <p>Naturally leavened, slow-fermented loaves baked daily — homestyle white, baguette, and a buttery brioche.</p>
+        <span class="purv__tie">Our toasts, sandwiches &amp; boards</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card__body purv__body">
+        <div class="purv__head"><span>Steadfast Farm</span><span class="purv__where">Scottsdale</span></div>
+        <p>A neighboring farm just up the road — pasture-raised eggs and bright, just-picked greens.</p>
+        <span class="purv__tie">Our deviled eggs &amp; arugula salad</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card__body purv__body">
+        <div class="purv__head"><span>Crow's Dairy</span><span class="purv__where">Buckeye</span></div>
+        <p>Family goat dairy crafting their signature "goatija" and fresh goat cheese — tangy, creamy, local.</p>
+        <span class="purv__tie">Our cheese boards &amp; spreads</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card__body purv__body">
+        <div class="purv__head"><span>Fra'Mani</span><span class="purv__where">Artisan charcuterie</span></div>
+        <p>Old-world salumi made simply and well — including a sweet apple ham we reach for again and again.</p>
+        <span class="purv__tie">Our build-your-own boards</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card__body purv__body">
+        <div class="purv__head"><span>Sweet Republic</span><span class="purv__where">Scottsdale</span></div>
+        <p>Award-winning small-batch creamery — their vanilla bean ice cream is the real deal.</p>
+        <span class="purv__tie">Our desserts &amp; affogato</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card__body purv__body">
+        <div class="purv__head"><span>Jones</span><span class="purv__where">Organic soda</span></div>
+        <p>Cane-sweetened organic root beer — the kind of fizz that pairs with a long, easy lunch.</p>
+        <span class="purv__tie">Our cooler &amp; floats</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card__body purv__body">
+        <div class="purv__head"><span>Copper State</span><span class="purv__where">Arizona ranch</span></div>
+        <p>Grass-fed, well-raised beef — including the tri tip we slow-cook for boards and evening plates.</p>
+        <span class="purv__tie">Our evening boards</span>
+      </div>
+    </article>
+
+    <div class="purv__more">
+      <h3 class="disp">…and many more local makers</h3>
+      <p>From specialty salts to the small businesses on our gift wall — we're always looking for the next neighbor to source from.</p>
+    </div>
+
+  </div>
+</div></section>
+
+<!-- CLOSING SPLIT -->
+<section class="split">
+  <div class="split__media"><img src="../../../../images/themarket.jpg" alt="Overhead of Amelia's market goods — house granola, oils, salts, root chips and energy bites"></div>
+  <div class="split__body section--soft">
+    <h2 class="disp">Taste the source</h2>
+    <p>Many of the same ingredients our purveyors supply are bottled, jarred, and bagged for your own kitchen. Browse the market, or come sit down and let us plate it for you.</p>
+    <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn btn--solid" href="market.html">Visit the Market</a>
+      <a class="btn" href="menu.html">See the Menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div><div class="foot__brand"><img src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></div><p style="max-width:34ch;margin:18px 0 0;color:#a8a395;font-size:.92rem">A conscious, made-from-scratch, all-day eating place &amp; market in Scottsdale.</p></div>
+    <div><h4>Visit</h4><a href="location.html">8240 N Hayden Rd, B-105<br>Scottsdale, AZ 85258</a><a href="tel:6024995195">(602) 499-5195</a><a href="mailto:info@ameliasaz.com">info@ameliasaz.com</a></div>
+    <div><h4>Hours</h4><a>Sun &nbsp;7a&ndash;3p</a><a>Mon&ndash;Thu &nbsp;7a&ndash;8p</a><a>Fri&ndash;Sat &nbsp;7a&ndash;close</a></div>
+    <div><h4>More</h4><a href="careers.html">Now Hiring</a><a href="story.html">Our Values</a><a href="purveyors.html">Our Purveyors</a><a href="giftcards.html">Gift Cards</a><a href="https://www.instagram.com/ameliasbyeat/">Instagram</a></div>
+  </div>
+  <div class="foot__base"><span>&copy; 2026 Amelia's by EAT &middot; Scottsdale, Arizona</span><span>Eat &amp; drink local.</span></div>
+</footer>
+
+</div>
+</body>
+</html>

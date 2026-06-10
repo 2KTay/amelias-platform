@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Location &amp; Contact — Amelia's by EAT</title>
+<!--
+  LOCATION v3 — public storefront mockup on the approved v3 design system.
+  Shared system in brand-v3.css. Display face Fraunces is a PROVISIONAL stand-in
+  for the licensed "Audrey". Prototype only.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-v3.css">
+<style>
+/* page-specific tweaks only */
+.visit{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,72px);align-items:start}
+.visit__info dl{margin:26px 0 0;display:grid;grid-template-columns:auto 1fr;gap:10px 28px}
+.visit__info dt{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink)}
+.visit__info dd{margin:0;color:var(--ink-2)}
+.visit__info dd a{border-bottom:1.5px solid var(--olive)}
+.visit__see{font-family:'Fraunces',serif;font-style:italic;font-size:1.5rem;color:var(--ink);margin:14px 0 0}
+.visit__note{color:var(--sage);font-size:.9rem;margin:22px 0 0;max-width:42ch}
+.map-box{aspect-ratio:4/3;background:var(--cream-2);border:1px solid var(--line);border-radius:var(--r);
+  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.map-box__label{font-family:'Fraunces',serif;font-style:italic;color:var(--sage);font-size:1.1rem;letter-spacing:.02em}
+.map-box__pin{position:absolute;top:14px;left:14px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+.contact-form{max-width:680px}
+@media(max-width:980px){
+  .visit{grid-template-columns:1fr}
+  .map-box{order:-1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<header class="nav"><div class="nav__in">
+  <a href="home-v3.html" aria-label="Amelia's by EAT — home"><img class="nav__logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></a>
+  <nav class="nav__links" id="navlinks">
+    <a class="lnk" href="menu.html">Menu</a>
+    <a class="lnk" href="market.html">Market</a>
+    <a class="lnk" href="wineclub.html">Wine Club</a>
+    <a class="lnk" href="supper.html">Sunday Supper</a>
+    <a class="lnk" href="catering.html">Catering</a>
+    <a class="lnk" href="story.html">Our Story</a>
+    <a class="btn" href="reserve.html">Reserve</a>
+    <a class="btn btn--solid" href="menu.html">Order</a>
+  </nav>
+  <button class="nav__burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('navlinks');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <img src="../../../../images/5I8A7492-1024x1536.jpeg" alt="Amelia's dining room — slatted-wood wall, woven-leather chairs, globe sconces and cacti in warm light">
+  <div class="page-hero__in">
+    <h1>Come visit</h1>
+    <p>See you in sunny Scottsdale — counter service by day, table service in the evening, and a market to take home.</p>
+  </div>
+</section>
+
+<!-- VISIT: details + map -->
+<section class="section"><div class="container visit">
+  <div class="visit__info">
+    <h2 class="disp">Find us in McCormick Ranch</h2>
+    <p class="visit__see serif-it">Families always welcome.</p>
+    <dl>
+      <dt>Where</dt>
+      <dd>8240 N Hayden Road, Ste B-105<br>Scottsdale, AZ 85258</dd>
+      <dt>Hours</dt>
+      <dd>Sun&nbsp;7a&ndash;3p<br>Mon&ndash;Thu&nbsp;7a&ndash;8p<br>Fri&ndash;Sat&nbsp;7a&ndash;close</dd>
+      <dt>Call</dt>
+      <dd><a href="tel:6024995195">(602) 499-5195</a></dd>
+      <dt>Email</dt>
+      <dd><a href="mailto:info@ameliasaz.com">info@ameliasaz.com</a></dd>
+    </dl>
+    <p class="visit__note">We're on N Hayden Road at the McCormick Ranch shops. Free surface parking out front, with additional spaces wrapping around the back of the building.</p>
+    <div style="margin-top:28px"><a class="btn btn--solid" href="https://maps.google.com/?q=8240+N+Hayden+Road+B-105+Scottsdale+AZ+85258">Get directions</a></div>
+  </div>
+  <div class="map-box" role="img" aria-label="Map showing Amelia's by EAT at 8240 N Hayden Road, Ste B-105, Scottsdale">
+    <span class="map-box__pin">8240 N Hayden Rd</span>
+    <span class="map-box__label">Map</span>
+  </div>
+</div></section>
+
+<!-- CONTACT FORM -->
+<section class="section section--soft"><div class="container">
+  <div class="head">
+    <h2 class="disp">Send us a note</h2>
+    <p>Questions about hours, large orders, private events, or anything else? Drop us a line and we'll get back to you.</p>
+  </div>
+  <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+    <div class="field">
+      <label for="name">Name <span class="req">*</span></label>
+      <input class="input" type="text" id="name" name="name" autocomplete="name" required>
+    </div>
+    <div class="field">
+      <label for="email">Email <span class="req">*</span></label>
+      <input class="input" type="email" id="email" name="email" autocomplete="email" required>
+    </div>
+    <div class="field">
+      <label for="message">Message <span class="req">*</span></label>
+      <textarea class="textarea" id="message" name="message" rows="6" required></textarea>
+    </div>
+    <div class="form-actions">
+      <a class="btn form-actions__left" href="home-v3.html">Cancel</a>
+      <button class="btn btn--solid" type="submit">Send</button>
+    </div>
+  </form>
+</div></section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div><div class="foot__brand"><img src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></div><p style="max-width:34ch;margin:18px 0 0;color:#a8a395;font-size:.92rem">A conscious, made-from-scratch, all-day eating place &amp; market in Scottsdale.</p></div>
+    <div><h4>Visit</h4><a href="location.html">8240 N Hayden Rd, B-105<br>Scottsdale, AZ 85258</a><a href="tel:6024995195">(602) 499-5195</a><a href="mailto:info@ameliasaz.com">info@ameliasaz.com</a></div>
+    <div><h4>Hours</h4><a>Sun &nbsp;7a&ndash;3p</a><a>Mon&ndash;Thu &nbsp;7a&ndash;8p</a><a>Fri&ndash;Sat &nbsp;7a&ndash;close</a></div>
+    <div><h4>More</h4><a href="careers.html">Now Hiring</a><a href="story.html">Our Values</a><a href="purveyors.html">Our Purveyors</a><a href="giftcards.html">Gift Cards</a><a href="https://www.instagram.com/ameliasbyeat/">Instagram</a></div>
+  </div>
+  <div class="foot__base"><span>&copy; 2026 Amelia's by EAT &middot; Scottsdale, Arizona</span><span>Eat &amp; drink local.</span></div>
+</footer>
+
+</div>
+</body>
+</html>

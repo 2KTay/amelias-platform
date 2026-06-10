@@ -1,0 +1,88 @@
+/* Admin dashboard (screen 19) — operations overview.
+   Mobile-first single column; two-column queue/reservations at >=900px.
+   Tokens only — no raw hex. */
+
+/* Page header title group: title + subtitle stacked tightly on the left so the
+   page header's space-between leaves room for future header actions on the right. */
+.admin-head__title { display: flex; flex-direction: column; gap: 2px; }
+.dash-sub { margin: 0; font-size: 0.9rem; }
+
+.kpi__sub { display: block; font-size: 0.74rem; font-weight: 400; color: var(--sage); margin-top: 2px; }
+
+/* Panel action link — sits on the same baseline as the panel title (the parent
+   .admin-head uses align-items: baseline). */
+.dash-link { font-size: 0.82rem; font-weight: 600; color: var(--accent); white-space: nowrap; }
+
+/* Uniform vertical rhythm between the dashboard's top-level sections (KPI row,
+   panels, two-column block, alert). The shared .mt-6 utility (40px) is too large
+   here; 24px matches the gap between the side-by-side panels for a calm, even
+   grid. Scoped to the dashboard so other pages keep the utility's spacing. */
+.kpi-grid.mt-6,
+.dash-cols.mt-6,
+.admin-card.mt-6,
+.dash-alert.mt-6 { margin-top: var(--space-5); }
+
+.dash-cols { display: grid; grid-template-columns: 1fr; gap: var(--space-5); align-items: start; }
+
+/* Upcoming reservations list */
+.dash-rez { list-style: none; margin: 0; padding: 0; }
+.dash-rez li { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+.dash-rez li:last-child { border-bottom: 0; }
+.dash-rez__time { font-weight: 600; min-width: 72px; }
+.dash-rez__name { flex: 1; font-size: 0.9rem; }
+
+.num { font-variant-numeric: tabular-nums; }
+
+/* Low-stock alert strip */
+.dash-alert { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--c-warn-bg); border: 1px solid var(--c-warn-ink); color: var(--c-warn-ink); padding: 12px 16px; border-radius: var(--r); }
+.dash-alert__lead { font-weight: 600; }
+.dash-alert__cta { margin-left: auto; }
+
+/* Revenue by stream — labeled horizontal bars (no JS chart lib) */
+.dash-streams { list-style: none; margin: 0; padding: 0; }
+.dash-stream { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.dash-stream:last-child { border-bottom: 0; }
+.dash-stream__head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+.dash-stream__label { font-size: 0.9rem; font-weight: 600; }
+.dash-stream__val { font-size: 0.82rem; color: var(--ink-2); white-space: nowrap; }
+.dash-stream__track { height: 8px; background: var(--cream-2); border-radius: 999px; overflow: hidden; }
+.dash-stream__bar { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 999px; }
+
+/* Width buckets (rounded to nearest 5%) — keeps all styling in the stylesheet */
+.dash-stream__bar--w0 { width: 0; }
+.dash-stream__bar--w5 { width: 5%; }
+.dash-stream__bar--w10 { width: 10%; }
+.dash-stream__bar--w15 { width: 15%; }
+.dash-stream__bar--w20 { width: 20%; }
+.dash-stream__bar--w25 { width: 25%; }
+.dash-stream__bar--w30 { width: 30%; }
+.dash-stream__bar--w35 { width: 35%; }
+.dash-stream__bar--w40 { width: 40%; }
+.dash-stream__bar--w45 { width: 45%; }
+.dash-stream__bar--w50 { width: 50%; }
+.dash-stream__bar--w55 { width: 55%; }
+.dash-stream__bar--w60 { width: 60%; }
+.dash-stream__bar--w65 { width: 65%; }
+.dash-stream__bar--w70 { width: 70%; }
+.dash-stream__bar--w75 { width: 75%; }
+.dash-stream__bar--w80 { width: 80%; }
+.dash-stream__bar--w85 { width: 85%; }
+.dash-stream__bar--w90 { width: 90%; }
+.dash-stream__bar--w95 { width: 95%; }
+.dash-stream__bar--w100 { width: 100%; }
+
+/* Recent feedback list */
+.dash-fb { list-style: none; margin: 0; padding: 0; }
+.dash-fb li { padding: 13px 0; border-bottom: 1px solid var(--line); }
+.dash-fb li:last-child { border-bottom: 0; }
+.dash-fb__top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 2px; }
+.dash-fb__name { font-size: 0.9rem; font-weight: 600; }
+.dash-fb__meta { font-size: 0.78rem; margin-bottom: 4px; }
+.dash-fb__txt { font-size: 0.88rem; color: var(--ink-2); margin: 0; }
+
+.stars { color: var(--gold-ink); letter-spacing: 1px; white-space: nowrap; }
+.stars__dim { color: var(--line); }
+
+@media (min-width: 900px) {
+  .dash-cols { grid-template-columns: 1fr 1fr; }
+}

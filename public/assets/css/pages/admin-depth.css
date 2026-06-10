@@ -1,0 +1,141 @@
+/* admin-depth.css — page-specific layout for the Phase 6 admin screens
+   (Customers, Reports, Inventory, Users, Feedback). Reuses shared tokens and
+   the admin shell; only adds structures the shared CSS does not already cover.
+   Mobile-first: stacked by default, multi-column at >=820px. */
+
+/* Page-head row with title + actions */
+.admin-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.admin-head__actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.role-select { display: inline-flex; align-items: center; width: auto; min-height: 40px; padding: 6px 28px 6px 12px; font-size: .85rem; font-weight: 500; }
+
+/* Search row */
+.admin-search { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+.admin-search .input { max-width: 360px; }
+
+/* "Signed in as" chip + small panel timestamp */
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 600; padding: 5px 12px; border-radius: 999px; background: var(--bg-soft); color: var(--ink-2); }
+.panel-stamp { font-size: 0.82rem; color: var(--sage); }
+
+/* Range filter bar (reports) */
+.filter-bar { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 0; }
+.filter-bar .field { margin-bottom: 0; }
+.filter-bar .input, .filter-bar .select { width: auto; }
+
+/* Focusable scroll region for wide tables at the table breakpoint; below 820px
+   the shared .admin-tbl card-stacks (no horizontal scroll), so overflow only
+   matters once the real table layout is restored. */
+.table-wrap { overflow-x: auto; }
+.table-wrap:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Numeric / date / priority column treatments on the shared admin-tbl.
+   Card-stack mobile layout still applies; these refine the >=820px table. */
+.admin-tbl caption { text-align: left; }
+
+/* Primary column (item / name): the row's anchor — slightly stronger weight so
+   the eye lands on it first in a dense ops table. */
+.admin-tbl td.col-primary { font-weight: 600; }
+
+/* Numeric cells stay tabular even in the mobile card-stack so digits align in
+   the value slot; the >=820px block adds right-alignment + no-wrap. */
+.admin-tbl td.col-num { font-variant-numeric: tabular-nums lining-nums; }
+
+/* Two-column list + profile (Customers) */
+.admin-cols { display: grid; grid-template-columns: 1fr; gap: 20px; }
+
+/* Customer profile header (name + club badge + Edit) */
+.profile__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.profile__name { font-size: 1.4rem; font-weight: 600; }
+
+/* Profile tab strip (client-side switching) */
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin: 12px 0 4px; }
+.tabs a { padding: 11px 12px; font-size: 0.86rem; font-weight: 600; color: var(--sage); border-bottom: 2px solid transparent; }
+.tabs a.is-active { color: var(--ink); border-bottom-color: var(--accent); }
+.tab-panel[hidden] { display: none; }
+
+/* Kebab (row actions) */
+.kebab { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); cursor: pointer; color: var(--ink); }
+.kebab:hover { background: var(--bg-soft); }
+
+/* Key/value rows inside the profile + reports cards */
+.kv { display: flex; justify-content: space-between; gap: 16px; font-size: 0.9rem; padding: 7px 0; border-bottom: 1px solid var(--line); }
+.kv:last-child { border-bottom: 0; }
+.kv__k { color: var(--sage); }
+.kv__v { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Compact line rows (order history, reservations within a profile) */
+.row-line { display: flex; justify-content: space-between; gap: 16px; font-size: 0.88rem; padding: 6px 0; border-bottom: 1px dotted var(--line); }
+.row-line:last-child { border-bottom: 0; }
+
+/* Star ratings */
+.stars { color: var(--gold-ink); letter-spacing: 1px; white-space: nowrap; }
+.stars__dim { color: var(--line); }
+
+/* Service-recovery alert cards */
+.recovery-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.rcard { border: 1px solid var(--line); border-radius: var(--r); padding: 14px; background: var(--bg-soft); }
+.rcard__top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.rcard__meta { font-size: 0.78rem; color: var(--sage); margin-bottom: 6px; }
+.rcard__cmt { font-size: 0.88rem; margin: 0 0 12px; }
+.rcard__act { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end; }
+
+/* Inline adjust buttons (inventory). Forms sit inline; the Set form groups its
+   two number inputs + button. Kept compact so the actions column stays tight. */
+.adj { display: inline-flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.adj form { display: inline-flex; gap: 6px; align-items: center; margin: 0; }
+.adj .input { width: 72px; min-height: 38px; padding: 6px 8px; font-variant-numeric: tabular-nums lining-nums; }
+
+/* Lower-priority columns: hidden by default (mobile card-stack stays terse and
+   the mid-width table avoids overflow), revealed once there's room at >=1024px.
+   Mobile-first: only min-width queries, never max-width. */
+.admin-tbl td.col-priority-low, .admin-tbl th.col-priority-low { display: none; }
+
+/* Role permissions reference (users) */
+.perms { display: grid; grid-template-columns: 1fr; gap: 0; }
+.perm { padding: 16px 0; border-bottom: 1px solid var(--line); }
+.perm:last-child { border-bottom: 0; }
+.perm h3 { font-size: 1.05rem; margin: 0 0 4px; }
+.perm ul { margin: 8px 0 0; padding-left: 18px; font-size: 0.85rem; color: var(--ink-2); }
+.perm li { margin: 4px 0; }
+.perm .no { color: var(--danger); }
+
+/* Simple sparkline-style trend bars (feedback) */
+.trend { display: flex; align-items: flex-end; gap: 4px; height: 90px; padding: 8px 0; overflow-x: auto; }
+.trend__bar { flex: 0 0 14px; width: 14px; background: var(--accent); border-radius: 3px 3px 0 0; }
+.trend__bar.h1 { height: 8%; } .trend__bar.h2 { height: 18%; } .trend__bar.h3 { height: 28%; }
+.trend__bar.h4 { height: 38%; } .trend__bar.h5 { height: 48%; } .trend__bar.h6 { height: 58%; }
+.trend__bar.h7 { height: 68%; } .trend__bar.h8 { height: 78%; } .trend__bar.h9 { height: 88%; }
+.trend__bar.h10 { height: 100%; }
+.trend__lbl { font-size: 0.7rem; color: var(--sage); text-align: center; }
+
+@media (min-width: 820px) {
+  .admin-cols { grid-template-columns: 1.5fr 1fr; }
+  .recovery-grid { grid-template-columns: repeat(3, 1fr); }
+  .perms { grid-template-columns: repeat(3, 1fr); }
+  .perm { border-bottom: 0; border-right: 1px solid var(--line); padding: 0 18px; }
+  .perm:last-child { border-right: 0; }
+
+  /* Numeric columns: right-aligned, tabular, no wrap. */
+  .admin-tbl td.col-num, .admin-tbl th.col-num { text-align: right; font-variant-numeric: tabular-nums lining-nums; white-space: nowrap; }
+  .admin-tbl td.col-date, .admin-tbl th.col-date { white-space: nowrap; font-variant-numeric: tabular-nums lining-nums; }
+  .admin-tbl td.badge-cell, .admin-tbl th.badge-cell { white-space: nowrap; }
+
+  /* Dense, professional table rhythm (Polaris / Primer): tighter cell padding
+     and a compact cell size so a stock list reads as data, not prose. Headers
+     are quiet uppercase labels. */
+  .admin-tbl td, .admin-tbl th { padding: 9px 12px; font-size: 0.875rem; }
+  .admin-tbl thead th { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--sage); }
+
+  /* Row-action column: hugs content, sticks to the right edge while scrolling. */
+  .admin-tbl td.col-actions, .admin-tbl th.col-actions { width: 1%; white-space: nowrap; text-align: right; position: sticky; right: 0; background: var(--surface); box-shadow: -8px 0 8px -8px rgba(0, 0, 0, 0.15); }
+  .admin-tbl thead .col-actions { box-shadow: none; }
+
+  /* Inventory adjust column carries several inline forms — let it wrap and stay
+     left-aligned rather than forcing a very wide sticky cell. */
+  .admin-tbl td.col-actions:has(.adj) { white-space: normal; text-align: left; position: static; box-shadow: none; width: auto; }
+}
+
+/* Reveal lower-priority columns once the viewport can hold the full table
+   without crowding the primary + numeric + action columns. */
+@media (min-width: 1024px) {
+  .admin-tbl td.col-priority-low, .admin-tbl th.col-priority-low { display: table-cell; }
+}

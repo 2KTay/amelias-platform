@@ -1,0 +1,53 @@
+# Amelia's by EAT — front-controller routing + baseline hardening.
+# This file assumes DocumentRoot points at public/. If cPanel cannot retarget
+# DocumentRoot, the deploy keeps includes/config/db/uploads ABOVE the web root
+# (see docs/runbooks/deploy.md). Full CSP/security headers land in Task 7.3.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # No RewriteBase — rules are directory-relative so this file works both at a
+    # domain root (production) and in a subdirectory (parityrfp.com/cs/amelias).
+
+    # --- Canonicalization (HTTPS + non-www) ---
+    # IMPORTANT: never 301 the Stripe webhook — a 301 on POST drops the body.
+    # Exclude /webhooks/ from all redirect rules (C-T1-8).
+    RewriteCond %{REQUEST_URI} !^/webhooks/ [NC]
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    RewriteCond %{REQUEST_URI} !^/webhooks/ [NC]
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+    # --- Front controller: route everything that isn't a real file/dir ---
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# --- Deny access to sensitive files/dirs (when web root is the repo root) ---
+RewriteRule ^(includes|config|db|src|cron|templates|vendor|docs|e2e|audit)/ - [F,L]
+
+# Block dotfiles (.env, .git, etc.)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Block PHP execution where it shouldn't run.
+<FilesMatch "\.(env|sql|md|json|lock|log|sqlite)$">
+    Require all denied
+</FilesMatch>
+
+# Directory listing off.
+Options -Indexes
+
+# Baseline security headers (full CSP added in Task 7.3).
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Custom error documents (templates rendered via the front controller).
+ErrorDocument 404 /index.php
+ErrorDocument 500 /index.php

@@ -1,0 +1,24 @@
+/* Careers page — page-specific layout tweaks (ports mockups/careers.html inline CSS). */
+.intro{display:grid;grid-template-columns:1fr;gap:clamp(32px,6vw,72px);align-items:center}
+.intro__media img{width:100%;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--line)}
+.values-list{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:12px}
+.values-list li{position:relative;padding-left:26px;color:var(--ink-2);font-size:.98rem}
+.values-list li::before{content:"";position:absolute;left:0;top:.62em;width:11px;height:1.5px;background:var(--olive)}
+.role{display:grid;grid-template-columns:1fr;gap:8px 24px;align-items:start;padding:26px 0;border-bottom:1px solid var(--line)}
+.role:first-child{border-top:1px solid var(--line)}
+.role__name{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:500;line-height:1.1}
+.role__meta{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink);font-size:.98rem;margin-top:4px}
+.role__desc{grid-column:1/-1;color:var(--ink-2);font-size:.95rem;max-width:64ch;margin:8px 0 0}
+.role__apply{justify-self:start;margin-top:6px}
+.apply-wrap{max-width:760px}
+.grid--form{display:grid;grid-template-columns:1fr;gap:0 18px}
+.hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+@media(min-width:641px){
+  .role{grid-template-columns:1fr auto}
+  .role__apply{justify-self:auto;align-self:center;margin-top:0}
+  .grid--form{grid-template-columns:1fr 1fr}
+}
+@media(min-width:981px){
+  .intro{grid-template-columns:1.1fr .9fr}
+}

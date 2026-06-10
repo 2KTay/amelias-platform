@@ -1,0 +1,48 @@
+/* Admin settings (screen 28) — subnav + sectioned panels. Tokens only.
+   Mobile-first single column; sticky subnav splits off at >=820px. */
+
+.set-note { background: var(--bg-soft); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--r); padding: 14px 16px; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 8px; font-size: 0.9rem; }
+
+.set-cols { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: start; }
+.set-main { min-width: 0; }
+
+.set-subnav { display: flex; flex-wrap: wrap; gap: 4px; background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 8px; }
+.set-subnav a { display: block; padding: 9px 12px; border-radius: var(--r); font-size: 0.88rem; font-weight: 500; color: var(--ink-2); }
+.set-subnav a:hover { background: var(--bg-soft); color: var(--ink); }
+
+.set-label-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.set-secret { font-variant-numeric: tabular-nums; }
+.set-badge-row { margin-top: 4px; }
+
+/* Panels: two-up field grid that collapses on narrow screens. */
+.set-panel { margin-bottom: 20px; }
+.set-row { display: grid; grid-template-columns: 1fr; gap: 0 18px; }
+.set-row .full { grid-column: 1 / -1; }
+
+/* Per-field Reveal toggle for secret inputs. */
+.set-reveal { font-size: 0.78rem; font-weight: 600; color: var(--accent); cursor: pointer; background: none; border: 0; padding: 2px 4px; }
+.set-reveal:hover { text-decoration: underline; }
+
+/* Live/Test mode switch. */
+.set-toggle { display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 500; cursor: pointer; }
+.set-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.set-toggle__track { width: 38px; height: 22px; border-radius: 999px; background: var(--bg-soft); border: 1px solid var(--line); position: relative; flex: none; transition: 0.15s; }
+.set-toggle__track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--white); border: 1px solid var(--line); transition: 0.15s; }
+.set-toggle input:checked + .set-toggle__track { background: var(--accent); border-color: var(--accent); }
+.set-toggle input:checked + .set-toggle__track::after { left: 18px; border-color: var(--accent); }
+.set-toggle input:focus-visible + .set-toggle__track { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* Business-config fieldsets. */
+.set-fieldset { border: 0; padding: 0; margin: 0 0 22px; }
+.set-fieldset:last-child { margin-bottom: 0; }
+.set-legend { font-family: var(--font-display); font-size: 1rem; font-weight: 600; margin: 0 0 10px; padding: 0; }
+.set-daygrid { display: grid; grid-template-columns: 90px 1fr 1fr; gap: 8px 14px; align-items: center; }
+.set-daygrid > label { font-weight: 600; font-size: 0.85rem; }
+
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+@media (min-width: 820px) {
+  .set-cols { grid-template-columns: 200px 1fr; }
+  .set-subnav { position: sticky; top: 16px; flex-direction: column; flex-wrap: nowrap; }
+  .set-row { grid-template-columns: 1fr 1fr; }
+}

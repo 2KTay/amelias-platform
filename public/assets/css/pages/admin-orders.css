@@ -1,0 +1,29 @@
+/* Admin live order queue (screen 20) — status pills + order table. */
+
+.pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.pill { display: inline-flex; align-items: center; gap: 7px; font-size: .86rem; font-weight: 600; padding: 8px 15px; border-radius: 999px; border: 1px solid var(--line); background: var(--white); color: var(--text, var(--ink)); cursor: pointer; text-decoration: none; }
+.pill .count { font-variant-numeric: tabular-nums; background: var(--cream-2); color: var(--ink-2); border-radius: 999px; padding: 1px 8px; font-size: .74rem; }
+.pill.active { background: var(--accent, var(--ink)); color: var(--white); border-color: var(--accent, var(--ink)); }
+.pill.active .count { background: var(--onink-dim); color: var(--white); }
+
+.orders-tbl .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.orders-tbl .cust { font-weight: 600; }
+.orders-tbl .items-sum { color: var(--ink-2); font-size: .85rem; max-width: 280px; }
+.orders-tbl tr.is-new td { background: var(--warn-bg, var(--cream-2)); }
+.new-tag { font-size: .66rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--gold-ink); margin-left: 6px; }
+
+.row-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+
+.row-more { position: relative; }
+.row-more > summary { list-style: none; cursor: pointer; }
+.row-more > summary::-webkit-details-marker { display: none; }
+.row-more__menu { display: grid; gap: 8px; margin-top: 8px; padding: 12px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); }
+.row-more__menu form { display: flex; gap: 6px; align-items: center; }
+.row-more__menu .input { max-width: 110px; }
+
+.btn--danger { background: transparent; color: var(--danger); border-color: var(--danger); }
+.btn--danger:hover { background: var(--danger); color: var(--white); }
+
+@media (min-width: 880px) {
+  .row-more__menu { position: absolute; right: 0; top: 100%; z-index: 5; min-width: 240px; box-shadow: 0 8px 24px rgba(0, 0, 0, .12); }
+}

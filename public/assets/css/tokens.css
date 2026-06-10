@@ -1,0 +1,66 @@
+/* ============================================================
+   tokens.css — design primitives (layer 1 of 5)
+   The ONLY file (with theme.css) allowed to contain raw hex values.
+   Verified Amelia's earth-tone brand (v6); navy dropped from public.
+   ============================================================ */
+:root {
+  /* --- Brand primitives (raw values; never reference these directly in
+         components — use the semantic tokens in theme.css) --- */
+  --c-ink:        #313530;
+  --c-ink-2:      #292b2c;
+  --c-ink-deep:   #23251f;
+  --c-cream:      #f9f6e4;
+  --c-cream-2:    #efe9d9;
+  --c-paper:      #fcfaf3;
+  --c-taupe:      #ccc6b9;
+  --c-sage:       #9a9a8d;
+  --c-olive:      #5f8219;
+  --c-olive-ink:  #46600f;
+  --c-gold:       #e1c188;
+  --c-gold-ink:   #9c7833;
+  --c-danger:     #a1392b;
+  --c-danger-bg:  #f4ddd8;
+  --c-line:       #e4ddca;
+  --c-white:      #ffffff;
+  --c-gold-bright: #f0d9a6;       /* brighter gold for text over dark hero imagery */
+
+  /* dark-surface (footer / admin chrome) text ramps */
+  --c-onink:       #cfcabb;
+  --c-onink-dim:   #8d897d;
+  --c-onink-bright:#d7d3c6;
+
+  /* status fills */
+  --c-ok-bg:      #e6efdd;
+  --c-ok-ink:     #3c5417;
+  --c-warn-bg:    #f6ecd4;
+  --c-warn-ink:   #8a5a1a;
+  /* aliases used by some page CSS */
+  --ok-bg:        var(--c-ok-bg);
+  --warn-bg:      var(--c-warn-bg);
+  --warn-ink:     var(--c-warn-ink);
+
+  /* admin-only (templated internal tool surfaces) */
+  --c-admin-navy: #171a2d;
+
+  /* --- Typography primitives ---
+     Display "Audrey" is licensed (Q#13a) — Fraunces is the approved stand-in. */
+  --font-display-stack: 'Fraunces', Georgia, serif;
+  --font-body-stack:    'Montserrat', system-ui, -apple-system, sans-serif;
+
+  --fs-root: 17px;
+  --lh-body: 1.62;
+
+  /* --- Space / layout primitives --- */
+  --maxw: 1240px;
+  --radius: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 40px;
+  --space-7: 64px;
+
+  /* --- Breakpoints (referenced in comments; CSS uses literal min-widths) --- */
+  /* sm 560px · md 768px · lg 980px · xl 1240px */
+}

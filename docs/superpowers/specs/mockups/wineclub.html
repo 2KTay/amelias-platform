@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Wine Club — Amelia's by EAT</title>
+<!--
+  WINE CLUB — public storefront mockup on the approved v3 design system.
+  Shared design system loaded from brand-v3.css. Real copy only.
+  Display face Fraunces is a PROVISIONAL stand-in for the licensed "Audrey".
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-v3.css">
+<style>
+/* page-specific tweaks only */
+.club{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,6vw,80px);align-items:start}
+.perks{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.perks li{display:grid;grid-template-columns:130px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.perks li:first-child{border-top:1px solid var(--line)}
+.perks__mark{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink);font-size:1.05rem;line-height:1.5;white-space:nowrap}
+.perks__t{font-weight:600;display:block;margin-bottom:3px}
+.perks__d{color:var(--ink-2);font-size:.95rem}
+.join{position:sticky;top:100px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:clamp(26px,3vw,38px)}
+.join__price{display:flex;align-items:baseline;gap:8px;margin:0 0 6px}
+.join__num{font-family:'Fraunces',serif;font-size:3rem;font-weight:500;line-height:1;letter-spacing:-.02em}
+.join__per{color:var(--sage);font-size:.95rem}
+.join__sub{color:var(--ink-2);font-size:.95rem;margin:0 0 22px}
+.join__list{list-style:none;margin:0 0 24px;padding:0;font-size:.92rem;color:var(--ink-2)}
+.join__list li{display:flex;gap:10px;padding:5px 0}
+.join__list svg{flex:none;margin-top:4px;color:var(--olive)}
+.age{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:.82rem;color:var(--sage)}
+.somms{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
+.somm{background:var(--cream);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px}
+.somm h3{font-size:1.3rem;margin:0 0 4px}
+.somm span{display:block;font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink);font-size:.95rem;margin-bottom:8px}
+.somm p{margin:0;color:var(--ink-2);font-size:.93rem}
+@media(max-width:980px){
+  .club{grid-template-columns:1fr}
+  .join{position:static}
+  .somms{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<header class="nav"><div class="nav__in">
+  <a href="home-v3.html" aria-label="Amelia's by EAT — home"><img class="nav__logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></a>
+  <nav class="nav__links" id="navlinks">
+    <a class="lnk" href="menu.html">Menu</a>
+    <a class="lnk" href="market.html">Market</a>
+    <a class="lnk" href="wineclub.html">Wine Club</a>
+    <a class="lnk" href="supper.html">Sunday Supper</a>
+    <a class="lnk" href="catering.html">Catering</a>
+    <a class="lnk" href="story.html">Our Story</a>
+    <a class="btn" href="reserve.html">Reserve</a>
+    <a class="btn btn--solid" href="menu.html">Order</a>
+  </nav>
+  <button class="nav__burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('navlinks');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <img src="../../../../images/WineWall-2-1365x2048.jpg" alt="Floor-to-ceiling white-shelved wine wall stocked with natural and organic bottles">
+  <div class="page-hero__in">
+    <span class="kicker" style="color:var(--gold)">$40 / month · members</span>
+    <h1>The Wine Club</h1>
+    <p>Two bottles a month, chosen for you by our in-house somms — plus a standing seat at the table on the third Wednesday. A small, friendly way to drink better, one neighborhood at a time.</p>
+  </div>
+</section>
+
+<!-- THE CLUB: perks + join -->
+<section class="section"><div class="container">
+  <div class="club">
+    <div>
+      <div class="head" style="margin-bottom:28px">
+        <h2 class="disp">What's included</h2>
+        <p>Membership is $40 a month, billed as a simple subscription. Cancel anytime — the wine is yours to keep.</p>
+      </div>
+      <ul class="perks">
+        <li>
+          <span class="perks__mark">Two bottles</span>
+          <div><span class="perks__t">Two featured bottles every month</span><span class="perks__d">Hand-chosen by our in-house somms — a pour you'd probably never have reached for, and one you'll want again.</span></div>
+        </li>
+        <li>
+          <span class="perks__mark">3rd Wed.</span>
+          <div><span class="perks__t">A monthly tasting, 5–7 pm</span><span class="perks__d">Members gather on the third Wednesday for the month's selections, poured alongside small bites from the kitchen.</span></div>
+        </li>
+        <li>
+          <span class="perks__mark">No corkage</span>
+          <div><span class="perks__t">Waived corkage that evening</span><span class="perks__d">Enjoy your club wine on premises the night of the tasting and we'll waive the corkage fee.</span></div>
+        </li>
+        <li>
+          <span class="perks__mark">15% off</span>
+          <div><span class="perks__t">15% off the curated wine collection</span><span class="perks__d">On any bottle you buy off the wall, anytime you're in — members' price, no minimum.</span></div>
+        </li>
+        <li>
+          <span class="perks__mark">First seats</span>
+          <div><span class="perks__t">Early access to wine dinners</span><span class="perks__d">Member tickets open before the public for our seasonal winemaker dinners and special pourings.</span></div>
+        </li>
+        <li>
+          <span class="perks__mark">Held for you</span>
+          <div><span class="perks__t">Bottles held for pickup</span><span class="perks__d">Can't make the tasting? We'll set your selections aside and you can grab them next time you're by.</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- JOIN CARD -->
+    <aside class="join" aria-label="Join the Wine Club">
+      <div class="join__price"><span class="join__num">$40</span><span class="join__per">/ month</span></div>
+      <p class="join__sub">A monthly subscription, billed to your card. Cancel anytime.</p>
+      <ul class="join__list">
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5 9-11"/></svg> Two somm-selected bottles each month</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5 9-11"/></svg> 3rd-Wednesday tasting with small bites</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5 9-11"/></svg> Waived corkage on tasting night</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5 9-11"/></svg> 15% off the curated collection</li>
+      </ul>
+      <a class="btn btn--solid btn--lg btn--block" href="#">Join the club</a>
+      <div class="age">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <span>Must be 21 or older to join. Valid ID is required at pickup and at tastings; we cannot release wine to anyone under 21.</span>
+      </div>
+    </aside>
+  </div>
+</div></section>
+
+<!-- THE SOMMS -->
+<section class="section section--soft"><div class="container">
+  <div class="head">
+    <h2 class="disp">Chosen by our somms</h2>
+    <p>Every month's pair is tasted, debated, and picked in-house — no algorithm, no warehouse list. Just two people who love this and want you to love it too.</p>
+  </div>
+  <div class="somms">
+    <article class="somm">
+      <h3 class="disp">April</h3>
+      <span>Level-2 sommelier</span>
+      <p>Leads the monthly selections and the third-Wednesday pour — with an eye for small growers and the bottles worth talking about.</p>
+    </article>
+    <article class="somm">
+      <h3 class="disp">Stacey</h3>
+      <span>Level-2 taster · founder</span>
+      <p>Chef and founder Stacey Weber tastes alongside April, keeping each pick honest to how we cook and eat at Amelia's.</p>
+    </article>
+  </div>
+</div></section>
+
+<!-- THE WALL / SHOP -->
+<section class="split split--rev">
+  <div class="split__media"><img src="../../../../images/Cooler-1405x1536.jpg" alt="Grab-and-go cooler and fridge of bottles at Amelia's"></div>
+  <div class="split__body">
+    <span class="kicker">Not ready to commit?</span>
+    <h2 class="disp" style="margin-top:8px">The wine wall &amp; shop</h2>
+    <p>The whole collection lives on the wall — natural, organic, and small-production bottles we actually pour and drink. Browse on your own or ask whoever's working; everyone here has a few favorites.</p>
+    <p style="margin-top:14px"><strong>Mix &amp; match any six bottles and take 10% off</strong> — members save 15% on every bottle, every visit.</p>
+    <div style="margin-top:28px"><a class="btn btn--solid" href="market.html">Browse the wall</a></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div><div class="foot__brand"><img src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></div><p style="max-width:34ch;margin:18px 0 0;color:#a8a395;font-size:.92rem">A conscious, made-from-scratch, all-day eating place &amp; market in Scottsdale.</p></div>
+    <div><h4>Visit</h4><a href="location.html">8240 N Hayden Rd, B-105<br>Scottsdale, AZ 85258</a><a href="tel:6024995195">(602) 499-5195</a><a href="mailto:info@ameliasaz.com">info@ameliasaz.com</a></div>
+    <div><h4>Hours</h4><a>Sun &nbsp;7a&ndash;3p</a><a>Mon&ndash;Thu &nbsp;7a&ndash;8p</a><a>Fri&ndash;Sat &nbsp;7a&ndash;close</a></div>
+    <div><h4>More</h4><a href="careers.html">Now Hiring</a><a href="story.html">Our Values</a><a href="purveyors.html">Our Purveyors</a><a href="giftcards.html">Gift Cards</a><a href="https://www.instagram.com/ameliasbyeat/">Instagram</a></div>
+  </div>
+  <div class="foot__base"><span>&copy; 2026 Amelia's by EAT &middot; Scottsdale, Arizona</span><span>Eat &amp; drink local.</span></div>
+</footer>
+
+</div>
+</body>
+</html>

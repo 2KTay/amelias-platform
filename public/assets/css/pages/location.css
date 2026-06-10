@@ -1,0 +1,19 @@
+/* Location page — page-specific layout tweaks (ports mockups/location.html inline CSS). */
+.visit{display:grid;grid-template-columns:1fr;gap:clamp(32px,6vw,72px);align-items:start}
+.visit__info dl{margin:26px 0 0;display:grid;grid-template-columns:auto 1fr;gap:10px 28px}
+.visit__info dt{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink)}
+.visit__info dd{margin:0;color:var(--ink-2)}
+.visit__info dd a{border-bottom:1.5px solid var(--olive)}
+.visit__see{font-family:'Fraunces',serif;font-style:italic;font-size:1.5rem;color:var(--ink);margin:14px 0 0}
+.visit__note{color:var(--sage);font-size:.9rem;margin:22px 0 0;max-width:42ch}
+.visit__actions{margin-top:28px}
+.map-box{aspect-ratio:4/3;background:var(--cream-2);border:1px solid var(--line);border-radius:var(--r);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;order:-1}
+.map-box__label{font-family:'Fraunces',serif;font-style:italic;color:var(--sage);font-size:1.1rem;letter-spacing:.02em}
+.map-box__pin{position:absolute;top:14px;left:14px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+.contact-form{max-width:680px}
+.hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+@media(min-width:981px){
+  .visit{grid-template-columns:1fr 1fr}
+  .map-box{order:0}
+}

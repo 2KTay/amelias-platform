@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Users — Amelia's Admin</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;padding:5px 12px;border-radius:999px;background:var(--c-sand-2);color:var(--c-ink-2)}
+  .panel{background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-sm);overflow:hidden;margin-top:20px}
+  .panel__head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border)}
+  .panel__head h3{margin:0}
+  .role-select{display:inline-flex;align-items:center;width:auto;min-height:40px;padding:6px 28px 6px 12px;font-size:.85rem;font-weight:500}
+  .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .table-wrap{overflow:auto}
+  .table td.col-date,.table th.col-date{white-space:nowrap;font-variant-numeric:tabular-nums lining-nums}
+  .table td.badge-cell,.table td.role-cell{white-space:nowrap}
+  .table caption{text-align:left}
+  .col-actions{white-space:nowrap;position:sticky;right:0;background:#fff;box-shadow:-8px 0 8px -8px rgba(0,0,0,.15)}
+  .table thead .col-actions{box-shadow:none}
+  .row-actions{display:flex;gap:8px;align-items:center}
+  .btn--danger-text{color:var(--c-danger);border-color:var(--c-danger)}
+  .btn--danger-text:hover{background:var(--c-danger);color:#fff}
+  .cols{display:grid;grid-template-columns:1fr;gap:20px}
+  .perms{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .perm{padding:16px 18px;border-right:1px solid var(--border)}
+  .perm:last-child{border-right:0}
+  .perm h4{font-family:var(--font-display);font-size:1.05rem;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+  .perm ul{margin:8px 0 0;padding-left:18px;font-size:.85rem;color:var(--c-ink-2)}
+  .perm li{margin:4px 0}
+  .perm .no{color:var(--c-danger)}
+  @media(max-width:860px){.perms{grid-template-columns:1fr}.perm{border-right:0;border-bottom:1px solid var(--border)}}
+</style>
+</head>
+<body>
+<div class="admin">
+  <aside class="admin__side" id="adminside">
+    <div class="brand">Amelia's · Admin</div>
+    <nav class="admin__nav">
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-reservations.html">Reservations</a>
+      <a href="admin-menu.html">Menu &amp; Pricing</a>
+      <a href="admin-inventory.html">Inventory</a>
+      <a href="admin-customers.html">Customers</a>
+      <a href="admin-feedback.html">Feedback</a>
+      <a href="admin-content.html">Content</a>
+      <a href="admin-team.html">Team</a>
+      <a href="admin-media.html">Media</a>
+      <a href="admin-reports.html">Reports</a>
+      <a href="admin-users.html" class="active">Users</a>
+      <a href="admin-settings.html">Settings</a>
+    </nav>
+  </aside>
+  <main class="admin__main">
+    <div class="admin__bar"><button class="admin__burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="adminside" onclick="var n=document.getElementById('adminside');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <div class="flex center gap">
+        <h2 style="margin:0">Users</h2>
+        <span class="badge badge--warn">Owner only</span>
+      </div>
+      <div class="flex center gap">
+        <span class="chip">Signed in as Owner</span>
+        <button type="button" class="btn btn--primary btn--sm">+ Invite user</button>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:0">
+      <div class="panel__head"><h3 id="staff-caption">Staff &amp; roles</h3></div>
+      <div class="table-wrap" role="region" aria-labelledby="staff-caption" tabindex="0">
+      <table class="table data-table--list">
+        <caption class="visually-hidden">Staff and roles</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="col-primary">Name</th>
+            <th scope="col" class="col-priority-low">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col" class="col-date col-priority-medium">Last active</th>
+            <th scope="col">Status</th>
+            <th scope="col" class="col-actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-primary" data-label="Name"><a href="#" class="row-link">Renato da Prado</a></td><td class="muted col-priority-low" data-label="Email">renato@ameliasbyeat.com</td>
+            <td class="badge-cell" data-label="Role"><span class="badge badge--new">Owner</span></td><td class="col-date col-priority-medium" data-label="Last active">2 min ago</td>
+            <td class="badge-cell" data-label="Status"><span class="badge badge--ok">Active</span></td>
+            <td class="col-actions role-cell" data-label="Actions"><span class="muted" style="font-size:.82rem">Owner (you)</span></td>
+          </tr>
+          <tr>
+            <td class="col-primary" data-label="Name"><a href="#" class="row-link">Carla Diaz</a></td><td class="muted col-priority-low" data-label="Email">carla@ameliasbyeat.com</td>
+            <td class="badge-cell" data-label="Role"><span class="badge">Manager</span></td><td class="col-date col-priority-medium" data-label="Last active">18 min ago</td>
+            <td class="badge-cell" data-label="Status"><span class="badge badge--ok">Active</span></td>
+            <td class="col-actions" data-label="Actions"><div class="row-actions"><label for="role-carla" class="visually-hidden">Role for Carla Diaz</label><select id="role-carla" class="select role-select"><option selected>Manager</option><option>Staff</option><option>Owner</option></select><button type="button" class="btn btn--ghost btn--sm btn--danger-text">Deactivate</button></div></td>
+          </tr>
+          <tr>
+            <td class="col-primary" data-label="Name"><a href="#" class="row-link">Tom Nguyen</a></td><td class="muted col-priority-low" data-label="Email">tom@ameliasbyeat.com</td>
+            <td class="badge-cell" data-label="Role"><span class="badge">Manager</span></td><td class="col-date col-priority-medium" data-label="Last active">Yesterday</td>
+            <td class="badge-cell" data-label="Status"><span class="badge badge--ok">Active</span></td>
+            <td class="col-actions" data-label="Actions"><div class="row-actions"><label for="role-tom" class="visually-hidden">Role for Tom Nguyen</label><select id="role-tom" class="select role-select"><option selected>Manager</option><option>Staff</option><option>Owner</option></select><button type="button" class="btn btn--ghost btn--sm btn--danger-text">Deactivate</button></div></td>
+          </tr>
+          <tr>
+            <td class="col-primary" data-label="Name"><a href="#" class="row-link">Bea Olsen</a></td><td class="muted col-priority-low" data-label="Email">bea@ameliasbyeat.com</td>
+            <td class="badge-cell" data-label="Role"><span class="badge">Staff</span></td><td class="col-date col-priority-medium" data-label="Last active">3 hours ago</td>
+            <td class="badge-cell" data-label="Status"><span class="badge badge--ok">Active</span></td>
+            <td class="col-actions" data-label="Actions"><div class="row-actions"><label for="role-bea" class="visually-hidden">Role for Bea Olsen</label><select id="role-bea" class="select role-select"><option>Manager</option><option selected>Staff</option><option>Owner</option></select><button type="button" class="btn btn--ghost btn--sm btn--danger-text">Deactivate</button></div></td>
+          </tr>
+          <tr>
+            <td class="col-primary" data-label="Name"><a href="#" class="row-link">Luis Romero</a></td><td class="muted col-priority-low" data-label="Email">luis@ameliasbyeat.com</td>
+            <td class="badge-cell" data-label="Role"><span class="badge">Staff</span></td><td class="col-date col-priority-medium" data-label="Last active">2 days ago</td>
+            <td class="badge-cell" data-label="Status"><span class="badge badge--warn">Invited</span></td>
+            <td class="col-actions" data-label="Actions"><div class="row-actions"><label for="role-luis" class="visually-hidden">Role for Luis Romero</label><select id="role-luis" class="select role-select"><option>Manager</option><option selected>Staff</option><option>Owner</option></select><button type="button" class="btn btn--ghost btn--sm">Resend invite</button></div></td>
+          </tr>
+          <tr>
+            <td class="col-primary" data-label="Name"><a href="#" class="row-link">Mei Tanaka</a></td><td class="muted col-priority-low" data-label="Email">mei@ameliasbyeat.com</td>
+            <td class="badge-cell" data-label="Role"><span class="badge">Staff</span></td><td class="col-date col-priority-medium" data-label="Last active">3 weeks ago</td>
+            <td class="badge-cell" data-label="Status"><span class="badge badge--danger">Deactivated</span></td>
+            <td class="col-actions" data-label="Actions"><button type="button" class="btn btn--ghost btn--sm">Reactivate</button></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel__head"><h3>Role permissions reference</h3></div>
+      <div class="perms">
+        <div class="perm">
+          <h4><span class="badge badge--new">Owner</span></h4>
+          <p class="muted" style="font-size:.82rem;margin:0">Full access</p>
+          <ul>
+            <li>All dashboards &amp; operations</li>
+            <li>Reports &amp; financials</li>
+            <li>User &amp; role management</li>
+            <li>Menu, pricing &amp; inventory</li>
+            <li>Stripe &amp; payouts</li>
+          </ul>
+        </div>
+        <div class="perm">
+          <h4><span class="badge">Manager</span></h4>
+          <p class="muted" style="font-size:.82rem;margin:0">Operations</p>
+          <ul>
+            <li>Orders &amp; reservations</li>
+            <li>Menu, pricing &amp; inventory</li>
+            <li>Customers &amp; feedback</li>
+            <li class="no">No Users management</li>
+            <li class="no">No financial exports</li>
+          </ul>
+        </div>
+        <div class="perm">
+          <h4><span class="badge">Staff</span></h4>
+          <p class="muted" style="font-size:.82rem;margin:0">Floor &amp; service</p>
+          <ul>
+            <li>Orders &amp; reservations</li>
+            <li>Feedback (view)</li>
+            <li class="no">Cannot see Reports</li>
+            <li class="no">Cannot see Users</li>
+            <li class="no">Cannot see financials</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel__head"><h3 id="audit-caption">Audit log</h3></div>
+      <div class="table-wrap" role="region" aria-labelledby="audit-caption" tabindex="0">
+      <table class="table">
+        <caption class="visually-hidden">Audit log</caption>
+        <thead><tr><th scope="col" class="col-date">Time</th><th scope="col">User</th><th scope="col">Action</th></tr></thead>
+        <tbody>
+          <tr><td class="col-date">Jun 02 &middot; 09:41</td><td>Renato da Prado</td><td>Exported May reconciliation CSV</td></tr>
+          <tr><td class="col-date">Jun 02 &middot; 09:12</td><td>Carla Diaz</td><td>86'd "House Sourdough loaf"</td></tr>
+          <tr><td class="col-date">Jun 01 &middot; 18:30</td><td>Tom Nguyen</td><td>Updated price: Branzino &rarr; $42</td></tr>
+          <tr><td class="col-date">Jun 01 &middot; 14:05</td><td>Renato da Prado</td><td>Invited user luis@ameliasbyeat.com (Staff)</td></tr>
+          <tr><td class="col-date">May 31 &middot; 22:18</td><td>Bea Olsen</td><td>Resolved feedback alert #221</td></tr>
+          <tr><td class="col-date">May 31 &middot; 11:02</td><td>Renato da Prado</td><td>Deactivated user Mei Tanaka</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

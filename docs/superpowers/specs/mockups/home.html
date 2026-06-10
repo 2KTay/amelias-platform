@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amelia's by EAT — Source-to-Plate in Scottsdale</title>
+  <link rel="stylesheet" href="brand.css">
+  <style>
+    .ph{background:var(--c-sand-2);color:var(--c-muted);display:flex;align-items:center;justify-content:center;min-height:200px;border-radius:var(--r-sm);font-size:.8rem;text-align:center}
+    .hero__grid{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+    .hero__media{min-height:440px}
+    .badge--open{background:#E3EFE6;color:var(--c-success)}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--c-success);display:inline-block}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+    .card__media{min-height:220px;border-radius:0}
+    .sectionhead{max-width:62ch;margin:0 auto 36px;text-align:center}
+    /* marketing rhythm: more generous vertical spacing than the 64px tool default */
+    .hero.section{padding:96px 0}
+    .section{padding:88px 0}
+    /* keep primary CTA on the right even when the row wraps to mobile (source order: secondary first) */
+    .cta-row{justify-content:flex-start}
+    @media(max-width:860px){.hero__grid,.split{grid-template-columns:1fr;gap:28px}.hero__media{min-height:280px}.hero.section{padding:64px 0}.section{padding:56px 0}}
+  </style>
+</head>
+<body>
+
+<header class="nav"><div class="container nav__inner">
+  <a href="home.html" class="nav__logo-link"><img class="nav__logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></a>
+  <button class="nav__burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navlinks" onclick="var n=document.getElementById('navlinks');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <nav class="nav__links" id="navlinks">
+    <a href="menu.html">Menu</a>
+    <a href="market.html">Market</a>
+    <a href="wineclub.html">Wine Club</a>
+    <a href="supper.html">Sunday Supper</a>
+    <a href="story.html">Our Story</a>
+    <a href="location.html">Location</a>
+    <a class="btn btn--ghost btn--sm" href="reserve.html">Reserve</a>
+    <a class="btn btn--accent btn--sm" href="menu.html">Order</a>
+    <a class="nav__account" href="account.html" aria-label="Account" title="Account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+  </nav>
+</div></header>
+
+<!-- HERO -->
+<section class="hero section">
+  <div class="container hero__grid">
+    <div>
+      <span class="eyebrow">Scottsdale · Conscious Source-to-Plate</span>
+      <h1 class="mt">When you eat well, you feel good.</h1>
+      <p class="lede mt">An all-day restaurant and market where every plate begins with real ingredients, local growers, and care. Breakfast through dinner, plus a market to take the good stuff home.</p>
+      <div class="flex gap wrap mt-lg cta-row">
+        <a class="btn btn--ghost" href="reserve.html">Reserve a Table</a>
+        <a class="btn btn--accent" href="menu.html">Order Pickup</a>
+      </div>
+      <div class="flex center gap mt-lg wrap">
+        <span class="badge badge--open"><span class="dot"></span> Open now · until 8:00p</span>
+        <span class="muted" style="font-size:.85rem">8240 N Hayden Rd, Ste B-105 · Scottsdale</span>
+      </div>
+    </div>
+    <div class="ph hero__media">Hero photo — bright dining room &amp; market shelves</div>
+  </div>
+</section>
+
+<!-- FEATURED MENU -->
+<section class="section">
+  <div class="container">
+    <div class="sectionhead">
+      <span class="eyebrow">From the Kitchen</span>
+      <h2>Today's favorites</h2>
+      <p class="muted">Seasonal dishes made from scratch with ingredients we'd serve our own family.</p>
+    </div>
+    <div class="grid grid--3">
+
+      <div class="card">
+        <div class="ph card__media">Food photo</div>
+        <div class="card__body">
+          <div class="flex between center">
+            <h3 style="margin:0">Sunrise Grain Bowl</h3>
+            <span class="price">$14</span>
+          </div>
+          <div class="flex gap wrap mt"><span class="badge badge--veg">Vegetarian</span><span class="badge badge--gf">Gluten-free</span></div>
+          <p class="muted mt" style="font-size:.9rem">Ancient grains, soft egg, roasted squash, herb tahini.</p>
+          <button class="btn btn--ghost btn--sm btn--block mt" type="button">Add to order</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ph card__media">Food photo</div>
+        <div class="card__body">
+          <div class="flex between center">
+            <h3 style="margin:0">Wood-Grilled Chicken</h3>
+            <span class="price">$22</span>
+          </div>
+          <div class="flex gap wrap mt"><span class="badge badge--gf">Gluten-free</span><span class="badge badge--new">New</span></div>
+          <p class="muted mt" style="font-size:.9rem">Local pasture chicken, charred greens, lemon &amp; olive.</p>
+          <button class="btn btn--ghost btn--sm btn--block mt" type="button">Add to order</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ph card__media">Food photo</div>
+        <div class="card__body">
+          <div class="flex between center">
+            <h3 style="margin:0">Market Veg Plate</h3>
+            <span class="price">$16</span>
+          </div>
+          <div class="flex gap wrap mt"><span class="badge badge--veg">Vegan</span><span class="badge badge--gf">Gluten-free</span></div>
+          <p class="muted mt" style="font-size:.9rem">Whatever's freshest this week, dressed simply &amp; well.</p>
+          <button class="btn btn--ghost btn--sm btn--block mt" type="button">Add to order</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="flex center mt-lg" style="justify-content:center">
+      <a class="btn btn--ghost" href="menu.html">See the full menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET TEASER -->
+<section class="section section--soft">
+  <div class="container split">
+    <div class="ph" style="min-height:340px">Market photo — pantry goods &amp; fresh produce</div>
+    <div>
+      <span class="eyebrow">The Market</span>
+      <h2>Take the good stuff home.</h2>
+      <p class="lede">Stock your pantry with the same ingredients we cook with — small-batch oils, local honey, fresh-baked bread, house ferments, and grab-and-go meals for busy nights.</p>
+      <div class="flex gap wrap mt-lg">
+        <a class="btn btn--primary" href="market.html">Shop the Market</a>
+        <a class="btn btn--ghost" href="market.html">Weekly produce box</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WINE CLUB + SUNDAY SUPPER -->
+<section class="section">
+  <div class="container">
+    <div class="grid grid--2">
+
+      <div class="card">
+        <div class="ph card__media">Wine photo</div>
+        <div class="card__body">
+          <span class="eyebrow">Members</span>
+          <h3 style="font-size:1.5rem">The Wine Club</h3>
+          <p class="muted">Hand-picked bottles from growers who farm with intention. Three curated selections each month, plus member tastings and dinners.</p>
+          <a class="btn btn--primary btn--sm mt" href="wineclub.html">Join the club</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ph card__media">Supper photo</div>
+        <div class="card__body">
+          <span class="eyebrow">Every Sunday</span>
+          <h3 style="font-size:1.5rem">Sunday Supper</h3>
+          <p class="muted">A weekly family-style dinner around one long table. One menu, shared plates, good people — the way a meal is meant to be.</p>
+          <a class="btn btn--primary btn--sm mt" href="supper.html">Reserve a seat</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- OUR STORY SNIPPET -->
+<section class="section section--soft">
+  <div class="container split">
+    <div>
+      <span class="eyebrow">Our Story</span>
+      <h2>Real food, made with intention.</h2>
+      <p class="lede">Amelia's by EAT grew from a simple belief: that food should nourish the body, the community, and the land it comes from. Chef Stacey Weber builds every menu around what's growing now and the people who grow it.</p>
+      <a class="btn btn--ghost mt-lg" href="story.html">Read our story</a>
+    </div>
+    <div class="ph" style="min-height:320px">Portrait — Chef Stacey Weber in the kitchen</div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">Amelia's by EAT</div>
+    <div><strong>Visit</strong><br>8240 N Hayden Rd, Ste B-105<br>Scottsdale, AZ 85258<br>(602) 499-5195</div>
+    <div><strong>Hours</strong><br>Sun 7a&ndash;3p<br>Mon&ndash;Thu 7a&ndash;8p<br>Fri&ndash;Sat 7a&ndash;close</div>
+    <div><strong>Shop &amp; more</strong><br><a href="giftcards.html">Gift Cards</a><br><a href="catering.html">Catering</a><br><a href="market.html">Market</a><br>@ameliasbyeat</div>
+  </div>
+</footer>
+
+<!-- v4: cookie-consent gates analytics (client-analytics) -->
+<div class="cookie-consent" role="region" aria-label="Cookie consent">
+  <p>We use cookies for analytics to improve your experience. See our <a href="privacy.html">Privacy Policy</a>.</p>
+  <div class="flex gap">
+    <button class="btn btn--ghost btn--sm" type="button" onclick="this.closest('.cookie-consent').remove()">Decline</button>
+    <button class="btn btn--accent btn--sm" type="button" onclick="this.closest('.cookie-consent').remove()">Accept</button>
+  </div>
+</div>
+
+</body>
+</html>

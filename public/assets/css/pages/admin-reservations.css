@@ -1,0 +1,32 @@
+/* Admin reservations — day view + service book + side panel (ports mockups/admin-reservations.html). */
+/* Mobile-first single column; two-column layout at >=981px. */
+
+.resv-datepick{margin-left:auto}
+
+.resv-dayhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 0}
+.resv-dayhead__title{margin:0;font-size:1.25rem}
+.resv-dayhead__count{font-size:.85rem;margin-left:auto}
+
+.resv-layout{display:grid;grid-template-columns:1fr;gap:20px;align-items:start}
+.resv-side{display:flex;flex-direction:column;gap:20px}
+
+.num{font-variant-numeric:tabular-nums lining-nums}
+
+.resv-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:flex-end}
+.resv-inline{display:inline-flex;gap:6px;align-items:center;margin:0}
+
+.select--sm,.input--sm{min-height:38px;padding:6px 10px;font-size:.85rem}
+
+.resv-note{display:block;font-size:.78rem;margin-top:2px}
+
+.resv-wait{list-style:none;margin:0;padding:0}
+.resv-wait li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.resv-wait li:last-child{border-bottom:0}
+
+.resv-addwait,.resv-walkin{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.resv-walkin__note{font-size:.85rem;margin:0 0 12px}
+.resv-open-tables{font-size:.8rem;margin:12px 0 0}
+
+@media(min-width:981px){
+  .resv-layout{grid-template-columns:1fr 320px}
+}

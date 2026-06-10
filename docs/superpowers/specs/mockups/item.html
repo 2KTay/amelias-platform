@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amelia's Better Burger + Beef Tallow Skinny Fries — Amelia's by EAT</title>
+<!--
+  ITEM DETAIL / MODIFIERS — built on approved public design system v3.
+  Shared system: brand-v3.css. Display = Fraunces (provisional stand-in for "Audrey"); body = Montserrat.
+  Prototype only; small page-specific tweaks below for the item layout, modifier rows + quantity stepper.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-v3.css">
+<style>
+/* breadcrumb */
+.crumb{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.78rem;letter-spacing:.04em;color:var(--sage);padding:18px 0 0}
+.crumb a{color:var(--ink-2)}.crumb a:hover{color:var(--ink)}
+.crumb svg{opacity:.6}
+
+/* two-column item layout */
+.item{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:start;padding:clamp(24px,4vw,44px) 0 clamp(56px,8vw,100px)}
+.item__media{position:sticky;top:96px;display:grid;gap:14px}
+.item__photo{aspect-ratio:4/5;overflow:hidden;border:1px solid var(--line);border-radius:var(--r);background:var(--cream-2)}
+.item__photo img{width:100%;height:100%;object-fit:cover}
+.item__thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.item__thumb{aspect-ratio:1;overflow:hidden;border:1px solid var(--line);border-radius:var(--r);background:var(--cream-2)}
+.item__thumb img{width:100%;height:100%;object-fit:cover}
+
+.item__head{display:flex;justify-content:space-between;align-items:baseline;gap:18px}
+.item__name{font-family:'Fraunces',serif;font-size:clamp(1.9rem,3.6vw,2.8rem);font-weight:500;line-height:1.06}
+.item__price{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink);font-size:clamp(1.4rem,2.4vw,1.8rem);white-space:nowrap}
+.item__desc{color:var(--ink-2);margin:16px 0 18px;max-width:54ch}
+.item__tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+
+/* modifier groups */
+.mods{margin-top:8px}
+.modgroup{border:0;margin:0;padding:22px 0;border-top:1px solid var(--line)}
+.modgroup__head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:14px}
+.modgroup__title{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:500;padding:0}
+.modgroup__req{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--danger);white-space:nowrap}
+.modgroup__opt{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--sage);white-space:nowrap}
+
+/* option rows (radio / checkbox) */
+.opt{display:flex;align-items:center;gap:13px;padding:11px 14px;border:1px solid var(--line);border-radius:var(--r);background:#fff;cursor:pointer;margin-bottom:9px;transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--taupe)}
+.opt:has(input:checked){border-color:var(--olive);background:#f4f6ec}
+.opt:has(input:focus-visible){outline:2px solid var(--olive);outline-offset:2px}
+.opt input{width:20px;height:20px;accent-color:var(--olive);flex:none;cursor:pointer}
+.opt__label{flex:1;font-weight:500;font-size:.97rem}
+.opt__note{display:block;font-weight:400;font-size:.84rem;color:var(--sage);margin-top:1px}
+.opt__price{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink);font-size:1rem;white-space:nowrap}
+
+/* purchase bar */
+.buy{position:sticky;bottom:0;background:rgba(249,246,228,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);margin-top:26px;padding:16px 0}
+.buy__row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.stepper{display:inline-flex;align-items:center;border:1.5px solid var(--ink);border-radius:var(--r);overflow:hidden}
+.stepper button{width:46px;height:46px;background:transparent;border:0;cursor:pointer;color:var(--ink);font-size:1.3rem;line-height:1;display:flex;align-items:center;justify-content:center;font-family:'Montserrat'}
+.stepper button:hover{background:var(--ink);color:var(--cream)}
+.stepper button:disabled{opacity:.35;cursor:not-allowed}
+.stepper button:disabled:hover{background:transparent;color:var(--ink)}
+.stepper input{width:44px;height:46px;text-align:center;border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);font-family:'Fraunces',serif;font-size:1.1rem;background:#fff;color:var(--ink)}
+.buy__add{flex:1;min-width:200px}
+.buy__total{font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;color:var(--ink)}
+.buy__total b{font-style:normal;font-weight:600;color:var(--ink);font-size:1.15rem}
+.form-error{color:var(--danger);font-size:.86rem;margin:10px 0 0;display:none}
+.form-error.is-shown{display:block}
+
+@media(max-width:980px){
+  .item{grid-template-columns:1fr;gap:28px}
+  .item__media{position:static;top:auto}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<header class="nav"><div class="nav__in">
+  <a href="home-v3.html" aria-label="Amelia's by EAT — home"><img class="nav__logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></a>
+  <nav class="nav__links" id="navlinks">
+    <a class="lnk" href="menu.html">Menu</a>
+    <a class="lnk" href="market.html">Market</a>
+    <a class="lnk" href="wineclub.html">Wine Club</a>
+    <a class="lnk" href="supper.html">Sunday Supper</a>
+    <a class="lnk" href="catering.html">Catering</a>
+    <a class="lnk" href="story.html">Our Story</a>
+    <a class="btn" href="reserve.html">Reserve</a>
+    <a class="btn btn--solid" href="menu.html">Order</a>
+  </nav>
+  <button class="nav__burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('navlinks');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<!-- ITEM -->
+<main class="container">
+
+  <nav class="crumb" aria-label="Breadcrumb">
+    <a href="menu.html">Menu</a>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg>
+    <a href="menu.html#handhelds">Handhelds</a>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg>
+    <span>Amelia's Better Burger</span>
+  </nav>
+
+  <form id="itemForm" novalidate onsubmit="return addToOrder(event)">
+  <div class="item">
+
+    <!-- LEFT: photography -->
+    <div class="item__media">
+      <div class="item__photo">
+        <img src="../../../../images/banner-alternate-1536x1024.jpg" alt="Amelia's Better Burger plated with beef-tallow skinny fries in bright daylight" fetchpriority="high">
+      </div>
+      <div class="item__thumbs">
+        <div class="item__thumb"><img src="../../../../images/D0A7403-1.jpg" alt="Close plated view of the burger and fries"></div>
+        <div class="item__thumb"><img src="../../../../images/D0A7199-1-1024x1536.jpg" alt="Side angle of the stacked burger"></div>
+        <div class="item__thumb"><img src="../../../../images/5I8A7749-1-1024x1536.jpeg" alt="The dish on a table in Amelia's dining room"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: details + modifiers -->
+    <div class="item__detail">
+      <div class="item__head">
+        <h1 class="item__name">Amelia's Better Burger<br>+ Beef Tallow Skinny Fries</h1>
+        <span class="item__price">$26</span>
+      </div>
+
+      <p class="item__desc">Double-stacked AZ grass-fed beef + bacon patties, American + Swiss, tomato, shaved onion, shredded romaine, housemade pickles, Amelia's special sauce, toasted Noble brioche.</p>
+
+      <div class="item__tags">
+        <span class="tag">Grass-fed beef</span>
+        <span class="tag">Seed-oil free</span>
+        <span class="tag">GF bun available</span>
+        <span class="tag">No preservatives</span>
+      </div>
+
+      <div class="mods">
+
+        <!-- DONENESS — required radio -->
+        <fieldset class="modgroup" id="grp-doneness">
+          <div class="modgroup__head">
+            <legend class="modgroup__title">How would you like it cooked?</legend>
+            <span class="modgroup__req">Required &middot; choose 1</span>
+          </div>
+          <label class="opt">
+            <input type="radio" name="doneness" value="Medium-rare" required>
+            <span class="opt__label">Medium-rare<span class="opt__note">Warm red center — the kitchen's pick</span></span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="doneness" value="Medium">
+            <span class="opt__label">Medium<span class="opt__note">Warm pink center</span></span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="doneness" value="Medium-well">
+            <span class="opt__label">Medium-well<span class="opt__note">Slightly pink center</span></span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="doneness" value="Well-done">
+            <span class="opt__label">Well-done<span class="opt__note">Cooked through</span></span>
+          </label>
+        </fieldset>
+
+        <!-- BUN / SWAP — optional radio (incl. quinoa burger) -->
+        <fieldset class="modgroup" id="grp-bun">
+          <div class="modgroup__head">
+            <legend class="modgroup__title">Make it your way</legend>
+            <span class="modgroup__opt">Optional &middot; choose 1</span>
+          </div>
+          <label class="opt">
+            <input type="radio" name="bun" value="Toasted Noble brioche" data-price="0" checked>
+            <span class="opt__label">Toasted Noble brioche<span class="opt__note">As it's built — house standard</span></span>
+            <span class="opt__price">included</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="bun" value="Gluten-free bun" data-price="2">
+            <span class="opt__label">Gluten-free bun<span class="opt__note">Swap the brioche</span></span>
+            <span class="opt__price">+ $2</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="bun" value="Quinoa burger (patty swap)" data-price="0">
+            <span class="opt__label">Make it a quinoa burger<span class="opt__note">Swaps the beef + bacon for our house quinoa patty</span></span>
+            <span class="opt__price">even</span>
+          </label>
+        </fieldset>
+
+        <!-- ADD-ONS — checkboxes -->
+        <fieldset class="modgroup" id="grp-addons">
+          <div class="modgroup__head">
+            <legend class="modgroup__title">Add to it</legend>
+            <span class="modgroup__opt">Optional &middot; choose any</span>
+          </div>
+          <label class="opt">
+            <input type="checkbox" name="addon" value="Fried egg" data-price="4">
+            <span class="opt__label">Add a fried egg<span class="opt__note">Steadfast Farm egg, over-medium</span></span>
+            <span class="opt__price">+ $4</span>
+          </label>
+          <label class="opt">
+            <input type="checkbox" name="addon" value="Extra patty" data-price="6">
+            <span class="opt__label">Extra patty<span class="opt__note">One more grass-fed beef patty</span></span>
+            <span class="opt__price">+ $6</span>
+          </label>
+          <label class="opt">
+            <input type="checkbox" name="addon" value="Add avocado" data-price="3">
+            <span class="opt__label">Add avocado<span class="opt__note">Fresh smashed avocado</span></span>
+            <span class="opt__price">+ $3</span>
+          </label>
+        </fieldset>
+
+        <!-- SPECIAL INSTRUCTIONS -->
+        <fieldset class="modgroup" id="grp-notes">
+          <div class="modgroup__head">
+            <legend class="modgroup__title">Special instructions</legend>
+            <span class="modgroup__opt">Optional</span>
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <label for="notes" class="visually-hidden">Special instructions</label>
+            <textarea class="textarea" id="notes" name="notes" rows="3" maxlength="200" placeholder="Allergies, no pickles, sauce on the side… (we'll do our best)"></textarea>
+            <p class="field__hint">Up to 200 characters. For severe allergies, please call (602) 499-5195.</p>
+          </div>
+        </fieldset>
+
+      </div>
+
+      <!-- PURCHASE BAR -->
+      <div class="buy">
+        <div class="buy__row">
+          <div class="stepper" role="group" aria-label="Quantity">
+            <button type="button" aria-label="Decrease quantity" onclick="stepQty(-1)" id="qtyMinus" disabled>&minus;</button>
+            <input type="text" inputmode="numeric" id="qty" name="qty" value="1" aria-label="Quantity" readonly>
+            <button type="button" aria-label="Increase quantity" onclick="stepQty(1)">+</button>
+          </div>
+          <button type="submit" class="btn btn--solid btn--lg buy__add">
+            Add to order &middot;&nbsp;<span id="addPrice">$26.00</span>
+          </button>
+        </div>
+        <p class="buy__total" style="margin:12px 0 0">Live total <b id="liveTotal">$26.00</b> <span class="muted" id="liveBreak" style="font-size:.86rem"></span></p>
+        <p class="form-error" id="formError" role="alert">Please choose how you'd like your burger cooked before adding it to your order.</p>
+      </div>
+
+    </div>
+  </div>
+  </form>
+</main>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div><div class="foot__brand"><img src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></div><p style="max-width:34ch;margin:18px 0 0;color:#a8a395;font-size:.92rem">A conscious, made-from-scratch, all-day eating place &amp; market in Scottsdale.</p></div>
+    <div><h4>Visit</h4><a href="location.html">8240 N Hayden Rd, B-105<br>Scottsdale, AZ 85258</a><a href="tel:6024995195">(602) 499-5195</a><a href="mailto:info@ameliasaz.com">info@ameliasaz.com</a></div>
+    <div><h4>Hours</h4><a>Sun &nbsp;7a&ndash;3p</a><a>Mon&ndash;Thu &nbsp;7a&ndash;8p</a><a>Fri&ndash;Sat &nbsp;7a&ndash;close</a></div>
+    <div><h4>More</h4><a href="careers.html">Now Hiring</a><a href="story.html">Our Values</a><a href="purveyors.html">Our Purveyors</a><a href="giftcards.html">Gift Cards</a><a href="https://www.instagram.com/ameliasbyeat/">Instagram</a></div>
+  </div>
+  <div class="foot__base"><span>&copy; 2026 Amelia's by EAT &middot; Scottsdale, Arizona</span><span>Eat &amp; drink local.</span></div>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var BASE = 26;
+  var MAXQTY = 20, MINQTY = 1;
+  var qty = 1;
+
+  function money(n){ return '$' + n.toFixed(2); }
+
+  function unitPrice(){
+    var add = 0;
+    var bun = document.querySelector('input[name="bun"]:checked');
+    if(bun){ add += parseFloat(bun.getAttribute('data-price')) || 0; }
+    document.querySelectorAll('input[name="addon"]:checked').forEach(function(c){
+      add += parseFloat(c.getAttribute('data-price')) || 0;
+    });
+    return BASE + add;
+  }
+
+  function recalc(){
+    var unit = unitPrice();
+    var total = unit * qty;
+    document.getElementById('addPrice').textContent = money(total);
+    document.getElementById('liveTotal').textContent = money(total);
+    var brk = document.getElementById('liveBreak');
+    brk.textContent = qty > 1 ? '(' + money(unit) + ' each × ' + qty + ')' : '';
+  }
+
+  window.stepQty = function(dir){
+    qty = Math.min(MAXQTY, Math.max(MINQTY, qty + dir));
+    document.getElementById('qty').value = qty;
+    document.getElementById('qtyMinus').disabled = (qty <= MINQTY);
+    recalc();
+  };
+
+  window.addToOrder = function(e){
+    e.preventDefault();
+    var err = document.getElementById('formError');
+    var grp = document.getElementById('grp-doneness');
+    var picked = document.querySelector('input[name="doneness"]:checked');
+    if(!picked){
+      err.classList.add('is-shown');
+      grp.scrollIntoView({behavior:'smooth', block:'center'});
+      var first = grp.querySelector('input[name="doneness"]');
+      if(first){ first.focus(); }
+      return false;
+    }
+    err.classList.remove('is-shown');
+    // Prototype: in production this posts the configured line item to the cart.
+    alert('Added ' + qty + ' × Amelia\'s Better Burger (' + picked.value + ') — '
+      + money(unitPrice() * qty) + '.\n\nPrototype only.');
+    return false;
+  };
+
+  document.querySelectorAll('input[name="bun"], input[name="addon"]').forEach(function(el){
+    el.addEventListener('change', recalc);
+  });
+  document.querySelectorAll('input[name="doneness"]').forEach(function(el){
+    el.addEventListener('change', function(){ document.getElementById('formError').classList.remove('is-shown'); });
+  });
+  recalc();
+})();
+</script>
+</body>
+</html>

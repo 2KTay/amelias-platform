@@ -1,0 +1,99 @@
+/* Wine Club — storefront (perks + join card) and member portal. */
+/* Ports mockups/wineclub.html + wineclub-portal.html. Mobile-first: single */
+/* column by default, two columns at >=981px. Tokens only. */
+
+/* ---- Storefront ---- */
+.club { display: grid; grid-template-columns: 1fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
+.club__head { margin-bottom: 28px; }
+
+.perks { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.perks li {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+.perks li:first-child { border-top: 1px solid var(--line); }
+.perks__mark {
+  font-family: var(--font-display-stack);
+  font-style: italic;
+  color: var(--gold-ink);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.perks__t { font-weight: 600; display: block; margin-bottom: 3px; }
+.perks__d { color: var(--ink-2); font-size: 0.95rem; }
+
+.join {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: clamp(24px, 3vw, 38px);
+}
+.join__price { display: flex; align-items: baseline; gap: 8px; margin: 0 0 6px; }
+.join__num { font-family: var(--font-display-stack); font-size: 3rem; font-weight: 500; line-height: 1; letter-spacing: -0.02em; }
+.join__per { color: var(--sage); font-size: 0.95rem; }
+.join__sub { color: var(--ink-2); font-size: 0.95rem; margin: 0 0 22px; }
+.join__list { list-style: none; margin: 0 0 24px; padding: 0; font-size: 0.92rem; color: var(--ink-2); }
+.join__list li { padding: 5px 0; padding-left: 22px; position: relative; }
+.join__list li::before { content: "✓"; position: absolute; left: 0; color: var(--olive); font-weight: 600; }
+.join__signin { font-size: 0.82rem; color: var(--sage); margin: 12px 0 0; text-align: center; }
+.age { display: block; margin-top: 16px; font-size: 0.82rem; color: var(--sage); line-height: 1.5; }
+
+.somms { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 8px; }
+.somm { background: var(--cream); border: 1px solid var(--line); border-radius: var(--r); padding: 22px 24px; }
+.somm h3 { font-size: 1.3rem; margin: 0 0 4px; }
+.somm span { display: block; font-family: var(--font-display-stack); font-style: italic; color: var(--gold-ink); font-size: 0.95rem; margin-bottom: 8px; }
+.somm p { margin: 0; color: var(--ink-2); font-size: 0.93rem; }
+
+.club__wall-h { margin-top: 8px; }
+.club__wall-note { margin-top: 14px; }
+
+/* ---- Member portal ---- */
+.portal__h { margin-top: 8px; }
+.portal__section { padding-top: 0; }
+.portal { display: grid; grid-template-columns: 1fr; gap: clamp(24px, 4vw, 52px); align-items: start; margin-top: clamp(28px, 5vw, 48px); }
+
+.panel { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: clamp(22px, 3vw, 34px); }
+.panel + .panel { margin-top: 24px; }
+.panel h2 { font-size: 1.5rem; margin: 0 0 4px; }
+.panel__note { color: var(--sage); font-size: 0.9rem; margin: 0 0 22px; }
+.panel__note--last { margin-bottom: 0; }
+
+.status-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.status-row h2 { margin: 0; }
+
+.detail-list { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 14px 28px; align-items: baseline; }
+.detail-list dt { font-family: var(--font-display-stack); font-style: italic; color: var(--gold-ink); font-size: 1rem; }
+.detail-list dd { margin: 0; color: var(--ink-2); font-variant-numeric: tabular-nums; text-align: right; }
+.detail-list dd .sub { display: block; color: var(--sage); font-size: 0.82rem; font-style: normal; }
+
+.actions { display: flex; flex-direction: column; gap: 14px; margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line); }
+.actions__primary { display: flex; gap: 12px; flex-wrap: wrap; }
+.danger-link { font-size: 0.82rem; color: var(--sage); border: 0; background: none; cursor: pointer; padding: 0; align-self: flex-start; border-bottom: 1px solid transparent; transition: 0.2s; }
+.danger-link:hover { color: var(--danger); border-bottom-color: var(--danger); }
+
+.bottle { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.bottle:last-of-type { border-bottom: 0; padding-bottom: 0; }
+.bottle:first-of-type { padding-top: 0; }
+.bottle__img { flex: 0 0 96px; aspect-ratio: 3 / 4; overflow: hidden; background: var(--cream-2); border-radius: var(--r); }
+.bottle__img img { width: 100%; height: 100%; object-fit: cover; }
+.bottle__name { font-family: var(--font-display-stack); font-size: 1.18rem; font-weight: 500; line-height: 1.15; margin: 0 0 4px; }
+.bottle__meta { color: var(--olive-ink); font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; margin: 0 0 8px; }
+.bottle__desc { color: var(--ink-2); font-size: 0.92rem; margin: 0; }
+.portal__cta { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--line); }
+.portal__cta .panel__note { margin: 0 0 14px; }
+
+/* Pickup & shipment history table (shared .tbl/.badge live in components.css). */
+.tbl-wrap { overflow-x: auto; }
+.tbl td .badge { font-size: 0.66rem; }
+
+@media (min-width: 981px) {
+  .club { grid-template-columns: 1.1fr 0.9fr; }
+  .join { position: sticky; top: 100px; }
+  .somms { grid-template-columns: 1fr 1fr; }
+  .perks li { grid-template-columns: 130px 1fr; gap: 20px; }
+  .portal { grid-template-columns: 1.15fr 0.85fr; }
+}

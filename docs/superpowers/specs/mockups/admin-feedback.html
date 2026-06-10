@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback — Amelia's Admin</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;padding:5px 12px;border-radius:999px;background:var(--c-sand-2);color:var(--c-ink-2)}
+  .panel{background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-sm);overflow:hidden;margin-top:20px}
+  .panel__head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border)}
+  .panel__head h3{margin:0}
+  .ph{background:var(--c-sand-2);color:var(--c-muted);display:flex;align-items:center;justify-content:center;min-height:160px;border-radius:var(--r-sm);font-size:.8rem;text-align:center;margin:18px}
+  .stars{color:var(--c-warn);letter-spacing:1px;font-size:.95rem}
+  .stars--dim{color:var(--c-line)}
+  .recovery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:18px}
+  .rcard{border:1px solid var(--border);border-radius:var(--r-sm);padding:14px;background:var(--bg-soft)}
+  .rcard__top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .rcard__meta{font-size:.78rem;color:var(--text-muted);margin-bottom:6px}
+  .rcard__cmt{font-size:.88rem;margin:0 0 12px}
+  .rcard__act{display:flex;gap:8px}
+  .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .table-wrap{overflow:auto}
+  .table td.col-date,.table th.col-date{white-space:nowrap;font-variant-numeric:tabular-nums lining-nums}
+  .table td.badge-cell{white-space:nowrap}
+  .table caption{text-align:left}
+  .col-actions{width:1%;white-space:nowrap;position:sticky;right:0;background:#fff;box-shadow:-8px 0 8px -8px rgba(0,0,0,.15)}
+  .table thead .col-actions{box-shadow:none}
+  .kebab{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--border);border-radius:var(--r-sm);background:#fff;cursor:pointer;color:var(--c-ink)}
+  .kebab:hover{background:var(--bg-soft)}
+  @media(max-width:980px){.recovery{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="admin">
+  <aside class="admin__side" id="adminside">
+    <div class="brand">Amelia's · Admin</div>
+    <nav class="admin__nav">
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-reservations.html">Reservations</a>
+      <a href="admin-menu.html">Menu &amp; Pricing</a>
+      <a href="admin-inventory.html">Inventory</a>
+      <a href="admin-customers.html">Customers</a>
+      <a href="admin-feedback.html" class="active">Feedback</a>
+      <a href="admin-content.html">Content</a>
+      <a href="admin-team.html">Team</a>
+      <a href="admin-media.html">Media</a>
+      <a href="admin-reports.html">Reports</a>
+      <a href="admin-users.html">Users</a>
+      <a href="admin-settings.html">Settings</a>
+    </nav>
+  </aside>
+  <main class="admin__main">
+    <div class="admin__bar"><button class="admin__burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="adminside" onclick="var n=document.getElementById('adminside');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <h2>Feedback</h2>
+      <div class="flex center gap">
+        <span class="chip">Signed in as Owner</span>
+        <button type="button" class="btn btn--ghost btn--sm">Export</button>
+      </div>
+    </div>
+
+    <div class="grid grid--4">
+      <div class="stat"><div class="stat__n">4.6</div><div class="stat__l">Avg rating</div></div>
+      <div class="stat"><div class="stat__n">38%</div><div class="stat__l">Response rate</div></div>
+      <div class="stat"><div class="stat__n">22</div><div class="stat__l">Reviews this week</div></div>
+      <div class="stat"><div class="stat__n">3</div><div class="stat__l">Open alerts</div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel__head"><h3>Rating trend &mdash; last 8 weeks</h3></div>
+      <div class="ph">[ Line chart: weekly average rating, 4.2&ndash;4.8 ]</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel__head">
+        <h3>Service-recovery alerts</h3>
+        <span class="badge badge--danger">3 open</span>
+      </div>
+      <div class="recovery">
+        <div class="rcard">
+          <div class="rcard__top"><span class="stars" role="img" aria-label="2 out of 5 stars">&#9733;&#9733;<span class="stars--dim" aria-hidden="true">&#9733;&#9733;&#9733;</span></span><span class="badge badge--danger">Low score</span></div>
+          <div class="rcard__meta">M. Webb &middot; Table 12 &middot; May 30</div>
+          <p class="rcard__cmt">"Entrées arrived cold and the wait was over 40 minutes. Disappointing for the price."</p>
+          <div class="rcard__act"><button type="button" class="btn btn--primary btn--sm">Respond</button><button type="button" class="btn btn--ghost btn--sm">Mark resolved</button></div>
+        </div>
+        <div class="rcard">
+          <div class="rcard__top"><span class="stars" role="img" aria-label="2 out of 5 stars">&#9733;&#9733;<span class="stars--dim" aria-hidden="true">&#9733;&#9733;&#9733;</span></span><span class="badge badge--danger">Low score</span></div>
+          <div class="rcard__meta">Guest (online) &middot; Order #4793 &middot; May 29</div>
+          <p class="rcard__cmt">"Market order arrived with a broken jar. No reply to my email yet."</p>
+          <div class="rcard__act"><button type="button" class="btn btn--primary btn--sm">Respond</button><button type="button" class="btn btn--ghost btn--sm">Mark resolved</button></div>
+        </div>
+        <div class="rcard">
+          <div class="rcard__top"><span class="stars" role="img" aria-label="1 out of 5 stars">&#9733;<span class="stars--dim" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span></span><span class="badge badge--danger">Low score</span></div>
+          <div class="rcard__meta">J. Park &middot; Table 5 &middot; May 27</div>
+          <p class="rcard__cmt">"Reservation was lost on arrival, waited 25 minutes for a table we'd booked."</p>
+          <div class="rcard__act"><button type="button" class="btn btn--primary btn--sm">Respond</button><button type="button" class="btn btn--ghost btn--sm">Mark resolved</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel__head"><h3 id="feedback-caption">All feedback</h3></div>
+      <div class="table-wrap" role="region" aria-labelledby="feedback-caption" tabindex="0">
+      <table class="table data-table--list">
+        <caption class="visually-hidden">All feedback</caption>
+        <thead>
+          <tr>
+            <th scope="col">Rating</th>
+            <th scope="col" class="col-primary">Comment</th>
+            <th scope="col" class="col-priority-medium">Table / Source</th>
+            <th scope="col" class="col-date">Date</th>
+            <th scope="col">Status</th>
+            <th scope="col" class="col-actions"><span class="visually-hidden">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Rating"><span class="stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></td>
+            <td class="col-primary" data-label="Comment">Best branzino in Phoenix. Sommelier pairing was spot on.</td>
+            <td class="col-priority-medium" data-label="Table / Source">Table 8</td><td class="col-date" data-label="Date">Jun 01</td><td class="badge-cell" data-label="Status"><span class="badge badge--ok">Published</span></td>
+            <td class="col-actions"><button type="button" class="kebab" aria-label="Actions for feedback from Table 8" title="Actions"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+          </tr>
+          <tr>
+            <td data-label="Rating"><span class="stars" role="img" aria-label="4 out of 5 stars">&#9733;&#9733;&#9733;&#9733;<span class="stars--dim" aria-hidden="true">&#9733;</span></span></td>
+            <td class="col-primary" data-label="Comment">Lovely patio. Service slightly slow at peak.</td>
+            <td class="col-priority-medium" data-label="Table / Source">Table 3</td><td class="col-date" data-label="Date">May 31</td><td class="badge-cell" data-label="Status"><span class="badge badge--ok">Published</span></td>
+            <td class="col-actions"><button type="button" class="kebab" aria-label="Actions for feedback from Table 3" title="Actions"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+          </tr>
+          <tr>
+            <td data-label="Rating"><span class="stars" role="img" aria-label="2 out of 5 stars">&#9733;&#9733;<span class="stars--dim" aria-hidden="true">&#9733;&#9733;&#9733;</span></span></td>
+            <td class="col-primary" data-label="Comment">Entrées arrived cold and the wait was over 40 minutes.</td>
+            <td class="col-priority-medium" data-label="Table / Source">Table 12</td><td class="col-date" data-label="Date">May 30</td><td class="badge-cell" data-label="Status"><span class="badge badge--warn">In recovery</span></td>
+            <td class="col-actions"><button type="button" class="kebab" aria-label="Actions for feedback from Table 12" title="Actions"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+          </tr>
+          <tr>
+            <td data-label="Rating"><span class="stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></td>
+            <td class="col-primary" data-label="Comment">Pantry trio gift box was a hit. Fast shipping.</td>
+            <td class="col-priority-medium" data-label="Table / Source">Online</td><td class="col-date" data-label="Date">May 29</td><td class="badge-cell" data-label="Status"><span class="badge badge--ok">Published</span></td>
+            <td class="col-actions"><button type="button" class="kebab" aria-label="Actions for feedback from Online order" title="Actions"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+          </tr>
+          <tr>
+            <td data-label="Rating"><span class="stars" role="img" aria-label="1 out of 5 stars">&#9733;<span class="stars--dim" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span></span></td>
+            <td class="col-primary" data-label="Comment">Reservation was lost on arrival.</td>
+            <td class="col-priority-medium" data-label="Table / Source">Table 5</td><td class="col-date" data-label="Date">May 27</td><td class="badge-cell" data-label="Status"><span class="badge badge--warn">In recovery</span></td>
+            <td class="col-actions"><button type="button" class="kebab" aria-label="Actions for feedback from Table 5" title="Actions"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+          </tr>
+          <tr>
+            <td data-label="Rating"><span class="stars" role="img" aria-label="4 out of 5 stars">&#9733;&#9733;&#9733;&#9733;<span class="stars--dim" aria-hidden="true">&#9733;</span></span></td>
+            <td class="col-primary" data-label="Comment">Wine Club selection this month was excellent.</td>
+            <td class="col-priority-medium" data-label="Table / Source">Online</td><td class="col-date" data-label="Date">May 26</td><td class="badge-cell" data-label="Status"><span class="badge">Pending</span></td>
+            <td class="col-actions"><button type="button" class="kebab" aria-label="Actions for feedback from Online order" title="Actions"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

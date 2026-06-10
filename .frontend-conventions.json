@@ -1,0 +1,4 @@
+{
+  "$comment": "Conventions-audit waivers. Each waiver suppresses one (file, rule) pair and is reported as 'AslanException FE-EX-{id}'. Add only with a documented reason; prefer fixing the violation.",
+  "waivers": []
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content — Amelia's Admin</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;padding:5px 12px;border-radius:999px;background:var(--c-sand-2);color:var(--c-ink-2)}
+  .panel{background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-sm);overflow:hidden;margin-bottom:20px}
+  .panel__head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+  .panel__head h3{margin:0}
+  .panel__body{padding:18px}
+  .cols{display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start}
+  .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .table td.col-date,.table th.col-date{white-space:nowrap;font-variant-numeric:tabular-nums lining-nums}
+  .table td.badge-cell{white-space:nowrap}
+  .col-actions{width:1%;white-space:nowrap;text-align:right}
+  /* accessible toggle switch (checkbox-driven) */
+  .toggle{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:500;cursor:pointer}
+  .toggle input{position:absolute;opacity:0;width:0;height:0}
+  .toggle .track{width:38px;height:22px;border-radius:999px;background:var(--c-sand-2);position:relative;border:1px solid var(--border);flex:none;transition:.15s}
+  .toggle .track::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:var(--shadow-sm);transition:.15s}
+  .toggle input:checked + .track{background:var(--c-olive);border-color:var(--c-olive)}
+  .toggle input:checked + .track::after{left:18px}
+  .toggle input:focus-visible + .track{outline:2px solid var(--c-navy);outline-offset:2px}
+  .toolbar{display:flex;gap:6px;padding:8px;border:1px solid var(--border);border-bottom:0;border-radius:var(--r-sm) var(--r-sm) 0 0;background:var(--bg-soft)}
+  .toolbar .btn--sm{padding:6px 11px}
+  .editor-area{border-radius:0 0 var(--r-sm) var(--r-sm)}
+  .charcount{font-size:.76rem;color:var(--text-muted);text-align:right;margin-top:4px}
+  .pagelist a{display:block;padding:10px 12px;border-bottom:1px solid var(--border);font-size:.9rem;font-weight:500}
+  .pagelist a:last-child{border-bottom:0}
+  .pagelist a:hover{background:var(--bg-soft)}
+  .sticky-actions{position:sticky;top:0;z-index:5}
+  .seo{border-top:1px dashed var(--border);margin-top:18px;padding-top:16px}
+  @media(max-width:860px){.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="admin">
+  <aside class="admin__side" id="adminside">
+    <div class="brand">Amelia's · Admin</div>
+    <nav class="admin__nav">
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-reservations.html">Reservations</a>
+      <a href="admin-menu.html">Menu &amp; Pricing</a>
+      <a href="admin-inventory.html">Inventory</a>
+      <a href="admin-customers.html">Customers</a>
+      <a href="admin-feedback.html">Feedback</a>
+      <a href="admin-content.html" class="active">Content</a>
+      <a href="admin-team.html">Team</a>
+      <a href="admin-media.html">Media</a>
+      <a href="admin-reports.html">Reports</a>
+      <a href="admin-users.html">Users</a>
+      <a href="admin-settings.html">Settings</a>
+    </nav>
+  </aside>
+  <main class="admin__main">
+    <div class="admin__bar sticky-actions"><button class="admin__burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="adminside" onclick="var n=document.getElementById('adminside');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <div class="flex center gap">
+        <h2 style="margin:0">Content</h2>
+      </div>
+      <div class="flex center gap">
+        <span class="chip">Signed in as Owner</span>
+        <button type="submit" form="hero-block-form" class="btn btn--ghost btn--sm">Save draft</button>
+        <button type="submit" form="hero-block-form" class="btn btn--primary btn--sm">Publish</button>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div>
+        <!-- Content blocks list -->
+        <section class="panel">
+          <div class="panel__head"><h3 id="blocks-caption">Content blocks</h3></div>
+          <table class="table data-table--list">
+            <caption class="visually-hidden">Content blocks</caption>
+            <thead><tr><th scope="col">Block</th><th scope="col">Status</th><th scope="col" class="col-date">Last edited</th><th scope="col" class="col-actions"><span class="visually-hidden">Actions</span></th></tr></thead>
+            <tbody>
+              <tr>
+                <th scope="row" style="text-align:left;font-weight:600">Homepage hero<div class="muted" style="font-size:.8rem;font-weight:400">Headline + subtext</div></th>
+                <td class="badge-cell" data-label="Status"><span class="badge badge--ok">Published</span></td>
+                <td class="col-date" data-label="Last edited">Jun 01</td>
+                <td class="col-actions" data-label="Actions"><button type="button" class="btn btn--ghost btn--sm">Edit</button></td>
+              </tr>
+              <tr>
+                <th scope="row" style="text-align:left;font-weight:600">Announcement bar<div class="muted" style="font-size:.8rem;font-weight:400">On/off toggle + text</div></th>
+                <td class="badge-cell" data-label="Status"><label class="toggle"><input type="checkbox" checked><span class="track"></span> On</label></td>
+                <td class="col-date" data-label="Last edited">May 30</td>
+                <td class="col-actions" data-label="Actions"><button type="button" class="btn btn--ghost btn--sm">Edit</button></td>
+              </tr>
+              <tr>
+                <th scope="row" style="text-align:left;font-weight:600">Our Story<div class="muted" style="font-size:.8rem;font-weight:400">Long-form copy</div></th>
+                <td class="badge-cell" data-label="Status"><span class="badge badge--ok">Published</span></td>
+                <td class="col-date" data-label="Last edited">May 22</td>
+                <td class="col-actions" data-label="Actions"><button type="button" class="btn btn--ghost btn--sm">Edit</button></td>
+              </tr>
+              <tr>
+                <th scope="row" style="text-align:left;font-weight:600">Hours note<div class="muted" style="font-size:.8rem;font-weight:400">Short notice line</div></th>
+                <td class="badge-cell" data-label="Status"><span class="badge badge--warn">Draft</span></td>
+                <td class="col-date" data-label="Last edited">May 18</td>
+                <td class="col-actions" data-label="Actions"><button type="button" class="btn btn--ghost btn--sm">Edit</button></td>
+              </tr>
+              <tr>
+                <th scope="row" style="text-align:left;font-weight:600">Footer text<div class="muted" style="font-size:.8rem;font-weight:400">Copyright + tagline</div></th>
+                <td class="badge-cell" data-label="Status"><span class="badge badge--ok">Published</span></td>
+                <td class="col-date" data-label="Last edited">Apr 11</td>
+                <td class="col-actions" data-label="Actions"><button type="button" class="btn btn--ghost btn--sm">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Expanded editor -->
+        <section class="panel">
+          <div class="panel__head">
+            <h3>Editing: Homepage hero</h3>
+            <span class="badge">Block</span>
+          </div>
+          <form class="panel__body" id="hero-block-form">
+            <div class="field">
+              <label for="hero-headline">Headline <abbr class="required" title="required" style="color:var(--c-danger);text-decoration:none">*</abbr></label>
+              <input id="hero-headline" name="headline" class="input" type="text" required value="Seasonal plates, baked daily — Amelia's by EAT">
+            </div>
+
+            <div class="field">
+              <label for="hero-subtext">Subtext</label>
+              <div class="toolbar" role="toolbar" aria-label="Text formatting">
+                <button type="button" class="btn btn--ghost btn--sm" aria-label="Bold"><strong aria-hidden="true">B</strong></button>
+                <button type="button" class="btn btn--ghost btn--sm" aria-label="Italic"><em aria-hidden="true">I</em></button>
+                <button type="button" class="btn btn--ghost btn--sm" aria-label="Insert link">Link</button>
+                <button type="button" class="btn btn--ghost btn--sm" aria-label="Bulleted list">List</button>
+              </div>
+              <textarea id="hero-subtext" name="subtext" class="textarea editor-area" rows="5">Fresh, market-driven cooking in the heart of Scottsdale. Dine in, grab pickup, or order catering — everything made from scratch with locally sourced ingredients.</textarea>
+            </div>
+
+            <div class="field">
+              <button type="button" class="btn btn--ghost btn--sm">Insert image</button>
+              <span class="muted" style="font-size:.8rem"> Opens the <a href="admin-media.html">Media library</a></span>
+            </div>
+
+            <div class="seo">
+              <h4 style="margin:0 0 12px">Page SEO</h4>
+              <div class="field">
+                <label for="seo-title">SEO title</label>
+                <input id="seo-title" name="seo_title" class="input" type="text" maxlength="60" aria-describedby="seo-title-counter" value="Amelia's by EAT — Seasonal Restaurant &amp; Bakery in Scottsdale">
+                <div id="seo-title-counter" class="charcount" aria-live="polite" aria-atomic="true">6 characters remaining</div>
+              </div>
+              <div class="field">
+                <label for="meta-desc">Meta description</label>
+                <textarea id="meta-desc" name="meta_description" class="textarea" rows="3" maxlength="160" aria-describedby="meta-desc-counter">Market-driven seasonal plates baked daily in Scottsdale, AZ. Dine in, order pickup, or book catering at Amelia's by EAT.</textarea>
+                <div id="meta-desc-counter" class="charcount" aria-live="polite" aria-atomic="true">40 characters remaining</div>
+              </div>
+            </div>
+          </form>
+          <div class="panel__head" style="border-top:1px solid var(--border);border-bottom:0;justify-content:flex-end;gap:10px">
+            <button type="submit" form="hero-block-form" class="btn btn--ghost btn--sm">Save draft</button>
+            <button type="submit" form="hero-block-form" class="btn btn--primary btn--sm">Publish</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Pages sidebar -->
+      <aside>
+        <section class="panel" style="margin-bottom:0">
+          <div class="panel__head"><h3>Pages</h3></div>
+          <div class="pagelist">
+            <a href="#">Home <span class="muted" style="float:right;font-weight:400">Edit</span></a>
+            <a href="#">Our Story <span class="muted" style="float:right;font-weight:400">Edit</span></a>
+            <a href="#">Menu <span class="muted" style="float:right;font-weight:400">Edit</span></a>
+            <a href="#">Catering <span class="muted" style="float:right;font-weight:400">Edit</span></a>
+            <a href="#">Location <span class="muted" style="float:right;font-weight:400">Edit</span></a>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </main>
+</div>
+</body>
+</html>

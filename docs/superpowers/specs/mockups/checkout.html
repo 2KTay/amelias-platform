@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — Amelia's by EAT</title>
+<!--
+  CHECKOUT — public storefront mockup on the approved v3 design system.
+  Shared system: brand-v3.css (extracted from home-v3.html). Display = Fraunces
+  (provisional stand-in for licensed "Audrey"); body = Montserrat. No navy.
+  Stripe Payment Element is a PLACEHOLDER box only (SAQ-A: card data never
+  touches our server; Stripe-hosted fields + wallets). Prototype only.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-v3.css">
+<style>
+/* page-specific tweaks only */
+.checkout{display:grid;grid-template-columns:1.35fr .9fr;gap:clamp(32px,5vw,64px);align-items:start;padding-bottom:clamp(56px,8vw,112px)}
+.co-block{margin-top:clamp(34px,4vw,48px)}
+.co-block h2{font-size:1.55rem;margin:0 0 4px}
+.co-block__note{color:var(--sage);font-size:.9rem;margin:0 0 20px}
+.login-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin-bottom:26px}
+.login-row p{margin:0;font-size:.95rem;color:var(--ink-2)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+/* Stripe Payment Element placeholder */
+.stripe-el{border:1px dashed var(--taupe);border-radius:var(--r);background:#fff;padding:20px}
+.stripe-el__head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.stripe-el__brand{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;letter-spacing:.04em;color:var(--ink-2)}
+.stripe-el__lock{color:var(--olive-ink)}
+.wallet-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.wallet{display:flex;align-items:center;justify-content:center;height:46px;border:1px solid var(--taupe);border-radius:var(--r);background:#fff;font-size:.82rem;font-weight:600;color:var(--ink-2)}
+.wallet--dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.stripe-div{display:flex;align-items:center;gap:12px;color:var(--sage);font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;margin:4px 0 16px}
+.stripe-div::before,.stripe-div::after{content:"";flex:1;height:1px;background:var(--line)}
+.fake-field{height:46px;border:1px solid var(--taupe);border-radius:var(--r);background:#fcfcfa;display:flex;align-items:center;padding:0 14px;color:var(--sage);font-size:.92rem}
+.fake-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.stripe-foot{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:.78rem;color:var(--sage)}
+/* order summary */
+.summary{position:sticky;top:98px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:clamp(22px,3vw,30px)}
+.summary h2{font-size:1.4rem;margin:0 0 4px}
+.summary__pickup{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink);font-size:1rem;margin:0 0 18px}
+.sum-item{display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.sum-item__qty{color:var(--sage);font-weight:600;font-size:.9rem}
+.sum-item__name{font-weight:600;font-size:.95rem}
+.sum-item__mod{grid-column:1/-1;color:var(--sage);font-size:.84rem;margin-top:2px}
+.sum-item__price{font-family:'Fraunces',serif;font-style:italic;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.totals{margin-top:18px;font-variant-numeric:tabular-nums}
+.totals__row{display:flex;justify-content:space-between;gap:14px;padding:7px 0;font-size:.95rem;color:var(--ink-2)}
+.totals__sub{color:var(--sage);font-size:.86rem;padding-left:14px}
+.totals__grand{display:flex;justify-content:space-between;gap:14px;align-items:baseline;margin-top:12px;padding-top:14px;border-top:1px solid var(--line)}
+.totals__grand .lbl{font-family:'Fraunces',serif;font-size:1.25rem}
+.totals__grand .amt{font-family:'Fraunces',serif;font-size:1.5rem;font-variant-numeric:tabular-nums}
+.tip-row{display:flex;gap:8px;margin:18px 0 4px;flex-wrap:wrap}
+.tip-btn{flex:1;min-width:58px;height:42px;border:1px solid var(--taupe);border-radius:var(--r);background:#fff;font-family:inherit;font-size:.88rem;font-weight:600;color:var(--ink-2);cursor:pointer;transition:.15s}
+.tip-btn[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.summary .btn--block{margin-top:20px}
+.summary__terms{font-size:.78rem;color:var(--sage);margin:14px 0 0;text-align:center;line-height:1.5}
+@media(max-width:980px){
+  .checkout{grid-template-columns:1fr}
+  .summary{position:static;order:-1}
+  .field-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<header class="nav"><div class="nav__in">
+  <a href="home-v3.html" aria-label="Amelia's by EAT — home"><img class="nav__logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></a>
+  <nav class="nav__links" id="navlinks">
+    <a class="lnk" href="menu.html">Menu</a>
+    <a class="lnk" href="market.html">Market</a>
+    <a class="lnk" href="wineclub.html">Wine Club</a>
+    <a class="lnk" href="supper.html">Sunday Supper</a>
+    <a class="lnk" href="catering.html">Catering</a>
+    <a class="lnk" href="story.html">Our Story</a>
+    <a class="btn" href="reserve.html">Reserve</a>
+    <a class="btn btn--solid" href="menu.html">Order</a>
+  </nav>
+  <button class="nav__burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('navlinks');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<!-- PAGE HEAD -->
+<section class="page-head"><div class="container">
+  <h1 class="disp">Checkout</h1>
+  <p>Pickup at 8240 N Hayden Road, Ste B-105 — Scottsdale. We'll text you the moment your order is ready at the counter.</p>
+</div></section>
+
+<!-- CHECKOUT GRID -->
+<section class="section" style="padding-top:clamp(32px,4vw,48px)"><div class="container checkout">
+
+  <!-- LEFT: contact + payment -->
+  <form id="checkout-form">
+    <div class="login-row">
+      <p>Have an account? Sign in to autofill your details and reuse a saved card.</p>
+      <a class="btn" href="account.html">Log in</a>
+    </div>
+
+    <!-- contact -->
+    <div class="co-block" style="margin-top:0">
+      <h2 class="disp">Your details</h2>
+      <p class="co-block__note">So we can reach you about this pickup order.</p>
+      <div class="field-row">
+        <div class="field">
+          <label for="fname">First name <span class="req">*</span></label>
+          <input class="input" id="fname" name="fname" autocomplete="given-name" required>
+        </div>
+        <div class="field">
+          <label for="lname">Last name <span class="req">*</span></label>
+          <input class="input" id="lname" name="lname" autocomplete="family-name" required>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="phone">Mobile phone <span class="req">*</span></label>
+          <input class="input" id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(602) 555-0148" required>
+          <p class="field__hint">For your order-ready text. We won't spam you.</p>
+        </div>
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input class="input" id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@email.com" required>
+          <p class="field__hint">Your receipt lands here.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- payment -->
+    <div class="co-block">
+      <h2 class="disp">Payment</h2>
+      <p class="co-block__note">Card details are entered in secure fields hosted by Stripe — they never touch Amelia's servers.</p>
+
+      <div class="stripe-el" role="group" aria-label="Stripe Payment Element (secure card fields)">
+        <div class="stripe-el__head">
+          <span class="stripe-el__brand">
+            <svg class="stripe-el__lock" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            Secure card fields
+          </span>
+          <span class="badge badge--ok">PCI · SAQ-A</span>
+        </div>
+
+        <div class="wallet-row">
+          <span class="wallet wallet--dark">&#63743;&nbsp;Pay</span>
+          <span class="wallet">G&nbsp;Pay</span>
+        </div>
+        <div class="stripe-div">or pay with card</div>
+
+        <div class="fake-field">Card number &middot; 1234 1234 1234 1234</div>
+        <div class="fake-grid">
+          <div class="fake-field">MM / YY</div>
+          <div class="fake-field">CVC</div>
+        </div>
+        <div class="fake-field" style="margin-top:10px">ZIP code</div>
+
+        <p class="stripe-foot">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          Stripe Payment Element placeholder &middot; Apple Pay / Google Pay &middot; encrypted end-to-end
+        </p>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <a class="link-arrow form-actions__left" href="cart.html">
+        <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5" style="transform:scaleX(-1)"><path d="M1 6h17M13 1l5 5-5 5"/></svg>
+        Back to cart
+      </a>
+    </div>
+  </form>
+
+  <!-- RIGHT: order summary -->
+  <aside class="summary" aria-label="Order summary">
+    <h2 class="disp">Order summary</h2>
+    <p class="summary__pickup">Pickup today &middot; ready ~5:15 PM</p>
+
+    <div class="sum-item">
+      <span class="sum-item__name"><span class="sum-item__qty">1&times;</span> Quinoa &amp; Arugula</span>
+      <span class="sum-item__price">16.00</span>
+      <span class="sum-item__mod">Add rotisserie chicken</span>
+    </div>
+    <div class="sum-item">
+      <span class="sum-item__name"><span class="sum-item__qty">2&times;</span> Spicy Deviled Eggs</span>
+      <span class="sum-item__price">12.00</span>
+    </div>
+    <div class="sum-item">
+      <span class="sum-item__name"><span class="sum-item__qty">1&times;</span> Grain-Free Granola Parfait</span>
+      <span class="sum-item__price">12.00</span>
+    </div>
+    <div class="sum-item">
+      <span class="sum-item__name"><span class="sum-item__qty">1&times;</span> House Granola (market)</span>
+      <span class="sum-item__price">14.00</span>
+      <span class="sum-item__mod">Grab-and-go &middot; taxed as grocery</span>
+    </div>
+
+    <div class="totals">
+      <div class="totals__row"><span>Subtotal</span><span>54.00</span></div>
+      <div class="totals__row"><span>AZ TPT &mdash; prepared food (8.05%)</span><span>3.22</span></div>
+      <div class="totals__row totals__sub"><span>on $40.00 prepared / dine items</span><span></span></div>
+      <div class="totals__row"><span>AZ TPT &mdash; grocery (0.00%)</span><span>0.00</span></div>
+      <div class="totals__row totals__sub"><span>on $14.00 market grocery items</span><span></span></div>
+
+      <div class="tip-row" role="group" aria-label="Add a tip">
+        <button type="button" class="tip-btn" aria-pressed="false">No tip</button>
+        <button type="button" class="tip-btn" aria-pressed="false">15%</button>
+        <button type="button" class="tip-btn" aria-pressed="true">18%</button>
+        <button type="button" class="tip-btn" aria-pressed="false">20%</button>
+      </div>
+      <div class="totals__row"><span>Tip (18% of prepared)</span><span>7.20</span></div>
+
+      <div class="totals__grand">
+        <span class="lbl">Total</span>
+        <span class="amt">64.42</span>
+      </div>
+    </div>
+
+    <button type="submit" form="checkout-form" class="btn btn--solid btn--lg btn--block">Place order &middot; $64.42</button>
+    <p class="summary__terms">By placing your order you agree to Amelia's pickup terms. Card processed securely by Stripe.</p>
+  </aside>
+
+</div></section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div><div class="foot__brand"><img src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></div><p style="max-width:34ch;margin:18px 0 0;color:#a8a395;font-size:.92rem">A conscious, made-from-scratch, all-day eating place &amp; market in Scottsdale.</p></div>
+    <div><h4>Visit</h4><a href="location.html">8240 N Hayden Rd, B-105<br>Scottsdale, AZ 85258</a><a href="tel:6024995195">(602) 499-5195</a><a href="mailto:info@ameliasaz.com">info@ameliasaz.com</a></div>
+    <div><h4>Hours</h4><a>Sun &nbsp;7a&ndash;3p</a><a>Mon&ndash;Thu &nbsp;7a&ndash;8p</a><a>Fri&ndash;Sat &nbsp;7a&ndash;close</a></div>
+    <div><h4>More</h4><a href="careers.html">Now Hiring</a><a href="story.html">Our Values</a><a href="purveyors.html">Our Purveyors</a><a href="giftcards.html">Gift Cards</a><a href="https://www.instagram.com/ameliasbyeat/">Instagram</a></div>
+  </div>
+  <div class="foot__base"><span>&copy; 2026 Amelia's by EAT &middot; Scottsdale, Arizona</span><span>Eat &amp; drink local.</span></div>
+</footer>
+
+</div>
+</body>
+</html>

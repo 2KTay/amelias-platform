@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customers — Amelia's Admin</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;padding:5px 12px;border-radius:999px;background:var(--c-sand-2);color:var(--c-ink-2)}
+  .panel{background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-sm);overflow:hidden;margin-top:20px}
+  .panel__head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border)}
+  .panel__head h3{margin:0}
+  .table td.num,.table th.num{text-align:right;font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+  .table td.col-date,.table th.col-date{white-space:nowrap}
+  .table td.badge-cell{white-space:nowrap}
+  .table caption{text-align:left;padding:0 12px 8px;font-size:.78rem;color:var(--text-muted)}
+  .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .table-wrap{overflow:auto}
+  /* sticky action column */
+  .col-actions{width:1%;white-space:nowrap;position:sticky;right:0;background:#fff;box-shadow:-8px 0 8px -8px rgba(0,0,0,.15)}
+  .table thead .col-actions{box-shadow:none}
+  .kebab{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--border);border-radius:var(--r-sm);background:#fff;cursor:pointer;color:var(--c-ink)}
+  .kebab:hover{background:var(--bg-soft)}
+  .row-link{color:inherit;font-weight:600}
+  .search{display:flex;gap:10px;align-items:center;margin-top:4px}
+  .search .input{max-width:340px}
+  .cols{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;margin-top:20px}
+  .profile__head{display:flex;align-items:center;justify-content:space-between;padding:18px;border-bottom:1px solid var(--border)}
+  .profile__name{font-family:var(--font-display);font-size:1.4rem;font-weight:600}
+  .profile__body{padding:18px}
+  .kv{display:flex;justify-content:space-between;font-size:.88rem;padding:7px 0;border-bottom:1px solid var(--border)}
+  .kv:last-child{border-bottom:0}
+  .kv span:first-child{color:var(--text-muted)}
+  .tabs{display:flex;gap:6px;padding:0 18px;border-bottom:1px solid var(--border)}
+  .tabs a{padding:11px 12px;font-size:.86rem;font-weight:600;color:var(--text-muted);border-bottom:2px solid transparent}
+  .tabs a.active{color:var(--text);border-bottom-color:var(--c-navy)}
+  .sect{padding:16px 18px;border-bottom:1px solid var(--border)}
+  .sect h4{font-family:var(--font-display);font-size:1rem;margin:0 0 10px}
+  .row-line{display:flex;justify-content:space-between;font-size:.86rem;padding:6px 0;border-bottom:1px dotted var(--border)}
+  .row-line:last-child{border-bottom:0}
+  @media(max-width:980px){.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="admin">
+  <aside class="admin__side" id="adminside">
+    <div class="brand">Amelia's · Admin</div>
+    <nav class="admin__nav">
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-reservations.html">Reservations</a>
+      <a href="admin-menu.html">Menu &amp; Pricing</a>
+      <a href="admin-inventory.html">Inventory</a>
+      <a href="admin-customers.html" class="active">Customers</a>
+      <a href="admin-feedback.html">Feedback</a>
+      <a href="admin-content.html">Content</a>
+      <a href="admin-team.html">Team</a>
+      <a href="admin-media.html">Media</a>
+      <a href="admin-reports.html">Reports</a>
+      <a href="admin-users.html">Users</a>
+      <a href="admin-settings.html">Settings</a>
+    </nav>
+  </aside>
+  <main class="admin__main">
+    <div class="admin__bar"><button class="admin__burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="adminside" onclick="var n=document.getElementById('adminside');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <h2>Customers</h2>
+      <div class="flex center gap">
+        <span class="chip">Signed in as Owner</span>
+        <button type="button" class="btn btn--ghost btn--sm">Export CSV</button>
+      </div>
+    </div>
+
+    <form class="search" role="search">
+      <label for="cust-search" class="visually-hidden">Search customers</label>
+      <input id="cust-search" name="q" class="input" type="search" autocomplete="off" placeholder="Search by name, email, or phone&hellip;" value="">
+      <button type="submit" class="btn btn--primary btn--sm">Search</button>
+    </form>
+
+    <div class="cols">
+      <div class="panel" style="margin-top:0">
+        <div class="panel__head">
+          <h3>All customers <span class="muted" style="font-size:.82rem;font-weight:400">(1,284)</span></h3>
+        </div>
+        <div class="table-wrap" role="region" aria-labelledby="customers-caption" tabindex="0">
+        <table class="table data-table--list">
+          <caption id="customers-caption" class="visually-hidden">All customers</caption>
+          <thead>
+            <tr>
+              <th scope="col" class="col-primary">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col" class="col-priority-low">Phone</th>
+              <th scope="col" class="num">Orders</th>
+              <th scope="col" class="num">LTV</th>
+              <th scope="col" class="col-date col-priority-medium">Last visit</th>
+              <th scope="col">Club</th>
+              <th scope="col" class="col-actions"><span class="visually-hidden">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-primary" data-label="Name"><a href="#" class="row-link">Sofia Marchetti</a></td><td class="muted" data-label="Email">sofia.m@gmail.com</td><td class="col-priority-low" data-label="Phone">(602) 555-0142</td>
+              <td class="num" data-label="Orders">28</td><td class="num" data-label="LTV">$3,940</td><td class="col-date col-priority-medium" data-label="Last visit">May 28</td><td class="badge-cell" data-label="Club"><span class="badge badge--new">Wine Club</span></td>
+              <td class="col-actions"><button type="button" class="kebab" aria-label="Actions for Sofia Marchetti" title="Actions"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+            </tr>
+            <tr>
+              <td class="col-primary" data-label="Name"><a href="#" class="row-link">Daniel Cho</a></td><td class="muted" data-label="Email">d.cho@outlook.com</td><td class="col-priority-low" data-label="Phone">(480) 555-0199</td>
+              <td class="num" data-label="Orders">12</td><td class="num" data-label="LTV">$1,210</td><td class="col-date col-priority-medium" data-label="Last visit">May 24</td><td class="badge-cell" data-label="Club"></td>
+              <td class="col-actions"><button type="button" class="kebab" aria-label="Actions for Daniel Cho" title="Actions"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+            </tr>
+            <tr>
+              <td class="col-primary" data-label="Name"><a href="#" class="row-link">Priya Nair</a></td><td class="muted" data-label="Email">priya.nair@me.com</td><td class="col-priority-low" data-label="Phone">(602) 555-0177</td>
+              <td class="num" data-label="Orders">19</td><td class="num" data-label="LTV">$2,560</td><td class="col-date col-priority-medium" data-label="Last visit">May 30</td><td class="badge-cell" data-label="Club"><span class="badge badge--new">Wine Club</span></td>
+              <td class="col-actions"><button type="button" class="kebab" aria-label="Actions for Priya Nair" title="Actions"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+            </tr>
+            <tr>
+              <td class="col-primary" data-label="Name"><a href="#" class="row-link">Marcus Webb</a></td><td class="muted" data-label="Email">mwebb@gmail.com</td><td class="col-priority-low" data-label="Phone">(480) 555-0123</td>
+              <td class="num" data-label="Orders">6</td><td class="num" data-label="LTV">$640</td><td class="col-date col-priority-medium" data-label="Last visit">Apr 19</td><td class="badge-cell" data-label="Club"></td>
+              <td class="col-actions"><button type="button" class="kebab" aria-label="Actions for Marcus Webb" title="Actions"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+            </tr>
+            <tr>
+              <td class="col-primary" data-label="Name"><a href="#" class="row-link">Elena Russo</a></td><td class="muted" data-label="Email">elena.r@yahoo.com</td><td class="col-priority-low" data-label="Phone">(602) 555-0188</td>
+              <td class="num" data-label="Orders">34</td><td class="num" data-label="LTV">$5,120</td><td class="col-date col-priority-medium" data-label="Last visit">Jun 01</td><td class="badge-cell" data-label="Club"><span class="badge badge--new">Wine Club</span></td>
+              <td class="col-actions"><button type="button" class="kebab" aria-label="Actions for Elena Russo" title="Actions"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+            </tr>
+            <tr>
+              <td class="col-primary" data-label="Name"><a href="#" class="row-link">James Park</a></td><td class="muted" data-label="Email">jpark@gmail.com</td><td class="col-priority-low" data-label="Phone">(480) 555-0166</td>
+              <td class="num" data-label="Orders">3</td><td class="num" data-label="LTV">$285</td><td class="col-date col-priority-medium" data-label="Last visit">Mar 11</td><td class="badge-cell" data-label="Club"></td>
+              <td class="col-actions"><button type="button" class="kebab" aria-label="Actions for James Park" title="Actions"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:0">
+        <div class="profile__head">
+          <div>
+            <div class="profile__name">Sofia Marchetti</div>
+            <span class="badge badge--new">Wine Club &middot; Tier II</span>
+          </div>
+          <button type="button" class="btn btn--ghost btn--sm">Edit</button>
+        </div>
+        <div class="profile__body">
+          <div class="kv"><span>Email</span><span>sofia.m@gmail.com</span></div>
+          <div class="kv"><span>Phone</span><span>(602) 555-0142</span></div>
+          <div class="kv"><span>Member since</span><span>Mar 2023</span></div>
+          <div class="kv"><span>Lifetime value</span><span class="price">$3,940</span></div>
+          <div class="kv"><span>Total orders</span><span>28</span></div>
+        </div>
+        <div class="tabs">
+          <a href="#" class="active">Order history</a>
+          <a href="#">Reservations</a>
+          <a href="#">Feedback</a>
+          <a href="#">Wine Club</a>
+          <a href="#">Preferences</a>
+        </div>
+        <div class="sect">
+          <h4>Order history</h4>
+          <div class="row-line"><span>#4821 &middot; May 28</span><span class="price">$184.00</span></div>
+          <div class="row-line"><span>#4710 &middot; May 09</span><span class="price">$96.50</span></div>
+          <div class="row-line"><span>#4566 &middot; Apr 22</span><span class="price">$212.75</span></div>
+        </div>
+        <div class="sect">
+          <h4>Reservations</h4>
+          <div class="row-line"><span>Jun 14 &middot; Party of 4</span><span class="badge badge--ok">Confirmed</span></div>
+          <div class="row-line"><span>May 02 &middot; Party of 2</span><span class="badge">Completed</span></div>
+        </div>
+        <div class="sect">
+          <h4>Wine Club status</h4>
+          <div class="row-line"><span>Tier II &middot; 2 bottles / mo</span><span class="badge badge--ok">Active</span></div>
+          <div class="row-line"><span>Next shipment</span><span>Jun 10</span></div>
+        </div>
+        <div class="sect" style="border-bottom:0">
+          <h4>Preferences</h4>
+          <div class="flex gap wrap">
+            <span class="chip">No shellfish</span>
+            <span class="chip">Prefers reds</span>
+            <span class="chip">Window seating</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

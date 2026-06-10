@@ -1,0 +1,40 @@
+# Secrets
+.env
+.env.local
+config/database.php
+
+# Logs
+logs/*.log
+
+# Uploads (keep structure, ignore contents)
+uploads/*
+!uploads/.htaccess
+!uploads/.gitkeep
+
+# Onboarding scratch — raw scrapes/screenshots live here transiently and are
+# deleted after extraction into durable docs (PROJECT-BRIEF / BRAND-GUIDE).
+# Per client-onboarding artifact lifecycle.
+docs/_audit/*
+!docs/_audit/.gitkeep
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Vendor
+vendor/
+node_modules/
+
+# PHP / build
+*.local.php
+.phpunit.result.cache
+db/*.sqlite
+
+# Playwright MCP scratch (snapshots, console logs)
+.playwright-mcp/
+_installer_setup.php
+_setup_upload.php
+
+# Local Claude tooling/config (skills contain infra creds — never publish)
+.claude/

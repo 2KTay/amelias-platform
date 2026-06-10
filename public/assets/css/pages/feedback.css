@@ -1,0 +1,26 @@
+/* QR feedback page — star rating + Google review panel (ports mockups/feedback.html). */
+.fb{max-width:640px;margin:0 auto}
+.fb__table{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:.78rem;
+  letter-spacing:.04em;color:var(--olive-ink);font-weight:600;background:var(--cream-2);
+  border-radius:999px;padding:6px 14px}
+
+/* star rating — reversed in DOM so the CSS sibling-fill works; values still 1-5 */
+.stars{display:flex;gap:6px;flex-direction:row-reverse;justify-content:flex-start;margin:6px 0 2px}
+.stars input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.stars label{cursor:pointer;color:var(--taupe);line-height:1;transition:color .15s,transform .15s}
+.stars label svg{width:42px;height:42px;display:block}
+.stars label:hover,.stars label:hover ~ label,
+.stars input:checked ~ label{color:var(--gold)}
+.stars input:focus-visible + label{outline:2px solid var(--olive);outline-offset:3px;border-radius:4px}
+.stars label:hover{transform:translateY(-1px)}
+
+.fb-grid{gap:16px}
+.fb-field-flush{margin-bottom:0}
+
+.gpanel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  padding:clamp(22px,4vw,30px);margin-top:34px}
+.gpanel h2{font-size:1.45rem;margin:0 0 8px}
+.gpanel p{color:var(--ink-2);font-size:.95rem;margin:0 0 18px;max-width:52ch}
+.gbtn{display:inline-flex;align-items:center;gap:10px}
+.gbtn svg{width:18px;height:18px}
+.recovery{font-size:.85rem;color:var(--sage);margin:16px 0 0;max-width:58ch}

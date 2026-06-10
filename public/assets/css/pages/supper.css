@@ -1,0 +1,99 @@
+/* Sunday Supper — "how it works" grid, upcoming-event rows, prepay form. */
+/* Ports mockups/supper.html. Mobile-first: stacked by default; multi-column */
+/* layouts at >=781px. Tokens only — no hardcoded colors, no max-width queries. */
+
+/* B&W heritage treatment on the hero image (matches the approved mockup). */
+.supper-hero__img { filter: grayscale(1) contrast(1.03); }
+
+/* Gold hero kicker (matches the approved mockup). */
+.kicker--gold { color: var(--gold); }
+
+.supper-idea { max-width: 60ch; }
+
+/* Closing call-to-action band. */
+.supper-cta { text-align: center; padding-top: clamp(60px, 9vw, 104px); padding-bottom: clamp(60px, 9vw, 104px); }
+.supper-cta__h { color: var(--cream); font-size: clamp(2rem, 5vw, 3.4rem); max-width: 20ch; margin: 0 auto 18px; }
+.supper-cta__p { color: var(--cream-2); max-width: 50ch; margin: 0 auto 30px; }
+
+.supper-how {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.supper-how__cell { background: var(--cream); padding: clamp(22px, 3vw, 38px); }
+.supper-how__cell h3 { font-size: 1.35rem; margin: 0 0 10px; }
+.supper-how__cell p { color: var(--ink-2); font-size: 0.95rem; margin: 0; }
+.supper-how__lead {
+  font-family: var(--font-display-stack);
+  font-style: italic;
+  color: var(--gold-ink);
+  font-size: 1.05rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.supper-upcoming__lede { max-width: 48ch; }
+
+.event {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 24px clamp(18px, 3vw, 32px);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--paper);
+}
+.event + .event { margin-top: 18px; }
+.event--full { opacity: 0.72; }
+
+.event__date {
+  font-family: var(--font-display-stack);
+  font-weight: 500;
+  line-height: 1.05;
+}
+.event__date .mo {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--olive-ink);
+  font-style: normal;
+  margin-right: 8px;
+}
+.event__date .day { font-size: 1.8rem; }
+
+.event__main h3 { font-size: 1.5rem; margin: 0 0 4px; }
+.event__meta { color: var(--ink-2); font-size: 0.92rem; margin: 0; max-width: 58ch; }
+
+.event__aside { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.event__price { font-family: var(--font-display-stack); font-style: italic; color: var(--gold-ink); font-size: 1.3rem; }
+
+.supper-buy { width: 100%; }
+.supper-buy summary { display: inline-flex; cursor: pointer; list-style: none; }
+.supper-buy summary::-webkit-details-marker { display: none; }
+.supper-buy__form {
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--cream);
+  padding: clamp(16px, 2.4vw, 22px);
+}
+
+.supper-pay { max-width: 620px; }
+.supper-pay #payment-element { margin: 18px 0; }
+
+.supper-detail__h { margin: 8px 0 18px; }
+.supper-detail__note { margin-top: 14px; }
+
+@media (min-width: 781px) {
+  .supper-how { grid-template-columns: repeat(3, 1fr); }
+  .event { grid-template-columns: auto 1fr auto; gap: 8px 28px; }
+  .event__date { text-align: center; min-width: 84px; }
+  .event__date .mo { display: block; margin: 0 0 4px; }
+  .event__date .day { display: block; font-size: 2.4rem; }
+  .event__aside { align-items: flex-end; text-align: right; }
+}

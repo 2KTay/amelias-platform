@@ -1,0 +1,56 @@
+/* Gift cards (screen 10) — two-column gift layout + amount chips. Mobile-first. */
+
+.gift { display: grid; grid-template-columns: 1fr; gap: clamp(32px, 6vw, 72px); align-items: start; padding-bottom: clamp(48px, 7vw, 96px); }
+
+.fieldset { border: 0; padding: 0; margin: 0 0 26px; }
+.fieldset__legend { font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; margin: 0 0 16px; padding: 0; }
+
+.chips { display: flex; gap: 10px; flex-wrap: wrap; }
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.chip span { display: inline-flex; align-items: center; justify-content: center; min-width: 84px; padding: 13px 18px; border: 1.5px solid var(--taupe); border-radius: var(--r); font-family: var(--font-display); font-size: 1.15rem; background: var(--white); color: var(--ink); cursor: pointer; }
+.chip input:hover + span { border-color: var(--ink); }
+.chip input:checked + span { border-color: var(--ink); background: var(--ink); color: var(--cream); }
+.chip input:focus-visible + span { outline: 2px solid var(--olive); outline-offset: 2px; }
+
+.custom-amt { margin-top: 14px; max-width: 240px; }
+.custom-wrap { position: relative; }
+.custom-wrap::before { content: "$"; position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--sage); font-size: .98rem; z-index: 2; }
+.custom-wrap .input { padding-left: 30px; }
+.gc-senddate { max-width: 280px; }
+
+.field-row { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.req { color: var(--danger); }
+
+.gc-summary { margin-top: 8px; padding: 16px 18px; background: var(--cream-2); border: 1px solid var(--line); border-radius: var(--r); display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.gc-summary__label { font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--sage); }
+.gc-summary__amt { font-family: var(--font-display); font-size: 1.7rem; color: var(--ink); }
+
+.gc-form .form-actions { margin-top: 18px; }
+
+.gc-balance { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); }
+.gc-balance .promo { display: flex; gap: 8px; max-width: 420px; }
+.gc-balance__ok { color: var(--olive-ink); margin-top: 10px; font-weight: 600; }
+.gc-balance__err { color: var(--danger); margin-top: 10px; }
+
+.gift__card { position: relative; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; background: var(--cream-2); }
+.gift__card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+.gift__cardcap { position: absolute; left: 18px; bottom: 16px; color: var(--white); font-family: var(--font-display); font-style: italic; font-size: 1.25rem; text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55); }
+
+.gift__notes { margin-top: 24px; display: grid; gap: 14px; }
+.gift__note { display: flex; gap: 12px; align-items: flex-start; font-size: .92rem; color: var(--ink-2); }
+.gift__note svg { flex: none; margin-top: 3px; color: var(--olive); }
+
+.gc-pay { max-width: 480px; margin: 0 auto; }
+.gc-pay #payment-element { margin: 18px 0; }
+.pay-message { margin: 12px 0; padding: 10px 14px; border-radius: var(--r); background: var(--warn-bg, var(--cream-2)); color: var(--warn-ink, var(--ink-2)); font-size: .9rem; }
+
+@media (min-width: 560px) {
+  .field-row { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 980px) {
+  .gift { grid-template-columns: 1.05fr .95fr; }
+  .gift__aside { position: sticky; top: 102px; }
+  .gift__card img { aspect-ratio: 4/5; }
+}

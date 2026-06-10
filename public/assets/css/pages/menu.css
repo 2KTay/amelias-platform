@@ -1,0 +1,143 @@
+/* Menu page: add-to-cart action placement within the item grid. */
+.menu-item__actions { grid-column: 1 / -1; margin-top: 8px; }
+.menu-item__actions form { margin: 0; }
+
+/* Leading thumbnail on rows that have a photo. Rows without one (Layout A)
+   get .menu-item--noimg and drop the thumb column so their text sits
+   flush-left instead of behind an empty placeholder. */
+.menu-item { grid-template-columns: auto 1fr; }
+.menu-item__thumb { grid-row: 1 / 3; width: clamp(56px, 14vw, 64px); height: clamp(56px, 14vw, 64px); border-radius: var(--r); object-fit: cover; flex: none; background: var(--cream-2); border: 1px solid var(--line); }
+.menu-item__name { align-self: center; }
+/* Rows that span the full content width sit beside the thumb (column 2). */
+.menu-item__desc, .menu-item__tags { grid-column: 2; }
+/* Imageless rows: single content column, text aligned flush-left. */
+.menu-item--noimg { grid-template-columns: 1fr; }
+.menu-item--noimg .menu-item__desc, .menu-item--noimg .menu-item__tags { grid-column: 1; }
+
+/* Tighten the gap between the page intro and the sticky tabs: the page-head
+   already supplies top padding, so the menu section only needs a small,
+   intentional gap above the tablist. */
+.section--tight-top { padding-top: clamp(16px, 3vw, 28px); }
+
+/* Sticky day-part tabs (mockup: tablist pins under the nav while scrolling). */
+.menu-tabs--sticky { position: sticky; top: 78px; z-index: 30; background: var(--cream); padding-top: 10px; margin-top: 8px; }
+
+/* Per-day-part header: heading + italic subtitle, with a print-PDF link. */
+.menu-panel__head { margin: 30px 0 0; }
+.menu-meta { font-family: var(--font-display); font-style: italic; color: var(--gold-ink); font-size: 1.05rem; margin: 6px 0 0; }
+.menu-pdf { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--olive-ink); border-bottom: 1.5px solid var(--olive); padding-bottom: 3px; white-space: nowrap; }
+.menu-pdf:hover { color: var(--ink); }
+.menu-panel[hidden] { display: none; }
+
+/* Two-column flow for menu sections on wide screens. */
+.menu-cols { margin-top: 8px; }
+.menu-cols .menu-section:first-child { margin-top: 24px; }
+
+/* "Add proteins / build your own" run-on add-on lines. */
+.addons { padding: 14px 0 2px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--ink-2); font-size: 0.92rem; }
+.addons strong { color: var(--ink); font-weight: 600; }
+
+/* Catering price column header (12 | 24). */
+.cater-head { display: grid; grid-template-columns: 1fr auto; gap: 6px 18px; padding: 0 0 8px; border-bottom: 1px solid var(--line); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); font-weight: 600; }
+.cater-head span:last-child { font-family: var(--font-display); font-style: italic; letter-spacing: 0; text-transform: none; color: var(--gold-ink); font-size: 0.92rem; }
+
+/* Compliance / footnotes block at the foot of the menu. */
+.menu-foot { margin-top: 56px; padding-top: 30px; border-top: 1px solid var(--line); }
+.menu-foot p { color: var(--ink-2); font-size: 0.9rem; max-width: 74ch; margin: 0 0 12px; }
+.menu-foot .star { color: var(--gold-ink); font-style: italic; font-family: var(--font-display); }
+
+@media (min-width: 900px) {
+  .menu-cols { column-count: 2; column-gap: clamp(28px, 5vw, 64px); }
+  .menu-cols .menu-section { break-inside: avoid; }
+}
+@media (min-width: 768px) {
+  .menu-item { grid-template-columns: auto 1fr auto auto; align-items: baseline; }
+  .menu-item__thumb { grid-row: 1 / 3; align-self: start; }
+  .menu-item__name { align-self: baseline; }
+  /* Description/tags flow under the name/price, beside the thumb. */
+  .menu-item__desc, .menu-item__tags { grid-column: 2 / -1; }
+  .menu-item__actions { grid-column: auto; margin-top: 0; }
+  /* Imageless rows drop the thumb column: name / price / action. */
+  .menu-item--noimg { grid-template-columns: 1fr auto auto; }
+  .menu-item--noimg .menu-item__desc, .menu-item--noimg .menu-item__tags { grid-column: 1 / -1; }
+}
+.modifier-opt { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.modifier-opt input { width: auto; min-height: 0; }
+fieldset.field { border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; }
+fieldset.field legend { font-weight: 600; font-size: 0.82rem; color: var(--ink-2); padding: 0 6px; }
+
+/* ============ ITEM DETAIL (item.php) ============ */
+.item-wrap { padding-bottom: clamp(40px, 6vw, 80px); }
+
+/* Breadcrumb */
+.crumb { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 0.78rem; letter-spacing: 0.04em; color: var(--sage); padding: 18px 0 0; }
+.crumb a { color: var(--ink-2); }
+.crumb a:hover { color: var(--ink); }
+.crumb svg { opacity: 0.6; }
+
+/* Two-column item layout */
+.item { display: grid; grid-template-columns: 1fr; gap: 28px; padding: clamp(20px, 4vw, 40px) 0 0; align-items: start; }
+.item__media { display: grid; gap: 14px; }
+.item__photo { aspect-ratio: 4/5; overflow: hidden; border: 1px solid var(--line); border-radius: var(--r); background: var(--cream-2); }
+.item__photo img { width: 100%; height: 100%; object-fit: cover; }
+.item__photo-ph { width: 100%; height: 100%; background: var(--cream-2); }
+
+/* Thumbnail gallery (rendered only when the item has multiple images). */
+.item__thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.item__thumb { aspect-ratio: 1; overflow: hidden; border: 1px solid var(--line); border-radius: var(--r); background: var(--cream-2); }
+.item__thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.item__head { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; }
+.item__name { font-family: var(--font-display); font-size: clamp(1.9rem, 3.6vw, 2.8rem); font-weight: 500; line-height: 1.06; }
+.item__price { font-family: var(--font-display); font-style: italic; color: var(--gold-ink); font-size: clamp(1.4rem, 2.4vw, 1.8rem); white-space: nowrap; }
+.item__desc { color: var(--ink-2); margin: 16px 0 18px; max-width: 54ch; }
+
+/* Modifier groups */
+.mods { margin-top: 8px; }
+.modgroup { border: 0; margin: 0; padding: 22px 0; border-top: 1px solid var(--line); }
+.modgroup__head { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; margin-bottom: 14px; }
+.modgroup__title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; padding: 0; }
+.modgroup__req { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: var(--danger); white-space: nowrap; }
+.modgroup__opt { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: var(--sage); white-space: nowrap; }
+
+/* Option rows (radio / checkbox) */
+.opt { display: flex; align-items: center; gap: 13px; padding: 11px 14px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); cursor: pointer; margin-bottom: 9px; transition: border-color 0.15s, background 0.15s; }
+.opt:hover { border-color: var(--taupe); }
+.opt:has(input:checked) { border-color: var(--olive); background: var(--cream-2); }
+.opt:has(input:focus-visible) { outline: 2px solid var(--olive); outline-offset: 2px; }
+.opt input { width: 20px; height: 20px; min-height: 0; accent-color: var(--olive); flex: none; cursor: pointer; }
+.opt__label { flex: 1; font-weight: 500; font-size: 0.97rem; }
+.opt__note { display: block; font-weight: 400; font-size: 0.84rem; color: var(--sage); margin-top: 1px; }
+.opt__price { font-family: var(--font-display); font-style: italic; color: var(--gold-ink); font-size: 1rem; white-space: nowrap; }
+
+.item__notes { margin-bottom: 0; }
+
+/* Purchase bar */
+.buy { position: sticky; bottom: 0; background: var(--cream); border-top: 1px solid var(--line); margin-top: 26px; padding: 16px 0; z-index: 10; }
+.buy__row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.buy__add { flex: 1; min-width: 200px; }
+
+/* Quantity stepper (− / readonly value / +). Scoped under .buy so it never
+   collides with the order-confirmation progress .stepper. */
+.buy .stepper { display: inline-flex; align-items: center; border: 1.5px solid var(--ink); border-radius: var(--r); overflow: hidden; }
+.buy .stepper__btn { width: 46px; height: 46px; background: transparent; border: 0; cursor: pointer; color: var(--ink); font-size: 1.3rem; line-height: 1; display: flex; align-items: center; justify-content: center; font-family: var(--font-body); }
+.buy .stepper__btn:hover { background: var(--ink); color: var(--cream); }
+.buy .stepper__btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.buy .stepper__btn:disabled:hover { background: transparent; color: var(--ink); }
+.buy .stepper input { width: 44px; height: 46px; text-align: center; border: 0; border-left: 1px solid var(--line); border-right: 1px solid var(--line); font-family: var(--font-display); font-size: 1.1rem; background: var(--surface); color: var(--ink); }
+
+/* Live total + breakdown line under the add-to-order button. */
+.buy__total { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; color: var(--ink); margin: 12px 0 0; }
+.buy__total b { font-style: normal; font-weight: 600; color: var(--ink); font-size: 1.15rem; }
+
+/* Client-side validation message (required modifier groups). */
+.form-error { color: var(--danger); font-size: 0.86rem; margin: 10px 0 0; display: none; }
+.form-error.is-shown { display: block; }
+
+/* Catering panel CTA button row. */
+.catering-cta { margin-top: 34px; }
+
+@media (min-width: 980px) {
+  .item { grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 64px); }
+  .item__media { position: sticky; top: 96px; }
+}

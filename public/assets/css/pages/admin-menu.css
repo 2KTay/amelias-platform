@@ -1,0 +1,109 @@
+/* Admin Menu & Pricing (screen 22) — data-table list with a category filter,
+   inline price inputs, an 86 (sold-out) switch, a row-delete, and the product
+   editor form. Mobile-first: the list collapses to a card stack via data-label;
+   min-width queries promote it back to a table. */
+
+/* ---- sticky save bar (hidden at rest; revealed once a price is edited) ---- */
+.savebar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 18px;
+}
+.savebar__left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.savebar__actions { display: flex; gap: 8px; justify-content: flex-end; }
+.savebar__hint { font-size: .82rem; }
+.unsaved { font-size: .82rem; font-weight: 600; color: var(--warn-ink); }
+
+/* ---- category filter ---- */
+.menu-filter { display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.menu-filter__field { margin-bottom: 0; min-width: 240px; }
+.field__label { display: block; font-size: .74rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--sage); margin-bottom: 5px; }
+
+/* ---- table layout ---- */
+.menu-tbl .itemname { font-weight: 600; }
+.menu-tbl .menu-row__link { color: var(--ink); text-decoration: none; }
+.menu-tbl .menu-row__link:hover { text-decoration: underline; }
+.menu-tbl .menu-row { cursor: pointer; }
+.menu-tbl .menu-row:hover td { background: var(--bg-soft); }
+.menu-tbl .daypart { color: var(--ink-2); font-size: .85rem; }
+.menu-tbl .col-num { text-align: right; font-variant-numeric: tabular-nums lining-nums; white-space: nowrap; }
+.menu-tbl th.col-num { text-align: right; }
+.menu-tbl .col-actions { text-align: right; width: 1%; white-space: nowrap; }
+.menu-tbl .dietary { display: flex; gap: 5px; flex-wrap: wrap; }
+.menu-tbl tr.is-86 td { opacity: .62; }
+.menu-tbl tr.is-86 td.keep { opacity: 1; }
+.menu-tbl tr.is-dirty td { background: var(--warn-bg); }
+
+/* ---- inline price input ---- */
+.price-form { display: inline-flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.price-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 5px 9px;
+  background: var(--white);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  max-width: 110px;
+}
+.price-input > span { color: var(--sage); }
+.price-input .price-field { border: 0; width: 56px; font: inherit; font-weight: 600; padding: 0; outline: none; background: transparent; text-align: right; }
+.price-save { opacity: .85; }
+/* In bulk-edit mode, surface the inputs. */
+.menu-tbl.bulk-mode .price-input { border-color: var(--accent); }
+
+/* ---- 86 (sold-out) switch ---- */
+.sw { position: relative; display: inline-block; width: 42px; height: 24px; margin: 4px 0; cursor: pointer; }
+.sw input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.sw__track { position: absolute; inset: 0; background: var(--cream-2); border: 1px solid var(--line); border-radius: 999px; transition: background .15s, border-color .15s; }
+.sw__knob { position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--white); border-radius: 50%; box-shadow: 0 1px 2px rgba(0, 0, 0, .2); transition: transform .15s; }
+.sw input:checked ~ .sw__track { background: var(--danger); border-color: var(--danger); }
+.sw input:checked ~ .sw__knob { transform: translateX(18px); }
+.sw input:focus-visible ~ .sw__track { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---- per-row actions ---- */
+.row-actions { display: flex; gap: 7px; align-items: center; justify-content: flex-end; flex-wrap: wrap; }
+.btn--danger { background: transparent; color: var(--danger); border-color: var(--danger); }
+.btn--danger:hover { background: var(--danger); color: var(--white); }
+/* Icon-only delete: square, 44px touch target. */
+.btn--icon { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0 10px; font-size: 1rem; }
+
+/* ---- product editor ---- */
+.menu-back { margin-bottom: 8px; }
+.menu-edit__cols { display: grid; grid-template-columns: 1fr; gap: 18px; margin-bottom: 18px; }
+.menu-edit__row { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.menu-edit__tags legend { padding: 0; }
+.tag-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.tag-check { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 10px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); cursor: pointer; font-size: .9rem; }
+.menu-edit__img { width: 160px; height: 160px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-bottom: 10px; background: var(--bg-soft); }
+.menu-edit__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.menu-edit__img--empty { display: flex; align-items: center; justify-content: center; color: var(--sage); font-size: .85rem; }
+.menu-edit__upload { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 6px; }
+.field--check label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; }
+
+/* ---- responsive ---- */
+.menu-tbl .col-low { display: none; }
+@media (min-width: 860px) {
+  .savebar { flex-direction: row; align-items: center; }
+}
+@media (min-width: 768px) {
+  .menu-edit__row { grid-template-columns: 1fr 1fr 1fr; }
+}
+@media (min-width: 980px) {
+  .menu-edit__cols { grid-template-columns: 2fr 1fr; align-items: start; }
+}
+@media (min-width: 1024px) {
+  .menu-tbl .col-low { display: table-cell; }
+}

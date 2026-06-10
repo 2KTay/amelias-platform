@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How was your visit? — Amelia's by EAT</title>
+<!--
+  FEEDBACK (QR) — built on approved v3 public design system (brand-v3.css).
+  Mobile-first, lightweight (no image hero). Table identified via ?table= from the QR code.
+  COMPLIANCE: the "Leave us a Google review" link is shown to EVERYONE regardless of
+  star rating (never gated). Low scores additionally alert the team for service recovery.
+  Prototype only; production rebuilds on the frontend-css-architecture file set.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-v3.css">
+<style>
+/* page-specific: star rating + google panel (tiny tweaks only) */
+.fb{max-width:640px;margin:0 auto}
+.fb__table{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:.78rem;
+  letter-spacing:.04em;color:var(--olive-ink);font-weight:600;background:#e6efdd;
+  border-radius:999px;padding:6px 14px}
+.stars{display:flex;gap:6px;flex-direction:row-reverse;justify-content:flex-start;margin:6px 0 2px}
+.stars input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.stars label{cursor:pointer;color:var(--taupe);line-height:1;transition:color .15s,transform .15s}
+.stars label svg{width:42px;height:42px;display:block}
+.stars label:hover,.stars label:hover ~ label,
+.stars input:checked ~ label{color:var(--gold)}
+.stars input:focus-visible + label{outline:2px solid var(--olive);outline-offset:3px;border-radius:4px}
+.stars label:hover{transform:translateY(-1px)}
+.stars__hint{font-size:.85rem;color:var(--sage);margin:2px 0 0;min-height:1.2em}
+.gpanel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  padding:clamp(22px,4vw,30px);margin-top:34px}
+.gpanel h2{font-size:1.45rem;margin:0 0 8px}
+.gpanel p{color:var(--ink-2);font-size:.95rem;margin:0 0 18px;max-width:52ch}
+.gbtn{display:inline-flex;align-items:center;gap:10px}
+.gbtn svg{width:18px;height:18px}
+.recovery{font-size:.85rem;color:var(--sage);margin:16px 0 0;max-width:58ch}
+.recovery code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82em;background:var(--cream-2);padding:1px 6px;border-radius:4px;color:var(--ink-2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<header class="nav"><div class="nav__in">
+  <a href="home-v3.html" aria-label="Amelia's by EAT — home"><img class="nav__logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></a>
+  <nav class="nav__links" id="navlinks">
+    <a class="lnk" href="menu.html">Menu</a>
+    <a class="lnk" href="market.html">Market</a>
+    <a class="lnk" href="wineclub.html">Wine Club</a>
+    <a class="lnk" href="supper.html">Sunday Supper</a>
+    <a class="lnk" href="catering.html">Catering</a>
+    <a class="lnk" href="story.html">Our Story</a>
+    <a class="btn" href="reserve.html">Reserve</a>
+    <a class="btn btn--solid" href="menu.html">Order</a>
+  </nav>
+  <button class="nav__burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('navlinks');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<!-- PAGE HEAD -->
+<header class="page-head"><div class="container fb">
+  <span class="kicker">Thanks for eating with us</span>
+  <h1 class="disp" style="margin-top:8px">How was your visit?</h1>
+  <p>It takes about thirty seconds, and it helps Stacey and the team make the next plate even better. Tell us how we did.</p>
+  <span class="fb__table" id="tableTag">Table —</span>
+</div></header>
+
+<!-- FEEDBACK FORM -->
+<section class="section" style="padding-top:clamp(28px,4vw,44px)"><div class="container fb">
+
+  <form id="feedbackForm" novalidate>
+
+    <div class="field">
+      <label id="rateLabel">Your rating <span class="req">*</span></label>
+      <div class="stars" role="radiogroup" aria-labelledby="rateLabel">
+        <!-- reversed in the DOM so the CSS sibling-fill works; values are still 1–5 -->
+        <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="Excellent" aria-label="5 stars — excellent"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2l2.95 5.98 6.6.96-4.78 4.66 1.13 6.57L12 17.77l-5.9 3.1 1.13-6.57L2.45 9.64l6.6-.96L12 2.2z"/></svg></label>
+        <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="Good" aria-label="4 stars — good"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2l2.95 5.98 6.6.96-4.78 4.66 1.13 6.57L12 17.77l-5.9 3.1 1.13-6.57L2.45 9.64l6.6-.96L12 2.2z"/></svg></label>
+        <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="Okay" aria-label="3 stars — okay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2l2.95 5.98 6.6.96-4.78 4.66 1.13 6.57L12 17.77l-5.9 3.1 1.13-6.57L2.45 9.64l6.6-.96L12 2.2z"/></svg></label>
+        <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="Not great" aria-label="2 stars — not great"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2l2.95 5.98 6.6.96-4.78 4.66 1.13 6.57L12 17.77l-5.9 3.1 1.13-6.57L2.45 9.64l6.6-.96L12 2.2z"/></svg></label>
+        <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="Poor" aria-label="1 star — poor"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2l2.95 5.98 6.6.96-4.78 4.66 1.13 6.57L12 17.77l-5.9 3.1 1.13-6.57L2.45 9.64l6.6-.96L12 2.2z"/></svg></label>
+      </div>
+      <p class="stars__hint" id="ratingHint" aria-live="polite">Tap a star to rate.</p>
+    </div>
+
+    <div class="field">
+      <label for="comment">Tell us more</label>
+      <textarea class="textarea" id="comment" name="comment" rows="4" placeholder="What did you love? Anything we could do better? Mention a dish or a team member if you like."></textarea>
+      <span class="field__hint">Optional — but the details really help.</span>
+    </div>
+
+    <div class="grid grid--2" style="gap:16px">
+      <div class="field" style="margin-bottom:0">
+        <label for="name">Name</label>
+        <input class="input" type="text" id="name" name="name" autocomplete="name" placeholder="First name">
+        <span class="field__hint">Optional.</span>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label for="email">Email</label>
+        <input class="input" type="email" id="email" name="email" autocomplete="email" placeholder="you@email.com">
+        <span class="field__hint">Optional — only if you'd like a reply.</span>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn--solid btn--lg" type="submit">Send feedback</button>
+    </div>
+
+    <p class="recovery">If something fell short, a low score also pings our managers right away so we can make it right — please leave your email above if you'd like us to follow up.</p>
+  </form>
+
+  <!-- GOOGLE REVIEW — shown to EVERYONE, regardless of rating (never gated) -->
+  <div class="gpanel">
+    <h2 class="disp">Loved it? Tell the neighborhood.</h2>
+    <p>A quick public review goes a long way for a small, family-run kitchen. We'd be grateful — whatever your rating, the link's right here.</p>
+    <a class="btn btn--solid gbtn" href="https://search.google.com/local/writereview?placeid=" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2l2.95 5.98 6.6.96-4.78 4.66 1.13 6.57L12 17.77l-5.9 3.1 1.13-6.57L2.45 9.64l6.6-.96L12 2.2z"/></svg>
+      Leave us a Google review
+    </a>
+  </div>
+
+  <p class="recovery" style="margin-top:26px">Your table is identified automatically from the QR code you scanned (the <code>?table=</code> tag in the link), so you don't need to tell us where you sat. Thank you — truly.</p>
+
+</div></section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div><div class="foot__brand"><img src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></div><p style="max-width:34ch;margin:18px 0 0;color:#a8a395;font-size:.92rem">A conscious, made-from-scratch, all-day eating place &amp; market in Scottsdale.</p></div>
+    <div><h4>Visit</h4><a href="location.html">8240 N Hayden Rd, B-105<br>Scottsdale, AZ 85258</a><a href="tel:6024995195">(602) 499-5195</a><a href="mailto:info@ameliasaz.com">info@ameliasaz.com</a></div>
+    <div><h4>Hours</h4><a>Sun &nbsp;7a&ndash;3p</a><a>Mon&ndash;Thu &nbsp;7a&ndash;8p</a><a>Fri&ndash;Sat &nbsp;7a&ndash;close</a></div>
+    <div><h4>More</h4><a href="careers.html">Now Hiring</a><a href="story.html">Our Values</a><a href="purveyors.html">Our Purveyors</a><a href="giftcards.html">Gift Cards</a><a href="https://www.instagram.com/ameliasbyeat/">Instagram</a></div>
+  </div>
+  <div class="foot__base"><span>&copy; 2026 Amelia's by EAT &middot; Scottsdale, Arizona</span><span>Eat &amp; drink local.</span></div>
+</footer>
+
+</div>
+
+<script>
+// Reflect the ?table= QR parameter into the badge (display only).
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var t = (params.get('table') || '').trim();
+  var tag = document.getElementById('tableTag');
+  if (tag) tag.textContent = t ? ('Table ' + t) : 'Table — (scan a tabletop code)';
+})();
+
+// Live hint as a rating is chosen.
+(function(){
+  var hints = {
+    '1':'Poor — we’re sorry. A manager will be alerted.',
+    '2':'Not great — thank you for the honesty; we’ll look into it.',
+    '3':'Okay — tell us what would’ve made it better.',
+    '4':'Good — glad you enjoyed it!',
+    '5':'Excellent — you just made our day.'
+  };
+  var hint = document.getElementById('ratingHint');
+  document.querySelectorAll('.stars input').forEach(function(r){
+    r.addEventListener('change', function(){
+      if (hint){ hint.textContent = hints[this.value] || ''; hint.style.color=''; }
+    });
+  });
+})();
+
+// Prototype submit (no backend wired): require a rating, then acknowledge.
+document.getElementById('feedbackForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var rated = this.querySelector('input[name="rating"]:checked');
+  var hint = document.getElementById('ratingHint');
+  if (!rated){
+    if (hint){ hint.textContent = 'Please tap a star before sending.'; hint.style.color = 'var(--danger)'; }
+    this.querySelector('.stars').scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  alert('Thank you for your feedback! (Prototype — not yet submitted to a server.)');
+  this.reset();
+  if (hint){ hint.textContent = 'Tap a star to rate.'; hint.style.color = ''; }
+});
+</script>
+</body>
+</html>

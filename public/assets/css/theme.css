@@ -1,0 +1,53 @@
+/* ============================================================
+   theme.css — semantic token mapping (layer 2 of 5)
+   Maps brand primitives → role tokens. Two theme layers share ONE primitive
+   set: the public storefront (display serif) and the admin tool, which
+   overrides --font-display to the body sans (the display serif never appears
+   in-tool). Allowed to reference primitives from tokens.css.
+   ============================================================ */
+:root {
+  --ink:        var(--c-ink);
+  --ink-2:      var(--c-ink-2);
+  --ink-deep:   var(--c-ink-deep);
+  --cream:      var(--c-cream);
+  --cream-2:    var(--c-cream-2);
+  --paper:      var(--c-paper);
+  --taupe:      var(--c-taupe);
+  --sage:       var(--c-sage);
+  --olive:      var(--c-olive);
+  --olive-ink:  var(--c-olive-ink);
+  --gold:       var(--c-gold);
+  --gold-ink:   var(--c-gold-ink);
+  --danger:     var(--c-danger);
+  --line:       var(--c-line);
+
+  /* semantic roles */
+  --bg:           var(--c-cream);
+  --bg-soft:      var(--c-cream-2);
+  --surface:      var(--c-paper);
+  --text:         var(--c-ink);
+  --text-muted:   var(--c-sage);
+  --accent:       var(--c-olive);
+  --accent-ink:   var(--c-olive-ink);
+  --highlight:    var(--c-gold);
+
+  --white:        var(--c-white);
+  --gold-bright:  var(--c-gold-bright);
+  --danger-bg:    var(--c-danger-bg);
+  --onink:        var(--c-onink);
+  --onink-dim:    var(--c-onink-dim);
+  --onink-bright: var(--c-onink-bright);
+
+  --font-display: var(--font-display-stack);
+  --font-body:    var(--font-body-stack);
+
+  --r: var(--radius);
+  --maxw: var(--maxw);
+}
+
+/* Admin theme layer: same primitives, sans display, navy chrome accent. */
+[data-theme="admin"] {
+  --bg:           var(--c-paper);
+  --font-display: var(--font-body-stack); /* no public serif in-tool */
+  --accent:       var(--c-admin-navy);
+}

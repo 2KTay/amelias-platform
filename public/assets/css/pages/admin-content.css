@@ -1,0 +1,70 @@
+/* Admin content (screen) — two-column editor + Pages sidebar.
+   Mobile-first single column; sidebar splits off at >=900px. Tokens only. */
+
+.content-sub { margin: 4px 0 0; }
+
+.content-cols { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
+.content-main { min-width: 0; }
+.content-side { min-width: 0; }
+
+.editor-area { font-family: var(--font-body); }
+
+/* --- Content blocks: status table + inline editors --------------------- */
+.content-blocks-tbl { margin-bottom: 8px; }
+.content-block-name { text-align: left; font-weight: 600; }
+.content-block-key { display: block; font-size: 0.8rem; font-weight: 400; }
+.content-block-date { font-variant-numeric: tabular-nums lining-nums; white-space: nowrap; }
+.content-col-actions { text-align: right; white-space: nowrap; }
+.content-block-note { font-size: 0.82rem; margin: 4px 0 12px; }
+
+.content-edit-toggle[aria-expanded="true"] { background: var(--bg-soft); }
+
+/* Inline editor row revealed under its block row. */
+.content-editor-cell { padding: 0; display: block; }
+.content-editor-cell::before { content: none; }
+.content-editor-row .field { margin: 12px 0; }
+
+/* Formatting toolbar sits flush on top of the textarea. */
+.toolbar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: var(--r) var(--r) 0 0;
+  background: var(--bg-soft);
+}
+.toolbar + .editor-area,
+.toolbar + .textarea { border-radius: 0 0 var(--r) var(--r); }
+
+.charcount { font-size: 0.76rem; color: var(--text-muted); text-align: right; margin-top: 4px; }
+
+.req { color: var(--c-danger); }
+
+.content-seo { border-top: 1px dashed var(--line); margin-top: 18px; padding-top: 16px; }
+
+/* Editor-cell mobile affordance (no data-label, block layout) is set in the
+   base rules above; the desktop table layout overrides via .admin-tbl rules. */
+
+/* --- Featured "From the kitchen" picker -------------------------------- */
+.featured-picker { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 8px; }
+
+@media (min-width: 640px) {
+  .featured-picker { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* --- Hero image upload (page editor) ---------------------------------- */
+.content-hero-current { margin: 0 0 10px; }
+.content-hero-thumb { display: block; height: auto; border-radius: var(--r); border: 1px solid var(--line); }
+.content-hero-remove { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; margin: 8px 0; color: var(--text-muted); }
+
+.content-pagelist { display: flex; flex-direction: column; }
+.content-pagelist a { display: flex; justify-content: space-between; gap: 10px; padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 0.9rem; font-weight: 500; border-radius: var(--r); }
+.content-pagelist a:last-child { border-bottom: 0; }
+.content-pagelist a:hover { background: var(--bg-soft); }
+
+@media (min-width: 900px) {
+  .content-cols { grid-template-columns: 1fr 280px; }
+  .content-side { position: sticky; top: 16px; }
+}

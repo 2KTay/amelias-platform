@@ -1,0 +1,19 @@
+# User-uploaded media only. NEVER execute code here.
+# Disable any PHP handler so a disguised .php upload cannot run.
+php_flag engine off
+
+<IfModule mod_php7.c>
+  php_admin_flag engine off
+</IfModule>
+<IfModule mod_php.c>
+  php_admin_flag engine off
+</IfModule>
+
+# Deny direct access to any executable/script type, regardless of handler.
+<FilesMatch "\.(php|php\d|phtml|phar|pht|cgi|pl|py|asp|aspx|sh)$">
+  Require all denied
+</FilesMatch>
+
+# Remove handlers that might otherwise execute these as code.
+RemoveHandler .php .phtml .phar .pht .cgi .pl .py
+RemoveType .php .phtml .phar .pht

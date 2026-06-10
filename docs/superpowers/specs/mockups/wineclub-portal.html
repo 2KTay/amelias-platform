@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Wine Club — Amelia's by EAT</title>
+<!--
+  WINE CLUB PORTAL — logged-in member view, public v3 styling.
+  Uses shared design system (brand-v3.css). Prototype only.
+  Display face Fraunces is a PROVISIONAL stand-in for the licensed "Audrey" (Q13).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-v3.css">
+<style>
+/* page-specific tweaks only */
+.portal{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,4vw,52px);align-items:start;margin-top:clamp(34px,5vw,52px)}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:clamp(24px,3vw,34px)}
+.panel + .panel{margin-top:24px}
+.panel h2{font-size:1.5rem;margin:0 0 4px}
+.panel__note{color:var(--sage);font-size:.9rem;margin:0 0 22px}
+.status-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.status-row h2{margin:0}
+.detail-list{margin:0;display:grid;grid-template-columns:auto 1fr;gap:14px 28px;align-items:baseline}
+.detail-list dt{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink);font-size:1rem}
+.detail-list dd{margin:0;color:var(--ink-2);font-variant-numeric:tabular-nums;text-align:right}
+.detail-list dd .sub{display:block;color:var(--sage);font-size:.82rem;font-style:normal}
+.actions{display:flex;flex-direction:column;gap:14px;margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
+.actions__primary{display:flex;gap:12px;flex-wrap:wrap}
+.danger-link{font-size:.82rem;color:var(--sage);border-bottom:1px solid transparent;align-self:flex-start;transition:.2s}
+.danger-link:hover{color:var(--danger);border-bottom-color:var(--danger)}
+.bottle{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}
+.bottle:last-of-type{border-bottom:0;padding-bottom:0}
+.bottle:first-of-type{padding-top:0}
+.bottle__img{flex:0 0 96px;aspect-ratio:3/4;overflow:hidden;background:var(--cream-2);border-radius:var(--r)}
+.bottle__img img{width:100%;height:100%;object-fit:cover}
+.bottle__name{font-family:'Fraunces',serif;font-size:1.18rem;font-weight:500;line-height:1.15;margin:0 0 4px}
+.bottle__meta{color:var(--olive-ink);font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;font-weight:600;margin:0 0 8px}
+.bottle__desc{color:var(--ink-2);font-size:.92rem;margin:0}
+.tbl td .badge{font-size:.66rem}
+.tbl-wrap{overflow-x:auto}
+@media(max-width:980px){
+  .portal{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<header class="nav"><div class="nav__in">
+  <a href="home-v3.html" aria-label="Amelia's by EAT — home"><img class="nav__logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></a>
+  <nav class="nav__links" id="navlinks">
+    <a class="lnk" href="menu.html">Menu</a>
+    <a class="lnk" href="market.html">Market</a>
+    <a class="lnk" href="wineclub.html">Wine Club</a>
+    <a class="lnk" href="supper.html">Sunday Supper</a>
+    <a class="lnk" href="catering.html">Catering</a>
+    <a class="lnk" href="story.html">Our Story</a>
+    <a class="btn" href="reserve.html">Reserve</a>
+    <a class="btn btn--solid" href="menu.html">Order</a>
+  </nav>
+  <button class="nav__burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('navlinks');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<!-- PAGE HEAD -->
+<section class="page-head"><div class="container">
+  <span class="kicker">Welcome back, Stacey</span>
+  <h1 class="disp" style="margin-top:8px">Your Wine Club</h1>
+  <p>Two featured bottles a month, a 3rd-Wednesday tasting, waived corkage that night, and 15% off the wall anytime. Manage your membership below.</p>
+</div></section>
+
+<!-- PORTAL -->
+<section class="section" style="padding-top:0"><div class="container">
+  <div class="portal">
+
+    <!-- LEFT: membership + history -->
+    <div>
+      <div class="panel">
+        <div class="status-row">
+          <h2 class="disp">Membership</h2>
+          <span class="badge badge--ok">&#9679;&nbsp;Active</span>
+        </div>
+        <dl class="detail-list">
+          <dt>Plan</dt>
+          <dd>$40 / month<span class="sub">Two bottles &middot; monthly</span></dd>
+          <dt>Member since</dt>
+          <dd>March 2025</dd>
+          <dt>Next billing</dt>
+          <dd>July 1, 2026<span class="sub">Renews automatically</span></dd>
+          <dt>Payment</dt>
+          <dd>Visa &bull;&bull;&bull;&bull; 4242<span class="sub">Exp 09/27</span></dd>
+        </dl>
+
+        <div class="actions">
+          <div class="actions__primary">
+            <a class="btn btn--solid" href="#">Update payment</a>
+            <a class="btn" href="#">Pause membership</a>
+          </div>
+          <a class="danger-link" href="#">Cancel membership</a>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="disp">Pickup &amp; shipment history</h2>
+        <p class="panel__note">Bottles are held at the counter for two weeks &mdash; we'll text you when yours are ready.</p>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr><th>Date</th><th>Bottles</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Jun 2026</td>
+                <td>Cinsault Ros&eacute; &middot; Etna Bianco</td>
+                <td><span class="badge badge--warn">Ready for pickup</span></td>
+              </tr>
+              <tr>
+                <td>May 2026</td>
+                <td>Gamay &middot; Vermentino</td>
+                <td><span class="badge badge--ok">Picked up</span></td>
+              </tr>
+              <tr>
+                <td>Apr 2026</td>
+                <td>Cabernet Franc &middot; Gr&uuml;ner Veltliner</td>
+                <td><span class="badge badge--ok">Picked up</span></td>
+              </tr>
+              <tr>
+                <td>Mar 2026</td>
+                <td>Nebbiolo &middot; Albari&ntilde;o</td>
+                <td><span class="badge badge--ok">Picked up</span></td>
+              </tr>
+              <tr>
+                <td>Feb 2026</td>
+                <td>Carignan &middot; Chenin Blanc</td>
+                <td><span class="badge">Shipped</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: this month's bottles -->
+    <div>
+      <div class="panel">
+        <h2 class="disp">This month's bottles</h2>
+        <p class="panel__note">June 2026 &middot; chosen by our in-house somms</p>
+
+        <div class="bottle">
+          <div class="bottle__img"><img src="../../../../images/WineWall-2-1365x2048.jpg" alt="Bottles on Amelia's floor-to-ceiling white-shelved wine wall"></div>
+          <div>
+            <p class="bottle__meta">Ros&eacute; &middot; Provence</p>
+            <h3 class="bottle__name">Cinsault Ros&eacute;, 2024</h3>
+            <p class="bottle__desc">Pale, dry and mineral &mdash; wild strawberry and citrus pith. Chill it hard for the patio.</p>
+          </div>
+        </div>
+
+        <div class="bottle">
+          <div class="bottle__img"><img src="../../../../images/glasses-clinking.jpg" alt="Hands raising glasses together in a warm, low-lit toast"></div>
+          <div>
+            <p class="bottle__meta">White &middot; Sicily</p>
+            <h3 class="bottle__name">Etna Bianco, 2023</h3>
+            <p class="bottle__desc">Volcanic Carricante &mdash; saline, taut, a little smoky. Made for the deviled eggs.</p>
+          </div>
+        </div>
+
+        <div style="margin-top:24px;padding-top:22px;border-top:1px solid var(--line)">
+          <p class="panel__note" style="margin:0 0 14px">Next tasting: Wednesday, June 17 &middot; 5&ndash;7 pm. Small bites, no corkage that night.</p>
+          <a class="link-arrow" href="wineclub.html">Club details &amp; perks <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div></section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div><div class="foot__brand"><img src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></div><p style="max-width:34ch;margin:18px 0 0;color:#a8a395;font-size:.92rem">A conscious, made-from-scratch, all-day eating place &amp; market in Scottsdale.</p></div>
+    <div><h4>Visit</h4><a href="location.html">8240 N Hayden Rd, B-105<br>Scottsdale, AZ 85258</a><a href="tel:6024995195">(602) 499-5195</a><a href="mailto:info@ameliasaz.com">info@ameliasaz.com</a></div>
+    <div><h4>Hours</h4><a>Sun &nbsp;7a&ndash;3p</a><a>Mon&ndash;Thu &nbsp;7a&ndash;8p</a><a>Fri&ndash;Sat &nbsp;7a&ndash;close</a></div>
+    <div><h4>More</h4><a href="careers.html">Now Hiring</a><a href="story.html">Our Values</a><a href="purveyors.html">Our Purveyors</a><a href="giftcards.html">Gift Cards</a><a href="https://www.instagram.com/ameliasbyeat/">Instagram</a></div>
+  </div>
+  <div class="foot__base"><span>&copy; 2026 Amelia's by EAT &middot; Scottsdale, Arizona</span><span>Eat &amp; drink local.</span></div>
+</footer>
+
+</div>
+</body>
+</html>

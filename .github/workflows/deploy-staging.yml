@@ -1,0 +1,87 @@
+name: Deploy to staging (parityrfp.com/cs/amelias)
+
+# Auto-deploys the app to the Aslan staging server on every push to main.
+# Target: https://parityrfp.com/cs/amelias/  (FTP path /cs/amelias/).
+#
+# The app is base-path aware (auto-detected from SCRIPT_NAME), so it runs
+# correctly from the /cs/amelias subdirectory. This job assembles a FLAT deploy
+# layout (public/ contents at the mount root, support dirs alongside, denied by
+# .htaccess) and FTP-syncs it.
+#
+# Secrets (set via `gh secret set`):
+#   STAGING_FTP_SERVER, STAGING_FTP_USERNAME, STAGING_FTP_PASSWORD
+#   STAGING_FTP_REMOTE_DIR  (e.g. /cs/amelias/)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo, pdo_mysql, mbstring, openssl, json
+          tools: composer
+
+      - name: Install production dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist || echo "no composer deps yet"
+
+      - name: Conventions audit (CI gate)
+        run: php audit/conventions.php --quiet
+
+      - name: Assemble flat deploy bundle (dist/)
+        run: |
+          mkdir -p dist
+          # public/ contents become the web-accessible mount root
+          cp -r public/. dist/
+          # support dirs sit alongside (denied to the web by .htaccess)
+          for d in includes src config db templates cron audit; do
+            [ -d "$d" ] && cp -r "$d" dist/
+          done
+          # Menu seed data (db/seed.php parses these) — needed on the server even
+          # though the rest of docs/ is excluded.
+          mkdir -p dist/docs/content
+          [ -d docs/content/menus ] && cp -r docs/content/menus dist/docs/content/
+          [ -d vendor ] && cp -r vendor dist/ || true
+          [ -f composer.json ] && cp composer.json dist/ || true
+          # staging env: features off (no real secrets) so gated paths stay safe
+          cat > dist/.env <<EOF
+          APP_NAME=Amelia's by EAT (staging)
+          APP_ENV=staging
+          APP_DEBUG=false
+          APP_URL=https://parityrfp.com/cs/amelias
+          APP_KEY=base64:${{ secrets.STAGING_APP_KEY }}
+          DB_HOST=${{ secrets.STAGING_DB_HOST }}
+          DB_NAME=${{ secrets.STAGING_DB_NAME }}
+          DB_USER=${{ secrets.STAGING_DB_USER }}
+          DB_PASS=${{ secrets.STAGING_DB_PASS }}
+          EOF
+
+      - name: FTP deploy to parityrfp.com/cs/amelias
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.STAGING_FTP_SERVER }}
+          username: ${{ secrets.STAGING_FTP_USERNAME }}
+          password: ${{ secrets.STAGING_FTP_PASSWORD }}
+          server-dir: ${{ secrets.STAGING_FTP_REMOTE_DIR }}
+          local-dir: ./dist/
+          protocol: ftp
+          port: 21
+
+      - name: Smoke-check staging
+        run: |
+          sleep 5
+          code=$(curl -s -o /dev/null -w "%{http_code}" https://parityrfp.com/cs/amelias/ || echo "000")
+          echo "Home returned HTTP $code"
+          [ "$code" = "200" ] || echo "::warning::Staging home returned $code (review deploy)"

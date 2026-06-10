@@ -1,0 +1,67 @@
+name: Deploy (cPanel FTP)
+
+# Push-button, reversible deploys for a client with no developer on staff.
+# On push to master: build vendor/, run the conventions audit gate, take a
+# pre-deploy DB backup, then FTP-sync to the cPanel web root.
+#
+# Secrets required (Settings → Secrets and variables → Actions) — HUMAN-BLOCKED
+# on Q#10 cPanel/GoDaddy credentials, so these are unset until provided:
+#   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_REMOTE_DIR
+#   BACKUP_HOOK_URL  (tokenized URL that triggers cron/backup_db.php), optional
+
+# Production is HUMAN-BLOCKED on Q#10 (cPanel/GoDaddy credentials), so this
+# workflow is manual-only (workflow_dispatch) — it never auto-runs on push, so it
+# can't show a red X while prod secrets are unset. Trigger it by hand once the
+# production host + FTP secrets exist.
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      BACKUP_HOOK_URL: ${{ secrets.BACKUP_HOOK_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo, pdo_mysql, mbstring, openssl, json
+          tools: composer
+
+      - name: Install production dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist || composer update --no-dev --optimize-autoloader --no-interaction
+
+      - name: Conventions audit (CI gate)
+        run: php audit/conventions.php --quiet
+
+      - name: Pre-deploy DB backup (reversible)
+        if: ${{ env.BACKUP_HOOK_URL != '' }}
+        run: curl -fsS --max-time 120 "$BACKUP_HOOK_URL" || echo "backup hook failed — review before continuing"
+
+      - name: FTP deploy to cPanel
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          # Never ship secrets, VCS metadata, local-only or doc/test artifacts.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.env
+            **/.env.*
+            docs/**
+            e2e/**
+            tests/**
+            .github/**
+            **/*.md
+            node_modules/**
+            .playwright-mcp/**

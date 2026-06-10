@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Now Hiring — Amelia's by EAT</title>
+<!--
+  CAREERS / NOW HIRING — public storefront page on approved v3 system.
+  Shared design system loaded from brand-v3.css. Real copy + facts only.
+  Display Fraunces (provisional stand-in for "Audrey"); body Montserrat.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-v3.css">
+<style>
+/* page-specific tweaks only */
+.intro{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,6vw,72px);align-items:center}
+.intro img{width:100%;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--line)}
+.values-list{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:12px}
+.values-list li{position:relative;padding-left:26px;color:var(--ink-2);font-size:.98rem}
+.values-list li::before{content:"";position:absolute;left:0;top:.62em;width:11px;height:1.5px;background:var(--olive)}
+.role{display:grid;grid-template-columns:1fr auto;gap:8px 24px;align-items:start;padding:26px 0;border-bottom:1px solid var(--line)}
+.role:first-child{border-top:1px solid var(--line)}
+.role__name{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:500;line-height:1.1}
+.role__meta{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink);font-size:.98rem;margin-top:4px}
+.role__desc{grid-column:1/-1;color:var(--ink-2);font-size:.95rem;max-width:64ch;margin:8px 0 0}
+.role__apply{align-self:center}
+.apply-wrap{max-width:760px}
+.grid--form{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+@media(max-width:640px){
+  .intro{grid-template-columns:1fr}
+  .role{grid-template-columns:1fr}
+  .role__apply{justify-self:start;margin-top:6px}
+  .grid--form{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<header class="nav"><div class="nav__in">
+  <a href="home-v3.html" aria-label="Amelia's by EAT — home"><img class="nav__logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></a>
+  <nav class="nav__links" id="navlinks">
+    <a class="lnk" href="menu.html">Menu</a>
+    <a class="lnk" href="market.html">Market</a>
+    <a class="lnk" href="wineclub.html">Wine Club</a>
+    <a class="lnk" href="supper.html">Sunday Supper</a>
+    <a class="lnk" href="catering.html">Catering</a>
+    <a class="lnk" href="story.html">Our Story</a>
+    <a class="btn" href="reserve.html">Reserve</a>
+    <a class="btn btn--solid" href="menu.html">Order</a>
+  </nav>
+  <button class="nav__burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('navlinks');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <img src="../../../../images/5I8A7492-1024x1536.jpeg" alt="Amelia's dining room — slatted-wood wall, woven-leather chairs and warm afternoon light">
+  <div class="page-hero__in">
+    <h1>Now hiring</h1>
+    <p>Come build something good with us. We're growing our McCormick Ranch team and we'd love to meet people who cook, pour and host with heart.</p>
+  </div>
+</section>
+
+<!-- INTRO + VALUES -->
+<section class="section"><div class="container">
+  <div class="intro">
+    <div>
+      <span class="kicker">A place to grow</span>
+      <h2 class="disp" style="margin-top:10px">Work where the food is made from scratch</h2>
+      <p class="lede" style="margin-top:18px">Amelia's is a conscious, all-day eating place + market built around real cooking and real hospitality. Our kitchen is scratch-made and seed-oil free, our shelves are stocked from small local farms and makers, and our team treats every guest like a neighbor — because most of them are.</p>
+      <p style="margin-top:16px;color:var(--ink-2)">If you care about doing things the right way, work hard, and like the people you work beside, you'll feel at home here. We hire for warmth and curiosity first; skills we can teach.</p>
+      <ul class="values-list">
+        <li>Scratch-made cooking — no shortcuts, no preservatives, seed-oil free</li>
+        <li>Locally sourced from purveyors like Noble Bread, Steadfast Farm, Crow's Dairy, Fra'Mani &amp; Sweet Republic</li>
+        <li>Grass-fed &amp; organic wherever we can get it</li>
+        <li>A community gathering place — families and good people always welcome</li>
+      </ul>
+    </div>
+    <img src="../../../../images/5I8A7749-1-1024x1536.jpeg" alt="Warm interior corner of Amelia's with woven-leather seating and globe sconces">
+  </div>
+</div></section>
+
+<!-- OPEN POSITIONS -->
+<section class="section section--soft"><div class="container">
+  <div class="head"><h2 class="disp">Open positions</h2><p>Roles open right now. Don't see your fit? Reach out anyway — we're always glad to meet good people.</p></div>
+
+  <div class="apply-wrap">
+    <div class="role">
+      <div>
+        <div class="role__name">Line Cook</div>
+        <div class="role__meta">Full-time · scratch kitchen</div>
+      </div>
+      <a class="btn role__apply" href="mailto:info@ameliasaz.com?subject=Application%20%E2%80%94%20Line%20Cook">Apply</a>
+      <p class="role__desc">Cook our all-day menu from scratch on a busy line — prep, plating and a build-your-own-board concept in the evenings. Steady hands, clean habits, and pride in a plate that goes out right.</p>
+    </div>
+
+    <div class="role">
+      <div>
+        <div class="role__name">Barista</div>
+        <div class="role__meta">Full or part-time · craft coffee</div>
+      </div>
+      <a class="btn role__apply" href="mailto:info@ameliasaz.com?subject=Application%20%E2%80%94%20Barista">Apply</a>
+      <p class="role__desc">Pull craft coffees and pour our morning energy from behind the counter. A friendly face for regulars, an eye for detail in the cup, and the easy warmth that makes someone's day start better.</p>
+    </div>
+
+    <div class="role">
+      <div>
+        <div class="role__name">Host</div>
+        <div class="role__meta">Full or part-time · front of house</div>
+      </div>
+      <a class="btn role__apply" href="mailto:info@ameliasaz.com?subject=Application%20%E2%80%94%20Host">Apply</a>
+      <p class="role__desc">Set the tone the moment guests walk in — counter service by day, table service in the evening. Genuinely welcoming, organized under a rush, and happy to make families feel right at home.</p>
+    </div>
+
+    <div class="role">
+      <div>
+        <div class="role__name">Catering Lead</div>
+        <div class="role__meta">Full-time · catering &amp; events</div>
+      </div>
+      <a class="btn role__apply" href="mailto:info@ameliasaz.com?subject=Application%20%E2%80%94%20Catering%20Lead">Apply</a>
+      <p class="role__desc">Own platters, boards and full-service events from inquiry to delivery. Calm logistics, sharp communication and a love of feeding a crowd well — coordinating closely with our kitchen and Boutique Catering by EAT.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- APPLICATION FORM -->
+<section class="section"><div class="container container--narrow">
+  <div class="head"><h2 class="disp">Tell us about you</h2><p>Send a quick note and we'll be in touch. Prefer email? Write us anytime at <a href="mailto:info@ameliasaz.com" style="border-bottom:1.5px solid var(--olive)">info@ameliasaz.com</a>.</p></div>
+
+  <form class="apply-wrap" action="mailto:info@ameliasaz.com" method="post" enctype="text/plain">
+    <div class="grid--form">
+      <div class="field">
+        <label for="name">Name <span class="req">*</span></label>
+        <input class="input" id="name" name="name" type="text" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email <span class="req">*</span></label>
+        <input class="input" id="email" name="email" type="email" autocomplete="email" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="role">Role you're applying for <span class="req">*</span></label>
+      <select class="select" id="role" name="role" required>
+        <option value="" selected disabled>Choose a role…</option>
+        <option>Line Cook</option>
+        <option>Barista</option>
+        <option>Host</option>
+        <option>Catering Lead</option>
+        <option>Something else / general interest</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="message">A little about you <span class="req">*</span></label>
+      <textarea class="textarea" id="message" name="message" rows="5" placeholder="Your experience, when you can start, and why Amelia's sounds like your kind of place." required></textarea>
+      <p class="field__hint">No formal resume needed to start the conversation — just say hello.</p>
+    </div>
+
+    <div class="form-actions">
+      <span class="form-actions__left muted" style="font-size:.85rem">We read every note. Thanks for thinking of us.</span>
+      <button class="btn btn--solid btn--lg" type="submit">Submit application</button>
+    </div>
+  </form>
+</div></section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div><div class="foot__brand"><img src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></div><p style="max-width:34ch;margin:18px 0 0;color:#a8a395;font-size:.92rem">A conscious, made-from-scratch, all-day eating place &amp; market in Scottsdale.</p></div>
+    <div><h4>Visit</h4><a href="location.html">8240 N Hayden Rd, B-105<br>Scottsdale, AZ 85258</a><a href="tel:6024995195">(602) 499-5195</a><a href="mailto:info@ameliasaz.com">info@ameliasaz.com</a></div>
+    <div><h4>Hours</h4><a>Sun &nbsp;7a&ndash;3p</a><a>Mon&ndash;Thu &nbsp;7a&ndash;8p</a><a>Fri&ndash;Sat &nbsp;7a&ndash;close</a></div>
+    <div><h4>More</h4><a href="careers.html">Now Hiring</a><a href="story.html">Our Values</a><a href="purveyors.html">Our Purveyors</a><a href="giftcards.html">Gift Cards</a><a href="https://www.instagram.com/ameliasbyeat/">Instagram</a></div>
+  </div>
+  <div class="foot__base"><span>&copy; 2026 Amelia's by EAT &middot; Scottsdale, Arizona</span><span>Eat &amp; drink local.</span></div>
+</footer>
+
+</div>
+</body>
+</html>

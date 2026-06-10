@@ -1,0 +1,57 @@
+/* Reserve page: primary booking form + secondary details aside. */
+/* Mobile-first: single column by default; two columns at >=901px. */
+/* Hierarchy: the booking form is the focus (boxed paper card, larger heading,
+   generous rhythm). The aside recedes (no boxes, muted smaller type, calm
+   earth-tone accents only). */
+.reserve{display:grid;grid-template-columns:1fr;gap:clamp(32px,5vw,56px);align-items:start;padding-bottom:clamp(40px,8vw,96px)}
+
+/* --- Primary: booking form --- */
+.book{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(22px,3.6vw,40px)}
+.book__legend{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.05rem);line-height:1.1;margin:0 0 var(--space-5)}
+.book__step{color:var(--text-muted);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin:var(--space-6) 0 var(--space-4)}
+.book__step:first-of-type{margin-top:0}
+.grid2{display:grid;grid-template-columns:1fr;gap:0 var(--space-5)}
+
+.slots{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-1)}
+.slot{font-family:var(--font-body);font-size:.9rem;font-weight:500;font-variant-numeric:tabular-nums;
+  padding:10px 16px;min-height:44px;display:inline-flex;align-items:center;
+  border:1px solid var(--taupe);border-radius:999px;background:var(--surface);color:var(--text);cursor:pointer;transition:.18s}
+.slot:hover:not(:disabled){border-color:var(--accent);color:var(--accent-ink)}
+.slot[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.slot:disabled{opacity:.45;cursor:not-allowed;text-decoration:line-through;background:var(--bg-soft)}
+.slot small{font-variant-numeric:normal;letter-spacing:.04em;text-transform:uppercase;font-size:.6rem;margin-left:6px;opacity:.85}
+
+.reserve__rule{margin:var(--space-6) 0 var(--space-1)}
+.fineprint{color:var(--text-muted);font-size:.82rem;margin-top:var(--space-5);line-height:1.55}
+
+/* --- Secondary: details aside (calm, unboxed) --- */
+.aside{display:grid;gap:var(--space-6)}
+.aside__block{margin:0}
+.aside__block + .aside__block{padding-top:var(--space-6);border-top:1px solid var(--line)}
+.aside__title{font-family:var(--font-display);font-size:1.05rem;font-weight:600;color:var(--ink-2);margin:0 0 var(--space-3)}
+.aside__note{color:var(--ink-2);font-size:.86rem;line-height:1.55;margin:0 0 var(--space-3)}
+.aside__note:last-child{margin-bottom:0}
+.aside__lead{font-weight:600;color:var(--text)}
+
+.notes{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-3)}
+.note{display:flex;gap:var(--space-3);align-items:flex-start;font-size:.86rem;line-height:1.5;color:var(--ink-2);margin:0}
+.note svg{flex:none;margin-top:2px;color:var(--accent)}
+
+.reserve__hours{margin:0;display:grid;grid-template-columns:auto 1fr;gap:var(--space-2) var(--space-5)}
+.reserve__hours dt{font-family:var(--font-display);font-style:italic;color:var(--gold-ink);font-size:.9rem}
+.reserve__hours dd{margin:0;color:var(--ink-2);font-size:.86rem}
+.reserve__contact{margin:var(--space-4) 0 0;font-size:.86rem;color:var(--ink-2)}
+
+/* confirmation / manage / deposit cards */
+.reserve-confirm,.reserve-deposit{max-width:620px}
+.reserve-confirm .card,.reserve-deposit .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(22px,4vw,34px)}
+.reserve-confirm__dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 20px}
+.reserve-confirm__dl dt{font-family:var(--font-display);font-style:italic;color:var(--gold-ink)}
+.reserve-confirm__dl dd{margin:0;color:var(--ink-2)}
+.reserve-manage__cancel{margin-top:22px}
+
+@media(min-width:901px){
+  .reserve{grid-template-columns:1.4fr .85fr;gap:clamp(40px,5vw,72px)}
+  .grid2{grid-template-columns:1fr 1fr}
+  .aside{position:sticky;top:96px}
+}

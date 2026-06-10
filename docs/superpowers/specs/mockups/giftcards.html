@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gift Cards — Amelia's by EAT</title>
+<!--
+  GIFT CARDS — public storefront mockup on the approved v3 design system.
+  Shared design system lives in brand-v3.css. Display = Fraunces (provisional
+  stand-in for "Audrey"); body = Montserrat. Real brand palette, no navy.
+  Page-specific tweaks only in the small <style> below.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-v3.css">
+<style>
+/* page-specific: two-column gift layout + amount chips */
+.gift{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,6vw,72px);align-items:start}
+.gift__aside{position:sticky;top:102px}
+.gift__card{position:relative;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--cream-2)}
+.gift__card img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.gift__cardcap{position:absolute;left:18px;bottom:16px;color:#fff;font-family:'Fraunces',serif;font-style:italic;font-size:1.25rem;text-shadow:0 1px 12px rgba(0,0,0,.55)}
+.gift__notes{margin-top:24px;display:grid;gap:14px}
+.gift__note{display:flex;gap:12px;align-items:flex-start;font-size:.92rem;color:var(--ink-2)}
+.gift__note svg{flex:none;margin-top:3px;color:var(--olive)}
+.fieldset{border:0;padding:0;margin:0 0 26px}
+.fieldset__legend{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:500;margin:0 0 16px;padding:0}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;justify-content:center;min-width:84px;padding:13px 18px;border:1.5px solid var(--taupe);border-radius:var(--r);
+  font-family:'Fraunces',serif;font-size:1.2rem;background:#fff;color:var(--ink);cursor:pointer;transition:.18s}
+.chip input:hover+span{border-color:var(--ink)}
+.chip input:checked+span{border-color:var(--ink);background:var(--ink);color:var(--cream)}
+.chip input:focus-visible+span{outline:2px solid var(--olive);outline-offset:2px}
+.custom-amt{margin-top:14px;max-width:240px}
+.custom-wrap{position:relative}
+.custom-wrap::before{content:"$";position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--sage);font-size:.98rem;z-index:2}
+.custom-wrap .input{padding-left:30px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.summary{margin-top:8px;padding:16px 18px;background:var(--cream-2);border:1px solid var(--line);border-radius:var(--r);
+  display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.summary__label{font-size:.82rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--sage)}
+.summary__amt{font-family:'Fraunces',serif;font-size:1.7rem;color:var(--ink)}
+@media(max-width:980px){
+  .gift{grid-template-columns:1fr}
+  .gift__aside{position:static;order:-1}
+  .gift__card img{aspect-ratio:16/10}
+}
+@media(max-width:560px){.field-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<header class="nav"><div class="nav__in">
+  <a href="home-v3.html" aria-label="Amelia's by EAT — home"><img class="nav__logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></a>
+  <nav class="nav__links" id="navlinks">
+    <a class="lnk" href="menu.html">Menu</a>
+    <a class="lnk" href="market.html">Market</a>
+    <a class="lnk" href="wineclub.html">Wine Club</a>
+    <a class="lnk" href="supper.html">Sunday Supper</a>
+    <a class="lnk" href="catering.html">Catering</a>
+    <a class="lnk" href="story.html">Our Story</a>
+    <a class="btn" href="reserve.html">Reserve</a>
+    <a class="btn btn--solid" href="menu.html">Order</a>
+  </nav>
+  <button class="nav__burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('navlinks');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<!-- PAGE HEAD -->
+<section class="page-head"><div class="container">
+  <span class="kicker">Give a little good</span>
+  <h1 class="disp" style="margin-top:8px">Gift Cards</h1>
+  <p>A gift card to Amelia's is breakfast with friends, a bottle off the wine wall, or granola for the pantry — whatever the day calls for. Delivered by email, redeemable in-store and online.</p>
+</div></section>
+
+<!-- GIFT FORM -->
+<section class="section"><div class="container">
+  <form class="gift" action="#" method="post" novalidate>
+
+    <!-- LEFT: the form -->
+    <div>
+      <!-- Amount -->
+      <fieldset class="fieldset">
+        <legend class="fieldset__legend">Choose an amount</legend>
+        <div class="chips" role="group" aria-label="Gift card amount">
+          <label class="chip"><input type="radio" name="amount" value="25"><span>$25</span></label>
+          <label class="chip"><input type="radio" name="amount" value="50" checked><span>$50</span></label>
+          <label class="chip"><input type="radio" name="amount" value="100"><span>$100</span></label>
+          <label class="chip"><input type="radio" name="amount" value="150"><span>$150</span></label>
+          <label class="chip"><input type="radio" name="amount" value="custom"><span>Custom</span></label>
+        </div>
+        <div class="custom-amt">
+          <label class="visually-hidden" for="custom-amount">Custom amount in dollars</label>
+          <div class="custom-wrap">
+            <input class="input" id="custom-amount" name="custom_amount" type="number" min="10" max="500" step="5" inputmode="numeric" placeholder="Other amount">
+          </div>
+          <p class="field__hint">Any amount from $10 to $500.</p>
+        </div>
+      </fieldset>
+
+      <!-- Recipient -->
+      <fieldset class="fieldset">
+        <legend class="fieldset__legend">Who's it for?</legend>
+        <div class="field-row">
+          <div class="field">
+            <label for="r-name">Recipient name <span class="req">*</span></label>
+            <input class="input" id="r-name" name="recipient_name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="r-email">Recipient email <span class="req">*</span></label>
+            <input class="input" id="r-email" name="recipient_email" type="email" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="g-message">Gift message</label>
+          <textarea class="textarea" id="g-message" name="gift_message" rows="3" maxlength="250" placeholder="Happy birthday — lunch is on me. See you at Amelia's."></textarea>
+          <p class="field__hint">Printed in the email we send to your recipient. Up to 250 characters.</p>
+        </div>
+        <div class="field" style="max-width:280px">
+          <label for="send-date">Send date</label>
+          <input class="input" id="send-date" name="send_date" type="date">
+          <p class="field__hint">Leave blank to send right away.</p>
+        </div>
+      </fieldset>
+
+      <!-- Purchaser -->
+      <fieldset class="fieldset">
+        <legend class="fieldset__legend">Your details</legend>
+        <div class="field-row">
+          <div class="field">
+            <label for="p-name">Your name <span class="req">*</span></label>
+            <input class="input" id="p-name" name="purchaser_name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="p-email">Your email <span class="req">*</span></label>
+            <input class="input" id="p-email" name="purchaser_email" type="email" autocomplete="email" required>
+            <p class="field__hint">We'll send your receipt here.</p>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="summary">
+        <span class="summary__label">Card total · no tax</span>
+        <span class="summary__amt">$50.00</span>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn--solid btn--lg" type="submit">Buy gift card</button>
+      </div>
+    </div>
+
+    <!-- RIGHT: image + reassurance -->
+    <aside class="gift__aside">
+      <div class="gift__card">
+        <img src="../../../../images/banner-alternate-1536x1024.jpg" alt="Bright, sunlit spread of Amelia's food — arugula-strawberry salad, a plated dish and pastel glassware on cream linen">
+        <span class="gift__cardcap">When you eat well, you feel good.</span>
+      </div>
+      <div class="gift__notes">
+        <div class="gift__note">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 8l9 5 9-5"/></svg>
+          <span>Emailed straight to your recipient on the date you choose.</span>
+        </div>
+        <div class="gift__note">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 13l4 4 10-10"/></svg>
+          <span>Redeemable in-store and online — for the kitchen, the market, and the wine wall.</span>
+        </div>
+        <div class="gift__note">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span>No tax charged at purchase, and the card never expires.</span>
+        </div>
+      </div>
+    </aside>
+
+  </form>
+</div></section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div><div class="foot__brand"><img src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></div><p style="max-width:34ch;margin:18px 0 0;color:#a8a395;font-size:.92rem">A conscious, made-from-scratch, all-day eating place &amp; market in Scottsdale.</p></div>
+    <div><h4>Visit</h4><a href="location.html">8240 N Hayden Rd, B-105<br>Scottsdale, AZ 85258</a><a href="tel:6024995195">(602) 499-5195</a><a href="mailto:info@ameliasaz.com">info@ameliasaz.com</a></div>
+    <div><h4>Hours</h4><a>Sun &nbsp;7a&ndash;3p</a><a>Mon&ndash;Thu &nbsp;7a&ndash;8p</a><a>Fri&ndash;Sat &nbsp;7a&ndash;close</a></div>
+    <div><h4>More</h4><a href="careers.html">Now Hiring</a><a href="story.html">Our Values</a><a href="purveyors.html">Our Purveyors</a><a href="giftcards.html">Gift Cards</a><a href="https://www.instagram.com/ameliasbyeat/">Instagram</a></div>
+  </div>
+  <div class="foot__base"><span>&copy; 2026 Amelia's by EAT &middot; Scottsdale, Arizona</span><span>Eat &amp; drink local.</span></div>
+</footer>
+
+</div>
+</body>
+</html>

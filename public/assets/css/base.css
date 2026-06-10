@@ -1,0 +1,53 @@
+/* ============================================================
+   base.css — element + typographic defaults (layer 4 of 5)
+   Mobile-first: base rules target the smallest viewport; components.css and
+   utilities.css add min-width breakpoints for larger screens.
+   ============================================================ */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--fs-root);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Subtle paper grain (public). */
+body.has-grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap { position: relative; z-index: 2; }
+
+h1, h2, h3, .disp {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+/* sensible display sizes so bare headings never fall back to body size;
+   contextual rules (.hero h1, .head h2, etc.) override these. */
+h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); }
+h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); }
+h3 { font-size: 1.3rem; }
+.serif-it { font-style: italic; font-weight: 400; }
+.lede { font-size: 1.16rem; color: var(--ink-2); max-width: 50ch; }
+.kicker { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; color: var(--gold-ink); }
+.prose { max-width: 65ch; }
+.prose p { margin: 0 0 1.1em; }
+.muted { color: var(--text-muted); }
+
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(20px, 5vw, 56px); }
+.container--narrow { max-width: 900px; }
+.rule { height: 1px; background: var(--line); border: 0; margin: 0; }
+
+.section { padding: clamp(48px, 8vw, 112px) 0; }
+.section--soft { background: var(--bg-soft); }
+.section--ink { background: var(--ink); color: var(--cream); }

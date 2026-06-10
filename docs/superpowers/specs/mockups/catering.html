@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catering &amp; Events — Amelia's by EAT</title>
+<!--
+  CATERING — public sub-page on the approved v3 design system.
+  Uses shared brand-v3.css (no inline full stylesheet). Real copy from
+  ameliasaz.com + docs/content/menus/catering-menu.md. Fraunces (provisional
+  stand-in for licensed "Audrey") + Montserrat per home-v3.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-v3.css">
+<style>
+  /* page-specific tweaks only */
+  .cater__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:8px}
+  .cater__cell{background:var(--cream);padding:clamp(26px,3vw,40px);display:flex;flex-direction:column}
+  .cater__cell h3{font-size:1.45rem;margin:0 0 12px}
+  .cater__cell p{color:var(--ink-2);font-size:.95rem;margin:0 0 22px}
+  .cater__lead{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--olive-ink);font-weight:600;margin-bottom:14px}
+  .cater__cell .link-arrow{margin-top:auto;align-self:flex-start}
+  .note-band{background:var(--cream-2);border:1px solid var(--line);border-radius:var(--r);padding:clamp(22px,3vw,30px);display:flex;gap:30px;flex-wrap:wrap;align-items:baseline;margin-top:8px}
+  .note-band p{margin:0;color:var(--ink-2);max-width:46ch}
+  .note-band .serif-it{font-size:1.2rem;color:var(--ink);display:block;margin-bottom:6px}
+  .menu-size-head{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:baseline;border-bottom:2px solid var(--ink);padding:0 0 10px;margin-bottom:6px}
+  .menu-size-head__label{font-family:'Fraunces',serif;font-style:italic;color:var(--sage);font-size:.92rem}
+  .form-wrap{max-width:760px}
+  @media(max-width:980px){.cater__grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<header class="nav"><div class="nav__in">
+  <a href="home-v3.html" aria-label="Amelia's by EAT — home"><img class="nav__logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></a>
+  <nav class="nav__links" id="navlinks">
+    <a class="lnk" href="menu.html">Menu</a>
+    <a class="lnk" href="market.html">Market</a>
+    <a class="lnk" href="wineclub.html">Wine Club</a>
+    <a class="lnk" href="supper.html">Sunday Supper</a>
+    <a class="lnk" href="catering.html">Catering</a>
+    <a class="lnk" href="story.html">Our Story</a>
+    <a class="btn" href="reserve.html">Reserve</a>
+    <a class="btn btn--solid" href="menu.html">Order</a>
+  </nav>
+  <button class="nav__burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('navlinks');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <img src="../../../../images/boutique-catering-1536x1024.jpg" alt="An Amelia's catering spread laid out on cream linen — boards, platters and fresh seasonal dishes">
+  <div class="page-hero__in">
+    <h1>Catering &amp; events</h1>
+    <p>No matter the occasion, we've got you covered — from grab-and-go party platters to full-service catered events, all made from scratch with locally sourced ingredients.</p>
+  </div>
+</section>
+
+<!-- THREE OFFERINGS -->
+<section class="section"><div class="container">
+  <div class="head">
+    <h2 class="disp">Three ways to gather</h2>
+    <p>Pick the path that fits your event. Same conscious kitchen, same care at the source.</p>
+  </div>
+  <div class="cater__grid">
+    <div class="cater__cell">
+      <span class="cater__lead">Order 48 hrs ahead</span>
+      <h3 class="disp">Party Platters by Amelia's</h3>
+      <p>Party platters and nosh boards of our best-selling items, in portions to serve an intimate or large crowd — corporate events, showers, birthdays, family meals. Order online and pick up in store.</p>
+      <a class="link-arrow" href="#platters">Order online <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a>
+    </div>
+    <div class="cater__cell">
+      <span class="cater__lead">Full service</span>
+      <h3 class="disp">Boutique Catering by EAT</h3>
+      <p>EAT is Chef Stacey Weber's first concept — customized menus and full-service catering, from intimate in-home showers to large-scale weddings and corporate events. Tell us about your day and we'll build the rest.</p>
+      <a class="link-arrow" href="#inquiry">Start an inquiry <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a>
+    </div>
+    <div class="cater__cell">
+      <span class="cater__lead">Order Thu · delivered Mon</span>
+      <h3 class="disp">Meal Delivery by EAT</h3>
+      <p>Pre-prepared meals that take the stress out of eating well — staples spanning a range of dietary preferences. Order by Thursday 8 am for Monday delivery.</p>
+      <a class="link-arrow" href="#inquiry">Order here <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a>
+    </div>
+  </div>
+</div></section>
+
+<!-- BOUTIQUE SPLIT (visual breather) -->
+<section class="split split--rev">
+  <div class="split__media"><img src="../../../../images/boutique-catering-2.jpg" alt="Yogurt, granola and berry parfaits topped with edible flowers, arranged on a silver catering tray"></div>
+  <div class="split__body section--soft">
+    <h2 class="disp">Made for the moment</h2>
+    <p>Every platter is built from the same scratch-made, seed-oil-free kitchen you'll find on our counter — Noble bread, Steadfast Farm eggs, Fra'Mani charcuterie, Crow's Dairy cheese. Beautiful enough for the table, honest enough for every day.</p>
+    <div style="margin-top:28px"><a class="btn btn--solid" href="#platters">See the platter menu</a></div>
+  </div>
+</section>
+
+<!-- PLATTER MENU -->
+<section class="section" id="platters"><div class="container">
+  <div class="head">
+    <h2 class="disp">The catering platter menu</h2>
+    <p>Every item is a platter offered in two sizes. Prices show as <strong>serves 12 | serves 24</strong>. See online ordering for photos and quantities.</p>
+  </div>
+
+  <div class="note-band">
+    <p><span class="serif-it">A little planning goes a long way.</span>Order party platters at least <strong>48 hours</strong> before your event.</p>
+    <p><span class="serif-it">How much to order?</span>We suggest 3–4 platters to serve a group of 12 generously.</p>
+  </div>
+
+  <!-- column header for the 12 | 24 pricing -->
+  <div class="menu-size-head" style="margin-top:40px">
+    <span class="menu-size-head__label">Platter</span>
+    <span class="menu-size-head__label">serves 12&nbsp;&nbsp;|&nbsp;&nbsp;serves 24</span>
+  </div>
+
+  <!-- TOAST -->
+  <div class="menu-section" style="margin-top:18px">
+    <h3>Toast Platters</h3>
+    <p class="menu-section__note">Gluten-free bread available +12 | 24.</p>
+    <div class="menu-item">
+      <span class="menu-item__name">Avocado Toast</span>
+      <span class="menu-item__price">48 | 96</span>
+      <span class="menu-item__desc">Calabrian chili honey relish, coriander, lemon zest, hemp seed, herbs, seeded Noble bread.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Toast + Jam</span>
+      <span class="menu-item__price">20 | 40</span>
+      <span class="menu-item__desc">Organic strawberry + chia jam, grass-fed butter, white Noble bread.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Egg Salad Toast</span>
+      <span class="menu-item__price">52 | 104</span>
+      <span class="menu-item__desc">Herby organic egg salad, hot honey, local micro greens, seeded Noble bread.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Chicken Salad Toast</span>
+      <span class="menu-item__price">56 | 112</span>
+      <span class="menu-item__desc">EAT signature chicken salad, apple + dried tart cherries, local micro greens, seeded Noble bread.</span>
+    </div>
+  </div>
+
+  <!-- BREAKFAST -->
+  <div class="menu-section">
+    <h3>Breakfast Platters</h3>
+    <div class="menu-item">
+      <span class="menu-item__name">Eye Opener</span>
+      <span class="menu-item__price">192 | 384</span>
+      <span class="menu-item__desc">Fried Steadfast Farm egg, shaved Fra'Mani ham or crispy nitrate-free bacon, arugula, calabrian chili aioli, white cheddar, Noble brioche bun.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Breakfast Burrito</span>
+      <span class="menu-item__price">72 | 144</span>
+      <span class="menu-item__desc">Local scrambled organic eggs, nitrate-free bacon, roasted potatoes, mozzarella + cheddar, whole-wheat tortilla, fire-roasted tomato salsa.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Fruit of the Moment Platter</span>
+      <span class="menu-item__price">72 | 144</span>
+      <span class="menu-item__desc">Assorted fruit, lime zest.</span>
+    </div>
+  </div>
+
+  <!-- NOSHING -->
+  <div class="menu-section">
+    <h3>Noshing Platters</h3>
+    <div class="menu-item">
+      <span class="menu-item__name">Farmers Market Crudité</span>
+      <span class="menu-item__price">60 | 120</span>
+      <span class="menu-item__desc">Organic olive oil, harissa hummus, housemade seeded crackers.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Cheese + Charcuterie</span>
+      <span class="menu-item__price">112 | 224</span>
+      <span class="menu-item__desc">Hard + soft cheeses, marcona almonds, mixed nuts, orange chili olives, fruit cracker crisps, housemade seeded crackers.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Amelia's Spicy Deviled Eggs</span>
+      <span class="menu-item__price">48 | 96</span>
+      <span class="menu-item__desc">Steadfast Farm egg, housemade calabrian mayo, candied jalapeño.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Pretzel Bites</span>
+      <span class="menu-item__price">60 | 120</span>
+      <span class="menu-item__desc">Trio of dipping sauces — horseradish honey mustard, lemon-herb cream cheese, salted caramel.</span>
+    </div>
+  </div>
+
+  <!-- SALAD -->
+  <div class="menu-section">
+    <h3>Salad Platters</h3>
+    <div class="menu-item">
+      <span class="menu-item__name">Quinoa Arugula</span>
+      <span class="menu-item__price">64 | 128</span>
+      <span class="menu-item__desc">Marcona almonds, celery, organic strawberries, herbs, white balsamic vinaigrette.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Superfood Caesar</span>
+      <span class="menu-item__price">64 | 128</span>
+      <span class="menu-item__desc">Little gem, red grapes, avocado, pickled onions, celery, superfood sprinkles, lemony caesar vinaigrette.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">AZ Cobb</span>
+      <span class="menu-item__price">80 | 160</span>
+      <span class="menu-item__desc">Amelia's rotisserie chicken, Steadfast Farm spicy deviled egg, nitrate-free crispy bacon, avocado, cherry tomato, medjool date, whole-grain mustard vinaigrette.</span>
+    </div>
+  </div>
+
+  <!-- SLIDER -->
+  <div class="menu-section">
+    <h3>Slider Platters</h3>
+    <p class="menu-section__note">Gluten-free bun available +24 | 48.</p>
+    <div class="menu-item">
+      <span class="menu-item__name">Breakfast</span>
+      <span class="menu-item__price">84 | 168</span>
+      <span class="menu-item__desc">Scrambled eggs, shaved Fra'Mani ham or nitrate-free crispy bacon, calabrian chili aioli, white cheddar, toasted Noble brioche.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">H + C (Ham + Cheese)</span>
+      <span class="menu-item__price">96 | 192</span>
+      <span class="menu-item__desc">Sweet apple Fra'Mani ham, white cheddar, horseradish honey mustard, toasted Noble brioche.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">EAT's Signature Chicken Salad</span>
+      <span class="menu-item__price">84 | 168</span>
+      <span class="menu-item__desc">Green apple, dried tart cherries, housemade mayo, toasted Noble brioche.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Line-Caught Tinned Tuna</span>
+      <span class="menu-item__price">120 | 240</span>
+      <span class="menu-item__desc">Kalamata calabrian tapenade, dill pickles, arugula, toasted Noble brioche.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Grass-Fed Copper State Reserve Tri Tip</span>
+      <span class="menu-item__price">120 | 240</span>
+      <span class="menu-item__desc">Horseradish aioli, arugula, toasted Noble brioche.</span>
+    </div>
+  </div>
+
+  <!-- MAINS -->
+  <div class="menu-section">
+    <h3>Mains</h3>
+    <div class="menu-item">
+      <span class="menu-item__name">Stacey's Famous Chicken + Rice Enchiladas</span>
+      <span class="menu-item__price">216 | 432</span>
+      <span class="menu-item__desc">Housemade organic corn tortilla, creamy chicken + rice, hatch chili sauce, pickled red onion, goatija, cilantro; green chili pork stew, shaved radish.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Italian Zucchini Lasagna</span>
+      <span class="menu-item__price">240 | 480</span>
+      <span class="menu-item__desc">Zucchini noodles, ground pork + beef bolognese, Italian cheeses.</span>
+    </div>
+  </div>
+
+  <!-- SWEET TREATS -->
+  <div class="menu-section">
+    <h3>Sweet Treats Platters</h3>
+    <div class="menu-item">
+      <span class="menu-item__name">Morning Grazing Platter</span>
+      <span class="menu-item__price">66 | 132</span>
+      <span class="menu-item__desc">Lemon zucchini muffins, morning glory muffins, peanut butter power balls (2 treats per person).</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Muffins</span>
+      <span class="menu-item__price">48 | 96</span>
+      <span class="menu-item__desc">Lemon zucchini or morning glory.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Cookies</span>
+      <span class="menu-item__price">48 | 96</span>
+      <span class="menu-item__desc">Salted chocolate chip, almond butter, glazed sugar.</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Flourless Chocolate Cake Bites</span>
+      <span class="menu-item__price">36 | 72</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Lemon Bars</span>
+      <span class="menu-item__price">30 | 60</span>
+    </div>
+    <div class="menu-item">
+      <span class="menu-item__name">Amelia's Sweet Treat Platter</span>
+      <span class="menu-item__price">96 | 192</span>
+      <span class="menu-item__desc">All of our favorites on one platter (3 treats per person).</span>
+    </div>
+  </div>
+
+  <!-- BEVERAGES -->
+  <div class="menu-section">
+    <h3>Beverages</h3>
+    <p class="menu-section__note">Available upon request.</p>
+    <div class="menu-item">
+      <span class="menu-item__name">Drinks to add on</span>
+      <span class="menu-item__price">Ask us</span>
+      <span class="menu-item__desc">Cold brew · drip coffee · iced lattes · kombucha · iced tea · lemonade · housemade honey lemonade · still + sparkling water.</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- SOURCING NOTE -->
+<section class="section--ink"><div class="container" style="text-align:center;padding-top:clamp(56px,8vw,96px);padding-bottom:clamp(56px,8vw,96px)">
+  <h2 class="disp" style="font-size:clamp(2rem,4.4vw,3.2rem);max-width:24ch;margin:0 auto 20px;color:var(--cream)">Thoughtful care in the kitchen begins with thoughtful care at the source.</h2>
+  <p style="color:#dcd7c6;max-width:56ch;margin:0 auto;font-size:1.06rem">To ensure peak nutrition, freshness and deliciousness, we prioritize sourcing from local farmers and artisan growers — Noble Bread, Steadfast Farm, Crow's Dairy, Fra'Mani, Sweet Republic — inspired by the great state 48 we call home.</p>
+</div></section>
+
+<!-- INQUIRY FORM -->
+<section class="section section--soft" id="inquiry"><div class="container">
+  <div class="head">
+    <h2 class="disp">Start a catering inquiry</h2>
+    <p>Tell us about your event and we'll be in touch to build the right menu. For party platters, please allow at least 48 hours' notice.</p>
+  </div>
+  <div class="form-wrap">
+    <form action="#" method="post" novalidate>
+      <div class="grid grid--2">
+        <div class="field">
+          <label for="event-type">Event type <span class="req">*</span></label>
+          <select class="select" id="event-type" name="event_type" required>
+            <option value="" selected disabled>Choose one…</option>
+            <option>Party platters (pickup)</option>
+            <option>Boutique full-service catering</option>
+            <option>Meal delivery</option>
+            <option>Corporate / office</option>
+            <option>Wedding</option>
+            <option>Shower or birthday</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="event-date">Event date <span class="req">*</span></label>
+          <input class="input" type="date" id="event-date" name="event_date" required>
+          <p class="field__hint">Party platters need 48 hours' lead time.</p>
+        </div>
+      </div>
+      <div class="grid grid--2">
+        <div class="field">
+          <label for="headcount">Headcount <span class="req">*</span></label>
+          <input class="input" type="number" id="headcount" name="headcount" min="1" inputmode="numeric" placeholder="e.g. 24" required>
+          <p class="field__hint">We suggest 3–4 platters per 12 guests.</p>
+        </div>
+        <div class="field">
+          <label for="name">Your name <span class="req">*</span></label>
+          <input class="input" type="text" id="name" name="name" autocomplete="name" required>
+        </div>
+      </div>
+      <div class="grid grid--2">
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input class="input" type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input class="input" type="tel" id="phone" name="phone" autocomplete="tel">
+        </div>
+      </div>
+      <div class="field">
+        <label for="message">Tell us about your event</label>
+        <textarea class="textarea" id="message" name="message" rows="5" placeholder="Occasion, dietary needs, favorite platters, pickup or delivery…"></textarea>
+      </div>
+      <div class="form-actions">
+        <span class="form-actions__left muted" style="font-size:.86rem">Or call us at <a href="tel:6024995195" style="border-bottom:1.5px solid var(--olive)">(602) 499-5195</a></span>
+        <button class="btn btn--solid btn--lg" type="submit">Send inquiry</button>
+      </div>
+    </form>
+  </div>
+</div></section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div><div class="foot__brand"><img src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></div><p style="max-width:34ch;margin:18px 0 0;color:#a8a395;font-size:.92rem">A conscious, made-from-scratch, all-day eating place &amp; market in Scottsdale.</p></div>
+    <div><h4>Visit</h4><a href="location.html">8240 N Hayden Rd, B-105<br>Scottsdale, AZ 85258</a><a href="tel:6024995195">(602) 499-5195</a><a href="mailto:info@ameliasaz.com">info@ameliasaz.com</a></div>
+    <div><h4>Hours</h4><a>Sun &nbsp;7a&ndash;3p</a><a>Mon&ndash;Thu &nbsp;7a&ndash;8p</a><a>Fri&ndash;Sat &nbsp;7a&ndash;close</a></div>
+    <div><h4>More</h4><a href="careers.html">Now Hiring</a><a href="story.html">Our Values</a><a href="purveyors.html">Our Purveyors</a><a href="giftcards.html">Gift Cards</a><a href="https://www.instagram.com/ameliasbyeat/">Instagram</a></div>
+  </div>
+  <div class="foot__base"><span>&copy; 2026 Amelia's by EAT &middot; Scottsdale, Arizona</span><span>Eat &amp; drink local.</span></div>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amelia's by EAT — The neighborhood just got better</title>
+<!--
+  HOME v3 — approved public direction (2026-06-04)
+  (v2 = the earlier critiqued draft, kept for reference. v3 is the approved one.)
+  Design system: real homepage copy from ameliasaz.com; exact live-site brand hexes
+  (no navy); primary buttons use the real ink; real photography (project /images);
+  full-bleed ↔ contained editorial rhythm; B&W heritage; paper-grain substrate;
+  mobile hero = full-bleed image + scrim + overlaid headline/CTA.
+  No section numbers / mini-label-over-heading / marquee (AI tells removed).
+  Display face Fraunces is a PROVISIONAL stand-in for the licensed "Audrey" (Q13).
+  Prototype only (inline CSS); production rebuilds on the frontend-css-architecture file set.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ---- EXACT palette from ameliasaz.com's live CSS (no navy) ---- */
+  --ink:#313530;          /* their dominant brand ink (warm charcoal-olive) */
+  --ink-2:#292b2c;
+  --ink-deep:#23251f;
+  --cream:#f9f6e4;        /* their warm ground */
+  --cream-2:#efe9d9;
+  --taupe:#ccc6b9;        /* their stone/taupe */
+  --sage:#9a9a8d;         /* their sage-grey */
+  --olive:#5f8219;        /* their olive-green (decorative / large type only) */
+  --olive-ink:#46600f;    /* darkened olive for AA-legible links/details */
+  --gold:#e1c188;         /* their wheat-gold (decorative) */
+  --gold-ink:#9c7833;     /* darkened gold for AA-legible text */
+  --line:#e4ddca;
+  --maxw:1240px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);
+  font-family:'Montserrat',system-ui,sans-serif;font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* subtle paper grain */
+body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{position:relative;z-index:2}
+
+h1,h2,h3,.disp{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.04;letter-spacing:-.015em;margin:0}
+.serif-it{font-style:italic;font-weight:400}
+.lede{font-size:1.16rem;color:var(--ink-2);max-width:48ch}
+.kicker{font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;color:var(--gold-ink)}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+.rule{height:1px;background:var(--line);border:0;margin:0}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:40;background:rgba(249,246,228,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;height:78px;gap:24px}
+.nav__logo{height:42px;width:auto}
+.nav__links{display:flex;align-items:center;gap:24px;font-size:.85rem;letter-spacing:.02em;font-weight:500}
+.nav__links a.lnk{position:relative;padding:4px 0;color:var(--ink-2)}
+.nav__links a.lnk:hover{color:var(--ink)}
+.nav__links a.lnk::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--olive);transition:right .25s}
+.nav__links a.lnk:hover::after{right:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'Montserrat';font-size:.78rem;font-weight:600;
+  letter-spacing:.09em;text-transform:uppercase;padding:12px 22px;border:1.5px solid var(--ink);color:var(--ink);
+  background:transparent;cursor:pointer;transition:.2s;border-radius:2px;white-space:nowrap}
+.btn:hover{background:var(--ink);color:var(--cream)}
+.btn--solid{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.btn--solid:hover{background:var(--ink-deep);border-color:var(--ink-deep)}
+.btn--lg{padding:16px 30px;font-size:.8rem}
+.btn--ghost-light{border-color:#fff;color:#fff}
+.btn--ghost-light:hover{background:#fff;color:var(--ink)}
+.link-arrow{display:inline-flex;align-items:center;gap:9px;font-size:.8rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink);border-bottom:1.5px solid var(--olive);padding-bottom:4px}
+.link-arrow svg{transition:transform .25s}
+.link-arrow:hover svg{transform:translateX(5px)}
+.nav__burger{display:none;background:none;border:0;cursor:pointer;color:var(--ink)}
+
+/* hero — desktop: asymmetric copy | image */
+.hero{position:relative;display:grid;grid-template-columns:1.05fr .95fr;min-height:clamp(560px,80vh,800px)}
+.hero__copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(36px,6vw,88px) clamp(20px,5vw,60px);max-width:780px;margin-left:auto;width:100%}
+.hero h1{font-size:clamp(2.8rem,6vw,5.2rem)}
+.hero .lede{margin:24px 0 34px}
+.hero__cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.hero__meta{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:30px;font-size:.82rem;color:var(--ink-2)}
+.open-dot{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--olive-ink)}
+.open-dot::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--olive);box-shadow:0 0 0 3px rgba(95,130,25,.18)}
+.hero__media{position:relative;overflow:hidden}
+.hero__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero__cap{position:absolute;left:20px;bottom:18px;z-index:3;color:#fff;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;text-shadow:0 1px 10px rgba(0,0,0,.55)}
+
+/* quiet values line (static, restrained — replaces the marquee) */
+.values{border-bottom:1px solid var(--line);background:var(--cream)}
+.values__in{display:flex;justify-content:center;gap:34px;flex-wrap:wrap;padding:18px 20px;font-family:'Fraunces',serif;font-style:italic;color:var(--sage);font-size:1rem}
+.values__in span{color:var(--ink-2)}
+
+/* sections */
+.section{padding:clamp(60px,8.5vw,120px) 0}
+.section--soft{background:var(--cream-2)}
+.head{max-width:42ch;margin-bottom:42px}
+.head h2{font-size:clamp(2rem,4.4vw,3.4rem)}
+.head p{color:var(--ink-2);margin:14px 0 0}
+.head--row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;max-width:none}
+
+/* featured dishes */
+.feat{display:grid;grid-template-columns:1.5fr 1fr;gap:28px}
+.feat__col{display:grid;gap:28px;align-content:start}
+.dish__img{overflow:hidden;background:var(--cream-2)}
+.dish__img img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.dish:hover .dish__img img{transform:scale(1.04)}
+.dish--lg .dish__img{aspect-ratio:4/3}
+.dish--sm .dish__img{aspect-ratio:5/4}
+.dish__row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:16px}
+.dish__name{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;line-height:1.1}
+.dish--sm .dish__name{font-size:1.18rem}
+.dish__price{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink);font-size:1.2rem;white-space:nowrap}
+.dish__desc{color:var(--ink-2);font-size:.95rem;margin-top:6px;max-width:52ch}
+.cap{display:block;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);margin-top:10px}
+
+/* philosophy band */
+.philo{background:var(--ink);color:var(--cream);text-align:center}
+.philo .container{padding-top:clamp(64px,9vw,110px);padding-bottom:clamp(64px,9vw,110px)}
+.philo h2{font-size:clamp(2.1rem,5vw,3.6rem);max-width:18ch;margin:0 auto 22px;color:var(--cream)}
+.philo p{color:#dcd7c6;max-width:52ch;margin:0 auto;font-size:1.08rem}
+
+/* full-bleed split */
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(440px,60vh,660px)}
+.split--rev .split__media{order:2}
+.split__media{position:relative;overflow:hidden}
+.split__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.split__body{display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,7vw,92px) clamp(24px,6vw,80px)}
+.split__body h2{font-size:clamp(2rem,4vw,3.1rem);margin:0 0 18px}
+.split__body p{color:var(--ink-2)}
+
+/* our story (B&W heritage) */
+.story{background:var(--ink);color:var(--cream)}
+.story .container{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(32px,6vw,80px);align-items:center;padding-top:clamp(60px,9vw,120px);padding-bottom:clamp(60px,9vw,120px)}
+.story img{filter:grayscale(1) contrast(1.02);width:100%;aspect-ratio:3/4;object-fit:cover}
+.story h2{font-size:clamp(2.1rem,4.6vw,3.4rem);margin:0 0 22px;color:var(--cream)}
+.story p{color:#dcd7c6;max-width:50ch;margin:0 0 16px}
+.story .kicker{color:var(--gold)}
+.story .link-arrow{color:var(--cream);border-color:var(--gold);margin-top:14px}
+
+/* catering — three offerings */
+.cater__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.cater__cell{background:var(--cream);padding:clamp(26px,3vw,40px)}
+.cater__cell h3{font-size:1.45rem;margin:0 0 12px}
+.cater__cell p{color:var(--ink-2);font-size:.95rem;margin:0 0 18px}
+.cater__lead{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--olive-ink);font-weight:600;margin-bottom:14px}
+
+/* rituals */
+.rituals{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
+.ritual{position:relative;min-height:clamp(420px,54vh,580px);display:flex;align-items:flex-end;overflow:hidden;background:var(--ink)}
+.ritual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s ease}
+.ritual:hover img{transform:scale(1.05)}
+.ritual::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(25,25,18,.85),rgba(25,25,18,.05) 64%)}
+.ritual__body{position:relative;z-index:2;padding:clamp(28px,4vw,48px);color:#fff}
+.ritual__body h3{font-size:clamp(1.7rem,3vw,2.4rem);color:#fff;margin:6px 0 12px}
+.ritual__body p{color:rgba(255,255,255,.88);max-width:40ch;font-size:.95rem}
+.ritual__detail{font-family:'Fraunces',serif;font-style:italic;color:var(--gold);font-size:1rem}
+.ritual__body .link-arrow{color:#fff;border-color:var(--gold);margin-top:18px}
+.ritual--bw img{filter:grayscale(1) contrast(1.03)}
+
+/* come visit */
+.visit{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,72px);align-items:center}
+.visit__info dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 28px}
+.visit__info dt{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink)}
+.visit__info dd{margin:0;color:var(--ink-2)}
+.visit__map{aspect-ratio:4/3;background:var(--cream-2) url("../../../../images/5I8A7679-1024x1536.jpeg") center/cover;border:1px solid var(--line)}
+.visit__see{font-family:'Fraunces',serif;font-style:italic;font-size:1.5rem;color:var(--ink);margin-top:26px}
+
+/* footer */
+.foot{background:var(--ink-deep);color:#cfcabb;padding:clamp(54px,7vw,84px) 0 34px}
+.foot__grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px}
+.foot__brand img{height:48px;filter:brightness(0) invert(1);opacity:.92}
+.foot h4{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:0 0 12px;font-weight:600}
+.foot a{color:#cfcabb;display:block;padding:3px 0;font-size:.92rem}
+.foot a:hover{color:#fff}
+.foot__base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:46px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);font-size:.78rem;color:#8d897d}
+
+@media(max-width:980px){
+  .nav__links{display:none}
+  .nav__burger{display:inline-flex}
+  /* mobile hero = full-bleed image + scrim + overlaid copy (best practice) */
+  .hero{display:block;min-height:86vh}
+  .hero__media{position:absolute;inset:0;height:100%}
+  .hero__media::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,21,15,.86),rgba(20,21,15,.25) 55%,rgba(20,21,15,.35))}
+  .hero__copy{position:relative;z-index:3;min-height:86vh;justify-content:flex-end;margin:0;padding:0 clamp(22px,7vw,40px) clamp(40px,9vw,64px);color:#fff}
+  .hero h1,.hero .lede{color:#fff}
+  .hero .lede{text-shadow:0 1px 12px rgba(0,0,0,.4)}
+  .hero__meta{color:rgba(255,255,255,.9)}
+  .open-dot{color:#fff}.open-dot::before{background:var(--gold)}
+  .hero__cap{display:none}
+  .feat,.split,.rituals,.story .container,.cater__grid,.visit,.foot__grid{grid-template-columns:1fr}
+  .split--rev .split__media{order:0}
+  .split__media{height:52vh}.split__media img{position:relative}
+  .story img{aspect-ratio:4/3;max-height:58vh}
+  .head--row{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<header class="nav"><div class="container nav__in">
+  <a href="home-v3.html" aria-label="Amelia's by EAT — home"><img class="nav__logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></a>
+  <nav class="nav__links">
+    <a class="lnk" href="menu.html">Menu</a>
+    <a class="lnk" href="market.html">Market</a>
+    <a class="lnk" href="wineclub.html">Wine Club</a>
+    <a class="lnk" href="supper.html">Sunday Supper</a>
+    <a class="lnk" href="catering.html">Catering</a>
+    <a class="lnk" href="story.html">Our Story</a>
+    <a class="btn" href="reserve.html">Reserve</a>
+    <a class="btn btn--solid" href="menu.html">Order</a>
+  </nav>
+  <button class="nav__burger" aria-label="Menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__copy">
+    <h1>The neighborhood<br>just got better</h1>
+    <p class="lede">Amelia's is a conscious, made-from-scratch, all-day eating place + market. Created by chef and founder Stacey Weber — mindfully curated foods, from source to plate.</p>
+    <div class="hero__cta">
+      <a class="btn btn--solid btn--lg" href="menu.html">Order Pickup</a>
+      <a class="btn btn--lg" href="reserve.html">Reserve a Table</a>
+    </div>
+    <div class="hero__meta">
+      <span class="open-dot">Open now · until 8:00p</span>
+      <span>8240 N Hayden Rd, Ste B-105 · Scottsdale</span>
+    </div>
+  </div>
+  <div class="hero__media">
+    <img src="../../../../images/5I8A7492-1024x1536.jpeg" alt="Amelia's dining room — slatted-wood wall, woven-leather chairs, warm afternoon light" fetchpriority="high">
+    <span class="hero__cap">McCormick Ranch · open kitchen</span>
+  </div>
+</section>
+
+<!-- QUIET VALUES LINE (static) -->
+<div class="values"><div class="values__in">
+  <span>scratch made</span>·<span>locally sourced</span>·<span>seed-oil free</span>
+</div></div>
+
+<!-- FROM THE KITCHEN -->
+<section class="section"><div class="container">
+  <div class="head head--row">
+    <h2 class="disp">From the kitchen</h2>
+    <a class="link-arrow" href="menu.html">View full menu <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a>
+  </div>
+  <div class="feat">
+    <article class="dish dish--lg">
+      <div class="dish__img"><img src="../../../../images/banner-alternate-1536x1024.jpg" alt="Quinoa arugula salad with strawberries beside a plated dish in bright daylight"></div>
+      <div class="dish__row"><span class="dish__name">Quinoa &amp; Arugula</span><span class="dish__price">16</span></div>
+      <p class="dish__desc">Organic strawberries, marcona almonds, celery, white-balsamic vinaigrette, herbs. Add wild salmon or rotisserie chicken.</p>
+      <span class="cap">Greens from Steadfast Farm · Scottsdale</span>
+    </article>
+    <div class="feat__col">
+      <article class="dish dish--sm">
+        <div class="dish__img"><img src="../../../../images/boutique-catering-2.jpg" alt="Grain-free granola parfaits layered with yogurt, berry compote and edible flowers"></div>
+        <div class="dish__row"><span class="dish__name">Grain-Free Granola Parfait</span><span class="dish__price">12</span></div>
+        <p class="dish__desc">Signature grain-free granola, organic Greek yogurt, berry compote, strawberries.</p>
+      </article>
+      <article class="dish dish--sm">
+        <div class="dish__img"><img src="../../../../images/D0A7915-2.jpg" alt="Spicy deviled eggs dusted pink, finished with fresh dill"></div>
+        <div class="dish__row"><span class="dish__name">Spicy Deviled Eggs</span><span class="dish__price">6</span></div>
+        <p class="dish__desc">Steadfast Farm eggs, a little heat, fresh dill.</p>
+      </article>
+    </div>
+  </div>
+</div></section>
+
+<!-- PHILOSOPHY BAND (their real line, plainly set) -->
+<section class="philo"><div class="container">
+  <h2 class="disp">When you eat well, you feel good.</h2>
+  <p>Amelia's aims to bring people together with food — a modern dining experience that makes eating well enjoyable, with the freshest locally sourced ingredients to delight and nourish all.</p>
+</div></section>
+
+<!-- THE MARKET -->
+<section class="split">
+  <div class="split__media"><img src="../../../../images/themarket.jpg" alt="Overhead of Amelia's market goods — house granola, oils, salts, root chips, energy bites"></div>
+  <div class="split__body section--soft">
+    <h2 class="disp">The Market</h2>
+    <p>Every saleable grocery item sold in our market is used in Amelia's kitchen. From specialty salts to homemade granola, you'll find a unique assortment of grab-and-go food, beverages, and grocery items to take home — or give as gifts.</p>
+    <div style="margin-top:28px"><a class="btn btn--solid" href="market.html">View the Market</a></div>
+  </div>
+</section>
+
+<!-- OUR STORY (verbatim, B&W heritage) -->
+<section class="story"><div class="container">
+  <img src="../../../../images/new-about-hero.jpg" alt="Black-and-white portrait of Amelia, and Stacey Weber laughing with her son in the kitchen">
+  <div>
+    <span class="kicker">Named for Stacey's grandmother</span>
+    <h2 class="disp" style="margin-top:10px">Our Story</h2>
+    <p>Amelia's by EAT, named for founder Stacey Weber's grandmother, is an extension of all that Stacey's customers have come to love about her first concept, EAT. Amelia's offers counter service during the day and table service in the evening — an all-day menu, a build-your-own-board concept in the evening, scratch-made cocktails, craft coffees, grab-and-go, freezer items, plus market goods and a gift wall sourced from small businesses.</p>
+    <p>Amelia's is a community gathering place that provides mindful offerings made with the freshest locally sourced ingredients, all served with heart and love, where families can enjoy consciously curated food in a casual environment. Families always welcome.</p>
+    <a class="link-arrow" href="story.html">Read more <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a>
+  </div>
+</div></section>
+
+<!-- CATERING -->
+<section class="section"><div class="container">
+  <div class="head"><h2 class="disp">Catering &amp; events</h2><p>No matter the occasion, we've got you covered — from grab-and-go platters to full-service events.</p></div>
+  <div class="cater__grid">
+    <div class="cater__cell">
+      <span class="cater__lead">Order 48 hrs ahead</span>
+      <h3 class="disp">Party Platters by Amelia's</h3>
+      <p>Party platters and nosh boards of our best-selling items, in portions to serve an intimate or large crowd — corporate events, showers, birthdays, family meals.</p>
+      <a class="link-arrow" href="catering.html">Order online <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a>
+    </div>
+    <div class="cater__cell">
+      <span class="cater__lead">Full service</span>
+      <h3 class="disp">Boutique Catering by EAT</h3>
+      <p>EAT is Chef Stacey Weber's first concept — customized menus and full-service catering, from intimate in-home showers to large-scale weddings and corporate events. Let's talk.</p>
+      <a class="link-arrow" href="catering.html">Start an inquiry <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a>
+    </div>
+    <div class="cater__cell">
+      <span class="cater__lead">Order Thu · delivered Mon</span>
+      <h3 class="disp">Meal Delivery by EAT</h3>
+      <p>Pre-prepared meals that take the stress out of eating well — staples spanning a range of dietary preferences. Order by Thursday 8 am for Monday delivery.</p>
+      <a class="link-arrow" href="catering.html">Order here <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a>
+    </div>
+  </div>
+</div></section>
+
+<!-- RITUALS: WINE CLUB + SUNDAY SUPPER -->
+<section class="rituals">
+  <article class="ritual">
+    <img src="../../../../images/WineWall-2-1365x2048.jpg" alt="Floor-to-ceiling white-shelved wine wall stocked with natural and organic bottles">
+    <div class="ritual__body">
+      <span class="ritual__detail">Wine Club · $40 / month</span>
+      <h3 class="disp">The Wine Club</h3>
+      <p>Two featured bottles a month from our in-house somms, a 3rd-Wednesday tasting with small bites (5–7 pm), waived corkage that night, and 15% off the wall anytime.</p>
+      <a class="link-arrow" href="wineclub.html">Join the club <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a>
+    </div>
+  </article>
+  <article class="ritual ritual--bw">
+    <img src="../../../../images/glasses-clinking.jpg" alt="Hands raising glasses together in a warm, low-lit toast">
+    <div class="ritual__body">
+      <span class="ritual__detail">One Sunday a month</span>
+      <h3 class="disp">Sunday Supper</h3>
+      <p>One long table, one seasonal menu, all-Arizona sourcing. Shared plates and good people — the way a meal is meant to be.</p>
+      <a class="link-arrow" href="supper.html">Reserve a seat <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a>
+    </div>
+  </article>
+</section>
+
+<!-- COME VISIT -->
+<section class="section section--soft"><div class="container visit">
+  <div class="visit__info">
+    <h2 class="disp">Come visit</h2>
+    <p class="visit__see serif-it">See you in sunny Scottsdale.</p>
+    <dl style="margin-top:26px">
+      <dt>Where</dt><dd>8240 N Hayden Road, Ste B-105<br>Scottsdale, AZ 85258</dd>
+      <dt>Hours</dt><dd>Sun 7a–3p · Mon–Thu 7a–8p · Fri–Sat 7a–close</dd>
+      <dt>Call</dt><dd><a href="tel:6024995195" style="border-bottom:1.5px solid var(--olive)">(602) 499-5195</a></dd>
+      <dt>Email</dt><dd><a href="mailto:info@ameliasaz.com" style="border-bottom:1.5px solid var(--olive)">info@ameliasaz.com</a></dd>
+    </dl>
+    <div style="margin-top:28px"><a class="btn btn--solid" href="location.html">Directions &amp; parking</a></div>
+  </div>
+  <div class="visit__map" role="img" aria-label="Amelia's interior / map"></div>
+</div></section>
+
+<!-- FOOTER -->
+<footer class="foot"><div class="container">
+  <div class="foot__grid">
+    <div>
+      <div class="foot__brand"><img src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></div>
+      <p style="max-width:34ch;margin:18px 0 0;color:#a8a395;font-size:.92rem">A conscious, made-from-scratch, all-day eating place &amp; market in Scottsdale.</p>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <a href="location.html">8240 N Hayden Rd, B-105<br>Scottsdale, AZ 85258</a>
+      <a href="tel:6024995195">(602) 499-5195</a>
+      <a href="mailto:info@ameliasaz.com">info@ameliasaz.com</a>
+    </div>
+    <div>
+      <h4>Hours</h4>
+      <a>Sun &nbsp;7a–3p</a><a>Mon–Thu &nbsp;7a–8p</a><a>Fri–Sat &nbsp;7a–close</a>
+    </div>
+    <div>
+      <h4>More</h4>
+      <a href="careers.html">Now Hiring</a>
+      <a href="story.html">Our Values</a>
+      <a href="purveyors.html">Our Purveyors</a>
+      <a href="giftcards.html">Gift Cards</a>
+      <a href="https://www.instagram.com/ameliasbyeat/">Instagram</a>
+    </div>
+  </div>
+  <div class="foot__base">
+    <span>© 2026 Amelia's by EAT · Scottsdale, Arizona</span>
+    <span>Eat &amp; drink local.</span>
+  </div>
+</div></footer>
+
+</div>
+</body>
+</html>

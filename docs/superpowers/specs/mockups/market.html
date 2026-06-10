@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Market — Amelia's by EAT</title>
+<!--
+  MARKET — public sub-page on the approved v3 design system.
+  Shared system: brand-v3.css. Display face Fraunces (provisional stand-in for "Audrey").
+  Real copy from ameliasaz.com; project /images photography; nav + footer verbatim.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-v3.css">
+<style>
+/* page-specific tweaks only */
+.market-intro{max-width:62ch}
+.market-intro .lede{max-width:none}
+.cat{padding:clamp(56px,8vw,112px) 0}
+.cat__head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:34px}
+.cat__head h2{font-size:clamp(1.9rem,4vw,3rem)}
+.cat__head p{color:var(--ink-2);max-width:48ch;margin:14px 0 0}
+.cat__note{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink);font-size:1.02rem}
+.card__body p{color:var(--ink-2);font-size:.9rem;margin:6px 0 0}
+.card__row{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<header class="nav"><div class="nav__in">
+  <a href="home-v3.html" aria-label="Amelia's by EAT — home"><img class="nav__logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></a>
+  <nav class="nav__links" id="navlinks">
+    <a class="lnk" href="menu.html">Menu</a>
+    <a class="lnk" href="market.html">Market</a>
+    <a class="lnk" href="wineclub.html">Wine Club</a>
+    <a class="lnk" href="supper.html">Sunday Supper</a>
+    <a class="lnk" href="catering.html">Catering</a>
+    <a class="lnk" href="story.html">Our Story</a>
+    <a class="btn" href="reserve.html">Reserve</a>
+    <a class="btn btn--solid" href="menu.html">Order</a>
+  </nav>
+  <button class="nav__burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('navlinks');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <img src="../../../../images/themarket.jpg" alt="Overhead of Amelia's market goods — house granola, oils, salts, root chips and energy bites">
+  <div class="page-hero__in">
+    <h1 class="disp">The Market</h1>
+    <p>Every saleable grocery item sold in our market is used in Amelia's kitchen. From specialty salts to homemade granola, you'll find a unique assortment of grab-and-go food, beverages, and grocery items to take home — or give as gifts.</p>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="section"><div class="container">
+  <div class="market-intro">
+    <span class="kicker">Source to plate, then to your pantry</span>
+    <p class="lede" style="margin-top:14px">Wander the shelves the way you'd wander our menu. Three corners to explore — the wine wall, the grab-and-go cooler, and a home-and-gift table sourced from makers we love.</p>
+  </div>
+</div></section>
+
+<hr class="rule">
+
+<!-- 1. WINE -->
+<section class="cat"><div class="container">
+  <div class="cat__head">
+    <div>
+      <h2 class="disp">Wine</h2>
+      <p>A wall of top-quality wine — sustainable, organic, biodynamic, and natural bottles chosen by our in-house somms. Mix and match any six bottles for 10% off.</p>
+    </div>
+    <span class="cat__note">Six bottles, mix &amp; match — 10% off</span>
+  </div>
+  <div class="grid grid--3">
+    <article class="card">
+      <div class="card__media"><img src="../../../../images/WineWall-2-1365x2048.jpg" alt="Floor-to-ceiling white-shelved wine wall stocked with natural and organic bottles"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__title">The Wine Wall</span></div>
+        <p>Hundreds of low-intervention bottles, shelved floor to ceiling and refreshed as our somms find them.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card__media"><img src="../../../../images/glasses-clinking.jpg" alt="Hands raising glasses together in a warm, low-lit toast"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__title">Natural &amp; Biodynamic</span></div>
+        <p>Organic, biodynamic, and natural selections — the bottles we pour by the glass and stock on the wall.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card__media"><img src="../../../../images/Cooler-1405x1536.jpg" alt="Grab-and-go cooler stocked with chilled bottles and beverages"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__title">Join the Wine Club</span><span class="price">$40 / mo</span></div>
+        <p>Two featured bottles a month, a 3rd-Wednesday tasting, and 15% off the wall anytime.</p>
+        <div style="margin-top:16px"><a class="link-arrow" href="wineclub.html">Join the club <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a></div>
+      </div>
+    </article>
+  </div>
+</div></section>
+
+<hr class="rule">
+
+<!-- 2. GRAB & GO -->
+<section class="cat section--soft"><div class="container">
+  <div class="cat__head">
+    <div>
+      <h2 class="disp">Grab &amp; Go</h2>
+      <p>Locally sourced prepared foods ready to take home, plus our seasonal organic scratch-made frozen soups, stews, and bone broth, a gluten-free bakery, and the cold case.</p>
+    </div>
+    <span class="cat__note">Made here, ready to go</span>
+  </div>
+  <div class="grid grid--3">
+    <article class="card">
+      <div class="card__media"><img src="../../../../images/boutique-catering-1536x1024.jpg" alt="A spread of locally sourced prepared foods ready to take home"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__title">Prepared Foods</span></div>
+        <p>Locally sourced, made-from-scratch dishes from the kitchen — salads, sides, and mains to take home.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card__media"><img src="../../../../images/D0A7199-1-1024x1536.jpg" alt="Scratch-made frozen soups, stews and bone broth portioned for the freezer"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__title">Frozen Soups &amp; Bone Broth</span></div>
+        <p>Seasonal, organic, scratch-made soups, stews, and bone broth — pulled straight from the freezer.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card__media"><img src="../../../../images/boutique-catering-2.jpg" alt="Gluten-free bakery items and parfaits finished with edible flowers"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__title">GF Bakery &amp; Drinks</span></div>
+        <p>A gluten-free bakery alongside kombucha, craft beer, tea, and water — chilled and ready in the cooler.</p>
+      </div>
+    </article>
+  </div>
+</div></section>
+
+<hr class="rule">
+
+<!-- 3. HOME & GIFTING -->
+<section class="cat"><div class="container">
+  <div class="cat__head">
+    <div>
+      <h2 class="disp">Home &amp; Gifting</h2>
+      <p>Pantry items, glassware, and linens, custom-scented Amelia's candles, potted succulents, organic coffee beans, and a gift wall sourced from small businesses we love.</p>
+    </div>
+    <span class="cat__note">A gift wall from makers we love</span>
+  </div>
+  <div class="grid grid--3">
+    <article class="card">
+      <div class="card__media"><img src="../../../../images/themarket.jpg" alt="Pantry goods on the shelf — oils, salts, granola and nuts"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__title">Pantry &amp; Coffee</span></div>
+        <p>Specialty salts, oils, house granola, and organic coffee beans — the staples we cook and brew with daily.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card__media"><img src="../../../../images/5I8A7749-1-1024x1536.jpeg" alt="Glassware, linens and warm interior styling at Amelia's"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__title">Home &amp; Candles</span></div>
+        <p>Glassware, linens, custom-scented Amelia's candles, and potted succulents for the table and the home.</p>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card__media"><img src="../../../../images/5I8A8175-1024x1536.jpeg" alt="A curated corner of goods sourced from small businesses"></div>
+      <div class="card__body">
+        <div class="card__row"><span class="card__title">The Gift Wall</span></div>
+        <p>A curated wall of finds from small businesses — easy to wrap up and give, or to keep for yourself.</p>
+        <div style="margin-top:16px"><a class="link-arrow" href="giftcards.html">Gift cards too <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a></div>
+      </div>
+    </article>
+  </div>
+</div></section>
+
+<!-- CLOSING SPLIT -->
+<section class="split">
+  <div class="split__media"><img src="../../../../images/Cooler-1405x1536.jpg" alt="Amelia's grab-and-go cooler, fully stocked"></div>
+  <div class="split__body section--soft">
+    <span class="kicker">Pop in any day</span>
+    <h2 class="disp" style="margin-top:10px">Stop by the market</h2>
+    <p>The shelves, cooler, and wine wall are open all day. When you eat well, you feel good — take a little of Amelia's home with you.</p>
+    <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap">
+      <a class="btn btn--solid" href="menu.html">Order Pickup</a>
+      <a class="btn" href="location.html">Visit &amp; hours</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div><div class="foot__brand"><img src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></div><p style="max-width:34ch;margin:18px 0 0;color:#a8a395;font-size:.92rem">A conscious, made-from-scratch, all-day eating place &amp; market in Scottsdale.</p></div>
+    <div><h4>Visit</h4><a href="location.html">8240 N Hayden Rd, B-105<br>Scottsdale, AZ 85258</a><a href="tel:6024995195">(602) 499-5195</a><a href="mailto:info@ameliasaz.com">info@ameliasaz.com</a></div>
+    <div><h4>Hours</h4><a>Sun &nbsp;7a&ndash;3p</a><a>Mon&ndash;Thu &nbsp;7a&ndash;8p</a><a>Fri&ndash;Sat &nbsp;7a&ndash;close</a></div>
+    <div><h4>More</h4><a href="careers.html">Now Hiring</a><a href="story.html">Our Values</a><a href="purveyors.html">Our Purveyors</a><a href="giftcards.html">Gift Cards</a><a href="https://www.instagram.com/ameliasbyeat/">Instagram</a></div>
+  </div>
+  <div class="foot__base"><span>&copy; 2026 Amelia's by EAT &middot; Scottsdale, Arizona</span><span>Eat &amp; drink local.</span></div>
+</footer>
+
+</div>
+</body>
+</html>

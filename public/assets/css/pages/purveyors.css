@@ -1,0 +1,18 @@
+/* Purveyors page — page-specific layout tweaks (ports mockups/purveyors.html inline CSS). */
+.ethos{display:grid;grid-template-columns:1fr;gap:clamp(28px,6vw,72px);align-items:center}
+.ethos .kicker{display:block;margin-bottom:10px}
+.ethos h2{font-size:clamp(2rem,4.4vw,3.2rem)}
+.ethos p{color:var(--ink-2);margin:16px 0 0}
+.ethos__note{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink);font-size:1.3rem;margin-top:24px;line-height:1.3}
+.purv__head{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;line-height:1.15;display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+.purv__where{font-family:'Fraunces',serif;font-style:italic;font-size:.95rem;color:var(--gold-ink);white-space:nowrap}
+.purv__body p{color:var(--ink-2);font-size:.95rem;margin:10px 0 0}
+.purv__tie{display:block;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);margin-top:14px}
+.purv__more{grid-column:1/-1;background:var(--ink);color:var(--cream);border-radius:var(--r);padding:clamp(28px,4vw,44px);text-align:center}
+.purv__more h3{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.2rem);color:var(--cream);margin:0}
+.purv__more p{color:var(--cream-2);max-width:46ch;margin:12px auto 0;font-size:1rem}
+.purv__close-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+
+@media(min-width:981px){
+  .ethos{grid-template-columns:.9fr 1.1fr}
+}

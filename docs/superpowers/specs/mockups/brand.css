@@ -1,0 +1,290 @@
+/* ============================================================
+   Amelia's by EAT — Mockup Design System (finalized branding)
+   Source of truth for all spec mockups. Extracted from the live
+   site (docs/BRAND-GUIDE.md): warm charcoal-olive ink, deep navy
+   accent, white grounds; Montserrat body, serif display.
+   NOTE: real display face is "San-Diego" (licensed, not web-loadable);
+   mockups approximate it with Fraunces/Old Standard TT.
+
+   PROTOTYPE — throwaway. Production rebuilds this as the
+   frontend-css-architecture file set (tokens/reset/base/components/
+   utilities/theme via main.css), strips inline styles, and rewrites
+   the desktop-first max-width queries below to mobile-first min-width.
+   v4 (2026-06-03) skills-audit corrections reflected here: typography
+   seam (admin → body sans), hover hex moved to tokens, list-table
+   card-stack (needs per-cell data-label in HTML), cookie-consent +
+   staff-login primitives. See the v4 block at the foot of this file.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Old+Standard+TT:wght@400;700&display=swap');
+
+:root{
+  /* primitive */
+  --c-ink:#313530;        /* dominant text — warm charcoal-olive */
+  --c-ink-2:#292B2C;
+  --c-navy:#171A2D;       /* deep navy accent */
+  --c-white:#ffffff;
+  --c-sand:#F7F5F0;       /* warm off-white surface */
+  --c-sand-2:#EFEBE3;
+  --c-line:#E5E1D8;
+  --c-muted:#6E726B;
+  --c-olive:#5B6650;      /* secondary earthy accent */
+  --c-terracotta:#9E5436; /* warm CTA accent — darkened for AA contrast with white text */
+  --c-success:#1F7A4D;
+  --c-warn:#B26B00;
+  --c-danger:#A1392B;
+  --c-navy-hover:#0f1220;       /* v4: hover shade moved out of rules into tokens */
+  --c-terracotta-hover:#7f4329; /* v4 */
+
+  /* semantic */
+  --bg:var(--c-white);
+  --bg-soft:var(--c-sand);
+  --text:var(--c-ink);
+  --text-muted:var(--c-muted);
+  --border:var(--c-line);
+  --primary:var(--c-navy);
+  --primary-contrast:#fff;
+  --accent:var(--c-terracotta);
+
+  /* type */
+  --font-body:'Montserrat',system-ui,sans-serif;
+  --font-display:'Fraunces','Old Standard TT',Georgia,serif;
+
+  /* scale */
+  --r:10px; --r-sm:6px; --r-lg:18px;
+  --shadow:0 1px 2px rgba(25,28,20,.06),0 8px 24px rgba(25,28,20,.07);
+  --shadow-sm:0 1px 2px rgba(25,28,20,.08);
+  --maxw:1180px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--font-body);font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;}
+img{max-width:100%;display:block}
+a{color:var(--primary);text-decoration:none}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;line-height:1.1;letter-spacing:-.01em;margin:0 0 .4em}
+h1{font-size:clamp(2.2rem,4vw,3.4rem)}
+h2{font-size:clamp(1.6rem,2.6vw,2.3rem)}
+h3{font-size:1.25rem}
+.eyebrow{font-family:var(--font-body);font-weight:600;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.lede{font-size:1.12rem;color:var(--c-ink-2);max-width:60ch}
+.muted{color:var(--text-muted)}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,4vw,28px)}
+.section{padding-top:64px;padding-bottom:64px}  /* v4 fix: was `padding:64px 0`, which clobbered .container's horizontal gutter on `.container.section` elements → content touched the screen edge. Set only the vertical sides so the gutter survives. */
+.section--soft{background:var(--bg-soft)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);
+  font-weight:600;font-size:.95rem;padding:12px 22px;border-radius:999px;border:1px solid transparent;
+  cursor:pointer;transition:.15s;line-height:1}
+.btn--primary{background:var(--primary);color:var(--primary-contrast)}
+.btn--primary:hover{background:var(--c-navy-hover)}
+.btn--accent{background:var(--accent);color:#fff}
+.btn--accent:hover{background:var(--c-terracotta-hover)}
+.btn--ghost{background:transparent;color:var(--text);border-color:var(--border)}
+.btn--ghost:hover{background:var(--bg-soft)}
+.btn--block{width:100%;justify-content:center}
+.btn--sm{padding:8px 14px;font-size:.85rem}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav__inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+.nav__logo{height:40px}
+.nav__links{display:flex;gap:22px;align-items:center;font-weight:500;font-size:.92rem;flex-wrap:nowrap}
+.nav__links a{color:var(--c-ink);white-space:nowrap}
+.nav__links a:hover{color:var(--accent)}
+.nav__links a.btn--accent,.nav__links a.btn--primary{color:#fff}  /* keep CTA text white over accent */
+.nav__toggle{display:none}
+.nav__burger{display:none;font-size:26px;line-height:1;cursor:pointer;color:var(--c-ink);padding:4px 8px;user-select:none;background:none;border:0}
+
+/* cards */
+.card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-sm);overflow:hidden}
+.card__body{padding:18px}
+.grid{display:grid;gap:20px}
+.grid--3{grid-template-columns:repeat(3,1fr)}
+.grid--4{grid-template-columns:repeat(4,1fr)}
+.grid--2{grid-template-columns:repeat(2,1fr)}
+
+/* badges / pills */
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--c-sand-2);color:var(--c-ink-2);white-space:nowrap}
+.badge--veg{background:#E3EFE0;color:#2f5d3a}
+.badge--gf{background:#FdF0E3;color:#8a5a1a}
+.badge--new{background:var(--c-olive);color:#fff}
+.badge--ok{background:#E3EFE6;color:var(--c-success)}
+.badge--warn{background:#FbeFd6;color:var(--c-warn)}
+.badge--danger{background:#F6E3E0;color:var(--c-danger)}
+
+/* forms */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.82rem;font-weight:600;margin-bottom:5px;color:var(--c-ink-2)}
+.input,.select,.textarea{width:100%;font-family:inherit;font-size:.95rem;padding:11px 13px;border:1px solid var(--border);border-radius:var(--r-sm);background:#fff;color:var(--text)}
+.input:focus,.select:focus,.textarea:focus{outline:2px solid var(--c-navy);outline-offset:0;border-color:var(--c-navy)}
+
+/* price */
+.price{font-family:var(--font-body);font-variant-numeric:tabular-nums lining-nums;font-weight:600}
+
+/* tables (admin) */
+.table{width:100%;border-collapse:collapse;font-size:.9rem;font-variant-numeric:tabular-nums}
+.table th{text-align:left;font-weight:600;color:var(--text-muted);padding:10px 12px;border-bottom:1px solid var(--border);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;vertical-align:middle}
+.table td{padding:11px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+.table tr:hover td{background:var(--bg-soft)}
+
+/* admin shell */
+.admin{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
+.admin__side{background:var(--c-navy);color:#cfd2dc;padding:18px 14px}
+.admin__side .brand{color:#fff;font-family:var(--font-display);font-size:1.15rem;padding:6px 10px 18px}
+.admin__nav a{display:flex;align-items:center;gap:10px;color:#b9bdc9;padding:9px 11px;border-radius:8px;font-size:.9rem;font-weight:500}
+.admin__nav a.active,.admin__nav a:hover{background:rgba(255,255,255,.08);color:#fff}
+.admin__main{background:var(--bg-soft);padding:24px 28px}
+.admin__bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.admin__toggle{display:none}
+.admin__burger{display:none;align-items:center;justify-content:center;font-size:24px;line-height:1;cursor:pointer;color:var(--c-ink);background:none;border:0;padding:4px 8px;margin-right:8px}
+.stat{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:16px 18px}
+.stat__n{font-family:var(--font-display);font-size:1.9rem;font-weight:600;font-variant-numeric:tabular-nums}
+.stat__l{font-size:.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em}
+
+/* device frame for mockups */
+.frame{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);background:#fff;margin:0 auto}
+.frame--phone{max-width:390px}
+.frame__bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#fff;border-bottom:1px solid var(--border)}
+.frame__dot{width:10px;height:10px;border-radius:50%;background:var(--c-line)}
+.frame__url{margin-left:8px;font-size:.72rem;color:var(--text-muted);font-family:var(--font-body)}
+
+/* utilities */
+.flex{display:flex} .between{justify-content:space-between} .center{align-items:center}
+.gap{gap:12px} .gap-lg{gap:20px} .wrap{flex-wrap:wrap}
+.mt{margin-top:16px}.mt-lg{margin-top:28px}.mb{margin-bottom:16px}
+.hero{background:linear-gradient(180deg,var(--c-sand) 0%,#fff 100%)}
+@media(max-width:1024px){
+  /* public nav → hamburger (collapses BEFORE links would wrap) */
+  .nav__inner{position:relative}
+  .nav__burger{display:block}
+  .nav__links{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;align-items:flex-start;gap:14px;
+    background:#fff;border-bottom:1px solid var(--border);box-shadow:var(--shadow);padding:16px clamp(18px,4vw,28px);z-index:40}
+  .nav__toggle:checked ~ .nav__links,.nav__links.is-open{display:flex}  /* v4: .is-open = accessible <button> toggle */
+  /* v4 fix: mobile menu — every item shares one left edge at the gutter (align-items:
+     flex-start above); CTA buttons are small auto-width pills, not full-width bars. */
+  .nav__links .btn{width:auto;margin-left:-12px}  /* nudge CTA pills left so their labels sit closer to the menu-link column */
+  .nav__links .nav__account{padding-left:0}
+  /* admin sidebar → off-canvas drawer with hamburger */
+  .admin{grid-template-columns:1fr}
+  .admin__side{position:fixed;top:0;left:0;bottom:0;width:248px;transform:translateX(-100%);transition:transform .22s ease;z-index:60;overflow:auto}
+  .admin__toggle:checked ~ .admin__side,.admin__side.is-open{transform:translateX(0);box-shadow:0 0 0 100vmax rgba(0,0,0,.45)}  /* v4: .is-open = accessible <button> toggle */
+  .admin__burger{display:inline-flex}
+  .admin__main{overflow-x:auto}            /* wide tables/timelines scroll instead of breaking */
+  .grid--3,.grid--4{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){.grid--2,.grid--3,.grid--4{grid-template-columns:1fr}}
+
+/* account icon + site footer */
+.nav__account{display:inline-flex;align-items:center;color:var(--c-ink)}
+.nav__account:hover{color:var(--accent)}
+.site-footer{background:var(--c-navy);color:#cfd2dc;padding:48px 0;margin-top:64px}
+.site-footer__grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px}
+.site-footer strong{color:#fff}
+.site-footer a{color:#cfd2dc}
+.site-footer a:hover{color:#fff}
+.site-footer__brand{font-family:var(--font-display);font-size:1.4rem;color:#fff}
+@media(max-width:700px){.site-footer__grid{grid-template-columns:1fr 1fr}}
+
+/* ============================================================
+   Design-system primitives — added after the skills-compliance
+   audit (frontend-data-tables, frontend-form-patterns,
+   frontend-interaction-patterns, internal-tool-conventions).
+   Backs the per-screen fixes so the system is consistent.
+   ============================================================ */
+
+/* a11y utilities + focus rings (WCAG 2.4.13) */
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:where(a,button,.btn,.pill,input,select,textarea,[tabindex],.nav__burger,.admin__burger,.kebab,.drag-handle):focus-visible{outline:2px solid var(--c-navy);outline-offset:2px;border-radius:4px}
+
+/* button states + variants */
+.btn{min-height:40px}
+.btn--sm{min-height:36px}
+.btn:disabled,.btn[disabled]{opacity:.55;cursor:not-allowed}
+.btn[aria-pressed="true"]{background:var(--c-navy);color:#fff;border-color:var(--c-navy)}
+.pill[aria-pressed="true"],.pill--on,.pill.is-on{background:var(--c-navy);color:#fff;border-color:var(--c-navy)}
+.btn--danger{background:var(--c-danger);color:#fff;border-color:var(--c-danger)}
+.btn--danger:hover{filter:brightness(.93)}
+.btn--danger-text,.btn--danger-ghost{background:transparent;color:var(--c-danger);border:1px solid var(--border)}
+.btn--danger-text:hover,.btn--danger-ghost:hover{background:#f6e3e0;border-color:var(--c-danger)}
+
+/* touch targets (WCAG 2.5.5) */
+.input,.select,.textarea{min-height:44px}
+.nav__account{padding:6px}
+.kebab{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border:0;background:none;cursor:pointer;border-radius:8px;color:var(--c-ink)}
+.kebab:hover{background:var(--bg-soft)}
+.drag-handle{min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border:0;background:none;cursor:grab;color:var(--text-muted)}
+
+/* form primitives (frontend-form-patterns) */
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0}
+.required{color:var(--c-danger);text-decoration:none}
+.optional{color:var(--text-muted);font-weight:400}
+.form-hint,.field__hint{font-size:.82rem;color:var(--text-muted);margin-top:4px}
+.form-error{font-size:.82rem;color:var(--c-danger);margin-top:4px}
+.char-counter{font-size:.78rem;color:var(--text-muted);margin-top:4px}
+.form-actions{display:flex;gap:12px;align-items:center;justify-content:flex-end;margin-top:18px}
+.form-actions .form-actions__left{margin-right:auto}
+
+/* data-table chrome (frontend-data-tables) */
+.table-wrap{overflow:auto;-webkit-overflow-scrolling:touch}
+.table caption{text-align:left}
+.table .num,.table .col-num{text-align:right;font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+.table .col-id{width:1%;white-space:nowrap}
+.table .col-date{white-space:nowrap;font-variant-numeric:tabular-nums lining-nums}
+.table .col-actions{text-align:right;width:1%;white-space:nowrap}
+.table .badge-cell{white-space:nowrap}
+.table .row-link{color:inherit;text-decoration:none;font-weight:600}
+.table .row-link:hover{color:var(--accent)}
+@media(max-width:1023px){.col-priority-low{display:none}}
+@media(max-width:767px){.col-priority-medium{display:none}}
+
+/* toggle / switch */
+.toggle{position:relative;display:inline-flex;align-items:center;gap:10px;cursor:pointer}
+.toggle input{position:absolute;opacity:0;width:0;height:0}
+.toggle .track{width:42px;height:24px;border-radius:999px;background:var(--c-line);position:relative;transition:.15s;flex:0 0 auto}
+.toggle .track::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.15s;box-shadow:var(--shadow-sm)}
+.toggle input:checked + .track{background:var(--c-olive)}
+.toggle input:checked + .track::after{transform:translateX(18px)}
+
+/* ============================================================
+   v4 skills-audit corrections (2026-06-03)
+   ============================================================ */
+
+/* C-CONV-1 — typography seam: internal tool is sans-serif throughout.
+   Fraunces (--font-display) is PUBLIC-only; inside the admin shell,
+   headings, KPI stat numbers and the sidebar brand use the body sans
+   (internal-tool-typography). */
+.admin,
+.admin h1,.admin h2,.admin h3,.admin h4,
+.admin .stat__n,.admin .admin__side .brand{font-family:var(--font-body)}
+.admin h1,.admin h2,.admin h3,.admin h4{font-weight:700;letter-spacing:-.005em}
+
+/* C-CONV-1 — list tables card-stack on phone instead of horizontal-scroll
+   (frontend-data-tables). Apply .data-table--list to list-style admin
+   tables and add data-label="<header>" to each <td> in the HTML. */
+@media(max-width:600px){
+  .table.data-table--list thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .table.data-table--list tr{display:block;border:1px solid var(--border);border-radius:var(--r);margin-bottom:12px;padding:6px 12px;background:#fff}
+  .table.data-table--list td{display:grid;grid-template-columns:40% 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--c-sand-2)}
+  .table.data-table--list td:last-child{border-bottom:0}
+  .table.data-table--list td::before{content:attr(data-label);font-weight:600;color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+  .table.data-table--list td.col-actions{grid-template-columns:1fr;justify-items:end}
+  .table.data-table--list td.col-actions::before{display:none}
+}
+
+/* C-T1-5 — cookie-consent banner (public; gates GA4/GTM) */
+.cookie-consent{position:fixed;left:0;right:0;bottom:0;z-index:80;background:var(--c-navy);color:#e7e9f0;
+  display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;padding:14px clamp(18px,4vw,28px);box-shadow:0 -2px 12px rgba(0,0,0,.18)}
+.cookie-consent p{margin:0;font-size:.88rem;max-width:62ch}
+.cookie-consent a{color:#fff;text-decoration:underline}
+.cookie-consent .btn--ghost{color:#fff;border-color:rgba(255,255,255,.4)}
+
+/* C-T1-6 — staff-login screen helpers (demo credentials, env+hostname gated) */
+.demo-creds{background:var(--bg-soft);border:1px dashed var(--border);border-radius:var(--r);padding:14px 16px;margin-top:18px;font-size:.85rem}
+.demo-creds h4{font-family:var(--font-body);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin:0 0 8px}
+.demo-creds__row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0}
+.demo-creds code{font-family:ui-monospace,Menlo,Consolas,monospace;background:#fff;border:1px solid var(--border);border-radius:6px;padding:3px 8px}
+.copy-btn{min-height:36px}

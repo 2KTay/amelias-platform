@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amelia's by EAT — Staff Sign In</title>
+  <link rel="stylesheet" href="brand.css">
+  <style>
+    /* v4 (skills audit): staff login is separate from the customer auth screen.
+       Demo credentials render ONLY behind aslan_is_demo() (env AND hostname);
+       copy-to-clipboard, never autofill; seed.sql holds bcrypt hashes only. */
+    body{background:var(--c-navy)}
+    .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+    .login-card{max-width:400px;width:100%}
+    .login-logo{height:42px;margin:0 auto 16px}
+    .login-head{text-align:center;margin-bottom:6px}
+    .login-sub{text-align:center;color:var(--text-muted);font-size:.86rem;margin:0 0 20px}
+    .copied{font-size:.74rem;color:var(--c-success);margin-left:8px}
+  </style>
+</head>
+<body>
+
+<main class="login-wrap">
+  <div class="login-card">
+    <div class="card">
+      <div class="card__body" style="padding:28px 26px">
+        <img class="login-logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT">
+        <h1 class="login-head" style="font-size:1.35rem">Staff sign in</h1>
+        <p class="login-sub">Back-office access for Owner · Manager · Staff</p>
+
+        <form>
+          <div class="field">
+            <label for="su">Username or email <abbr class="required" title="required">*</abbr></label>
+            <input class="input" id="su" name="username" type="text" autocomplete="username" required>
+          </div>
+          <div class="field">
+            <label for="sp">Password <abbr class="required" title="required">*</abbr></label>
+            <input class="input" id="sp" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+          </div>
+          <button class="btn btn--primary btn--block" type="submit">Sign in</button>
+        </form>
+
+        <!-- Rendered only when aslan_is_demo() is true (APP_ENV=demo|staging AND allowlisted hostname). -->
+        <div class="demo-creds" aria-label="Demo credentials">
+          <h4>Demo credentials — staging only</h4>
+          <div class="demo-creds__row">
+            <span>Owner&nbsp; <code>admin</code> / <code>password</code></span>
+            <button class="btn btn--ghost copy-btn" type="button" onclick="cp(this,'admin','password')">Copy</button>
+          </div>
+          <div class="demo-creds__row">
+            <span>Staff&nbsp; <code>user</code> / <code>password123</code></span>
+            <button class="btn btn--ghost copy-btn" type="button" onclick="cp(this,'user','password123')">Copy</button>
+          </div>
+          <p class="form-hint" style="margin-top:10px">Copy-to-clipboard only — never auto-filled. Gated by environment + hostname; absent in production.</p>
+        </div>
+      </div>
+    </div>
+    <p class="login-sub mt" style="color:#cfd2dc">Customer accounts use the <a href="auth.html" style="color:#fff;text-decoration:underline">storefront sign-in</a>.</p>
+  </div>
+</main>
+
+<script>
+  function cp(btn, u, p){
+    navigator.clipboard && navigator.clipboard.writeText(u + ' / ' + p);
+    var s = btn.parentNode.querySelector('.copied');
+    if(!s){ s = document.createElement('span'); s.className='copied'; btn.after(s); }
+    s.textContent = 'Copied';
+    setTimeout(function(){ if(s) s.textContent=''; }, 1500);
+  }
+</script>
+
+</body>
+</html>

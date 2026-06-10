@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports — Amelia's Admin</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;padding:5px 12px;border-radius:999px;background:var(--c-sand-2);color:var(--c-ink-2)}
+  .panel{background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-sm);overflow:hidden;margin-top:20px}
+  .panel__head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border)}
+  .panel__head h3{margin:0}
+  .table td.num,.table th.num{text-align:right;font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+  .table td.col-date,.table th.col-date{white-space:nowrap;font-variant-numeric:tabular-nums lining-nums}
+  .table td.badge-cell{white-space:nowrap}
+  .table caption{text-align:left}
+  .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .table-wrap{overflow:auto}
+  .filters{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-top:4px}
+  .filters .field{margin:0}
+  .filters .input,.filters .select{width:auto}
+  .note{font-size:.82rem;color:var(--text-muted);padding:14px 18px;border-top:1px solid var(--border);background:var(--bg-soft)}
+  tfoot td{font-weight:700;border-top:2px solid var(--border)}
+  tfoot td.num{font-variant-numeric:tabular-nums lining-nums}
+</style>
+</head>
+<body>
+<div class="admin">
+  <aside class="admin__side" id="adminside">
+    <div class="brand">Amelia's · Admin</div>
+    <nav class="admin__nav">
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-reservations.html">Reservations</a>
+      <a href="admin-menu.html">Menu &amp; Pricing</a>
+      <a href="admin-inventory.html">Inventory</a>
+      <a href="admin-customers.html">Customers</a>
+      <a href="admin-feedback.html">Feedback</a>
+      <a href="admin-content.html">Content</a>
+      <a href="admin-team.html">Team</a>
+      <a href="admin-media.html">Media</a>
+      <a href="admin-reports.html" class="active">Reports</a>
+      <a href="admin-users.html">Users</a>
+      <a href="admin-settings.html">Settings</a>
+    </nav>
+  </aside>
+  <main class="admin__main">
+    <div class="admin__bar"><button class="admin__burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="adminside" onclick="var n=document.getElementById('adminside');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <div class="flex center gap">
+        <h2 style="margin:0">Reports</h2>
+        <span class="badge badge--warn">Owner only</span>
+      </div>
+      <div class="flex center gap">
+        <span class="chip">Signed in as Owner</span>
+        <button type="button" class="btn btn--ghost btn--sm">Export CSV</button>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:0">
+      <div class="panel__head" style="border-bottom:0">
+        <form class="filters">
+          <div class="field"><label for="rep-from">From</label><input id="rep-from" name="from" class="input" type="date" value="2026-05-01"></div>
+          <div class="field"><label for="rep-to">To</label><input id="rep-to" name="to" class="input" type="date" value="2026-05-31"></div>
+          <div class="field"><label for="rep-range">Range</label>
+            <select id="rep-range" name="range" class="select"><option>This month</option><option>Last month</option><option>Quarter</option><option>Custom</option></select>
+          </div>
+          <button type="submit" class="btn btn--primary btn--sm">Apply</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="grid grid--4">
+      <div class="stat"><div class="stat__n">$148,920</div><div class="stat__l">Gross</div></div>
+      <div class="stat"><div class="stat__n">$132,410</div><div class="stat__l">Net</div></div>
+      <div class="stat"><div class="stat__n">$2,840</div><div class="stat__l">Refunds</div></div>
+      <div class="stat"><div class="stat__n">$11,234</div><div class="stat__l">Tax collected</div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel__head"><h3 id="streams-caption">Sales by stream</h3><button type="button" class="btn btn--ghost btn--sm">Export CSV</button></div>
+      <div class="table-wrap" role="region" aria-labelledby="streams-caption" tabindex="0">
+      <table class="table">
+        <caption class="visually-hidden">Sales by stream</caption>
+        <thead><tr><th scope="col">Stream</th><th scope="col" class="num">Revenue</th><th scope="col" class="num">% of gross</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Dine-in &amp; Orders</th><td class="num">$86,540</td><td class="num">58.1%</td></tr>
+          <tr><th scope="row">Market</th><td class="num">$24,310</td><td class="num">16.3%</td></tr>
+          <tr><th scope="row">Gift cards</th><td class="num">$6,420</td><td class="num">4.3%</td></tr>
+          <tr><th scope="row">Catering</th><td class="num">$18,900</td><td class="num">12.7%</td></tr>
+          <tr><th scope="row">Events</th><td class="num">$8,250</td><td class="num">5.5%</td></tr>
+          <tr><th scope="row">Wine Club subscriptions</th><td class="num">$4,500</td><td class="num">3.0%</td></tr>
+        </tbody>
+        <tfoot><tr><th scope="row">Total</th><td class="num">$148,920</td><td class="num">100%</td></tr></tfoot>
+      </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel__head"><h3 id="payouts-caption">Stripe payout reconciliation</h3><button type="button" class="btn btn--ghost btn--sm">Export CSV</button></div>
+      <div class="table-wrap" role="region" aria-labelledby="payouts-caption" tabindex="0">
+      <table class="table">
+        <caption class="visually-hidden">Stripe payout reconciliation</caption>
+        <thead><tr><th scope="col" class="col-date">Payout date</th><th scope="col" class="num">Gross</th><th scope="col" class="num">Fees</th><th scope="col" class="num">Net</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><th scope="row" class="col-date">May 30</th><td class="num">$12,480</td><td class="num">$372</td><td class="num">$12,108</td><td class="badge-cell"><span class="badge badge--ok">Paid</span></td></tr>
+          <tr><th scope="row" class="col-date">May 23</th><td class="num">$15,210</td><td class="num">$451</td><td class="num">$14,759</td><td class="badge-cell"><span class="badge badge--ok">Paid</span></td></tr>
+          <tr><th scope="row" class="col-date">May 16</th><td class="num">$9,870</td><td class="num">$298</td><td class="num">$9,572</td><td class="badge-cell"><span class="badge badge--ok">Paid</span></td></tr>
+          <tr><th scope="row" class="col-date">Jun 06</th><td class="num">$13,940</td><td class="num">$418</td><td class="num">$13,522</td><td class="badge-cell"><span class="badge badge--warn">In transit</span></td></tr>
+          <tr><th scope="row" class="col-date">Jun 13</th><td class="num">$7,210</td><td class="num">$219</td><td class="num">$6,991</td><td class="badge-cell"><span class="badge">Pending</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note"><strong>Tax report &mdash; AZ TPT by category:</strong> Transaction Privilege Tax is reported per category (restaurant prepared food vs. retail Market goods are taxed at different combined city/state/county rates). Gift cards are recorded at redemption, not sale. Export the CSV for the monthly TPT filing.</p>
+    </div>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+/* admin.css — internal-tool shell layout. Uses the shared token set; the admin
+   theme layer (theme.css [data-theme="admin"]) supplies the sans display + navy
+   accent. Min-width >=820px shows the sidebar; below, the nav collapses and
+   list tables card-stack via [data-label]. */
+
+/* ── Admin type scale ───────────────────────────────────────────────────────
+   The public base.css sets large display sizes on h1/h2/h3 (clamp 2.2–3.2rem
+   etc.) with the display serif + text-wrap:balance — correct for marketing,
+   far too big and editorial for a dense ops tool. Scoped to [data-theme="admin"]
+   so EVERY admin page inherits a calm, compact, sans-serif hierarchy (Polaris /
+   Primer style). Hierarchy comes from weight + size, not typeface. */
+[data-theme="admin"] h1,
+[data-theme="admin"] h2,
+[data-theme="admin"] h3,
+[data-theme="admin"] .disp {
+  font-family: var(--font-display); /* admin layer remaps this to the body sans */
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-wrap: normal;
+}
+/* Page title (admin H1). */
+[data-theme="admin"] h1,
+[data-theme="admin"] .admin-h1 { font-size: 1.5rem; }
+/* Card / panel / section titles. */
+[data-theme="admin"] h2 { font-size: 1.2rem; }
+[data-theme="admin"] h3 { font-size: 1.05rem; }
+
+/* The public root font/line-height (17px / 1.62) is tuned for prose; a dense ops
+   tool reads better slightly smaller and tighter. Scoped to the shell so the
+   whole admin UI — labels, cells, KPIs — shares a calmer rhythm. */
+.admin-shell { min-height: 100vh; font-size: 16px; line-height: 1.5; }
+
+.admin-nav { background: var(--ink-deep); color: var(--onink-bright); padding: 18px 16px; display: flex; flex-direction: column; gap: 6px; }
+.admin-nav__brand { font-weight: 600; font-size: 1.05rem; color: var(--white); padding: 8px 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.12); margin-bottom: 8px; }
+.admin-nav nav { display: flex; flex-direction: column; gap: 2px; }
+.admin-nav a { color: var(--onink); padding: 9px 10px; border-radius: var(--r); font-size: 0.92rem; }
+.admin-nav a:hover { background: rgba(255,255,255,0.06); color: var(--white); }
+.admin-nav a[aria-current="page"] { background: var(--accent); color: var(--white); }
+.admin-nav__foot { margin-top: auto; padding-top: 14px; display: flex; flex-direction: column; gap: 8px; font-size: 0.8rem; }
+.admin-main { padding: clamp(20px, 4vw, 40px); background: var(--bg); }
+
+/* auth screens (centered card) */
+.auth-body { background: var(--bg-soft); min-height: 100vh; }
+.auth-wrap { max-width: 420px; margin: 0 auto; padding: clamp(40px,8vh,96px) 20px; }
+.auth-logo img { height: 48px; margin: 0 auto 28px; }
+.auth-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: clamp(24px,5vw,36px); }
+.auth-title { font-size: 1.8rem; }
+.auth-foot { text-align: center; margin-top: 20px; font-size: 0.9rem; }
+.demo-creds { border-top: 1px solid var(--line); padding-top: 16px; font-size: 0.85rem; }
+.demo-creds ul { list-style: none; }
+.demo-creds li { padding: 3px 0; }
+.demo-creds code { background: var(--bg-soft); padding: 1px 6px; border-radius: var(--r); cursor: pointer; }
+
+/* page header row (title + actions) — shared across all admin pages and reused
+   as the panel header inside .admin-card. Title and the right-side action link
+   sit on a shared baseline (align-items: baseline) with consistent spacing. */
+.admin-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; margin-bottom: 16px; }
+.admin-head > * { margin: 0; }
+.admin-head__actions { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+/* Panel header: tighter bottom margin than the page header, line under nothing. */
+.admin-card > .admin-head { margin-bottom: 14px; }
+
+.admin-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; margin-bottom: 20px; }
+.admin-h1 { font-size: 1.5rem; font-weight: 600; line-height: 1.25; margin-bottom: 4px; }
+.kpi-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.kpi { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; }
+.kpi__label { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--sage); }
+.kpi__value { font-size: 1.9rem; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: 4px; }
+.sticky-actions { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 12px 0; display: flex; gap: 10px; justify-content: flex-end; border-bottom: 1px solid var(--line); }
+
+/* Mobile-first: list tables card-stack by default (each row a card, cells
+   labelled via [data-label]); the real table layout is restored at >=820px. */
+.admin-tbl thead { display: none; }
+.admin-tbl tr { display: block; border: 1px solid var(--line); border-radius: var(--r); margin-bottom: 12px; padding: 8px 12px; }
+.admin-tbl td { display: flex; justify-content: space-between; gap: 16px; border: 0; padding: 6px 0; }
+.admin-tbl td::before { content: attr(data-label); font-weight: 600; color: var(--sage); }
+
+@media (min-width: 820px) {
+  .admin-shell { display: grid; grid-template-columns: 240px 1fr; }
+  .admin-nav { min-height: 100vh; position: sticky; top: 0; }
+  .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+  .admin-tbl { width: 100%; }
+  .admin-tbl thead { display: table-header-group; }
+  .admin-tbl tr { display: table-row; border: 0; margin: 0; padding: 0; }
+  .admin-tbl td { display: table-cell; padding: 13px 12px; border-bottom: 1px solid var(--line); }
+  .admin-tbl td::before { content: none; }
+}

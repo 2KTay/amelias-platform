@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunday Supper — Amelia's by EAT</title>
+<!--
+  SUPPER — Sunday Supper events page, built on the approved public v3 design system.
+  Shared design system: brand-v3.css. Display face Fraunces (provisional stand-in
+  for the licensed "Audrey"); body Montserrat. Exact nav + footer reused verbatim.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-v3.css">
+<style>
+/* page-specific tweaks only */
+.supper-how{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.supper-how__cell{background:var(--cream);padding:clamp(24px,3vw,38px)}
+.supper-how__cell h3{font-size:1.35rem;margin:0 0 10px}
+.supper-how__cell p{color:var(--ink-2);font-size:.95rem;margin:0}
+.supper-how__lead{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink);font-size:1.05rem;display:block;margin-bottom:8px}
+.event{display:grid;grid-template-columns:auto 1fr auto;gap:8px 28px;align-items:center;padding:26px clamp(20px,3vw,32px);border:1px solid var(--line);border-radius:var(--r);background:var(--paper)}
+.event + .event{margin-top:18px}
+.event__date{font-family:'Fraunces',serif;font-weight:500;line-height:1.05;text-align:center;min-width:84px}
+.event__date .mo{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--olive-ink);font-style:normal;margin-bottom:4px}
+.event__date .day{display:block;font-size:2.4rem}
+.event__main h3{font-size:1.5rem;margin:0 0 4px}
+.event__meta{color:var(--ink-2);font-size:.92rem;margin:0;max-width:58ch}
+.event__aside{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.event__price{font-family:'Fraunces',serif;font-style:italic;color:var(--gold-ink);font-size:1.3rem}
+.event--full{opacity:.72}
+@media(max-width:780px){
+  .supper-how{grid-template-columns:1fr}
+  .event{grid-template-columns:1fr;text-align:left;gap:14px}
+  .event__date{text-align:left;min-width:0}
+  .event__date .day{font-size:1.8rem;display:inline}
+  .event__date .mo{display:inline;margin:0 8px 0 0}
+  .event__aside{text-align:left;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<header class="nav"><div class="nav__in">
+  <a href="home-v3.html" aria-label="Amelia's by EAT — home"><img class="nav__logo" src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></a>
+  <nav class="nav__links" id="navlinks">
+    <a class="lnk" href="menu.html">Menu</a>
+    <a class="lnk" href="market.html">Market</a>
+    <a class="lnk" href="wineclub.html">Wine Club</a>
+    <a class="lnk" href="supper.html">Sunday Supper</a>
+    <a class="lnk" href="catering.html">Catering</a>
+    <a class="lnk" href="story.html">Our Story</a>
+    <a class="btn" href="reserve.html">Reserve</a>
+    <a class="btn btn--solid" href="menu.html">Order</a>
+  </nav>
+  <button class="nav__burger" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('navlinks');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <img src="../../../../images/glasses-clinking.jpg" alt="Hands raising glasses together in a warm, low-lit toast" style="filter:grayscale(1) contrast(1.03)">
+  <div class="page-hero__in">
+    <span class="kicker" style="color:var(--gold)">One Sunday a month</span>
+    <h1 class="disp" style="margin-top:8px">Sunday Supper</h1>
+    <p>One long table, one seasonal menu, all-Arizona sourcing. A multi-course communal dinner where strangers become neighbors over shared plates and good wine.</p>
+  </div>
+</section>
+
+<!-- THE IDEA -->
+<section class="section"><div class="container">
+  <div class="head" style="max-width:60ch">
+    <h2 class="disp">A meal the way it's meant to be</h2>
+    <p>Once a month we clear the room, set one long communal table, and cook a single menu for everyone who pulls up a chair. The courses change with the season and a little with the chef's mood — you'll know roughly what you're in for, and you'll be surprised in the best way. It's Stacey's favorite night of the month, and after one you'll see why.</p>
+  </div>
+  <div class="supper-how">
+    <div class="supper-how__cell">
+      <span class="supper-how__lead">One table</span>
+      <h3 class="disp">Communal seating</h3>
+      <p>Everyone shares the same long table and the same multi-course menu. Come as a pair or a party of six — you'll leave having met the rest.</p>
+    </div>
+    <div class="supper-how__cell">
+      <span class="supper-how__lead">All Arizona</span>
+      <h3 class="disp">Sourced close to home</h3>
+      <p>Each menu is built around our Arizona purveyors — Noble Bread, Steadfast Farm, Crow's Dairy, Fra'Mani, Sweet Republic. Scratch made, seed-oil free, served with heart.</p>
+    </div>
+    <div class="supper-how__cell">
+      <span class="supper-how__lead">Surprise menu</span>
+      <h3 class="disp">Seasonal &amp; a secret</h3>
+      <p>We share the theme and wine pairing ahead of time and keep a few courses under wraps. Tell us about allergies when you reserve and we'll take care of you.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- UPCOMING SUPPERS -->
+<section class="section section--soft"><div class="container">
+  <div class="head head--row">
+    <div>
+      <h2 class="disp">Upcoming suppers</h2>
+      <p style="max-width:48ch">Seats are limited to one table and are claimed at checkout — prepay to hold your place. Once a date sells out, it's full.</p>
+    </div>
+    <a class="link-arrow" href="reserve.html">Reserve a table instead <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h17M13 1l5 5-5 5"/></svg></a>
+  </div>
+
+  <article class="event">
+    <div class="event__date"><span class="mo">Jun</span><span class="day">29</span></div>
+    <div class="event__main">
+      <h3 class="disp">High-Desert Harvest</h3>
+      <p class="event__meta">Sunday, 6:30 pm · five courses · optional Arizona wine pairing · Steadfast Farm summer vegetables, Crow's Dairy chèvre, Noble Bread.</p>
+    </div>
+    <div class="event__aside">
+      <span class="event__price">$95 / seat</span>
+      <span class="badge badge--warn">6 seats left</span>
+      <a class="btn btn--solid" href="reserve.html">Reserve a seat</a>
+    </div>
+  </article>
+
+  <article class="event">
+    <div class="event__date"><span class="mo">Jul</span><span class="day">27</span></div>
+    <div class="event__main">
+      <h3 class="disp">Smoke &amp; Stone Fruit</h3>
+      <p class="event__meta">Sunday, 6:30 pm · five courses · live-fire mains, Sweet Republic for dessert, Fra'Mani charcuterie to start.</p>
+    </div>
+    <div class="event__aside">
+      <span class="event__price">$95 / seat</span>
+      <span class="badge badge--ok">14 seats left</span>
+      <a class="btn btn--solid" href="reserve.html">Reserve a seat</a>
+    </div>
+  </article>
+
+  <article class="event event--full">
+    <div class="event__date"><span class="mo">May</span><span class="day">25</span></div>
+    <div class="event__main">
+      <h3 class="disp">Spring at the Long Table</h3>
+      <p class="event__meta">Sunday, 6:30 pm · five courses · our first supper of the season. Thank you to everyone who joined us.</p>
+    </div>
+    <div class="event__aside">
+      <span class="event__price">$90 / seat</span>
+      <span class="badge">Sold out</span>
+      <a class="btn" href="reserve.html" aria-disabled="true">Join waitlist</a>
+    </div>
+  </article>
+</div></section>
+
+<!-- DETAIL SPLIT -->
+<section class="split">
+  <div class="split__media"><img src="../../../../images/5I8A7492-1024x1536.jpeg" alt="Amelia's dining room — slatted-wood wall, woven-leather chairs, warm globe sconces"></div>
+  <div class="split__body">
+    <span class="kicker">Good to know</span>
+    <h2 class="disp" style="margin:8px 0 18px">How the evening runs</h2>
+    <p>Doors at 6:00, first course at 6:30. Plan for about two and a half hours at the table. Seats are claimed at checkout and capacity is limited to one room, so reserve early — we can't add chairs once a supper is full.</p>
+    <p style="margin-top:14px">Prepayment holds your seat. Need to cancel? Let us know at least 72 hours ahead and we'll move you to a future supper. Questions? Call or email and we'll sort it out.</p>
+    <div style="margin-top:26px;display:flex;gap:14px;flex-wrap:wrap">
+      <a class="btn btn--solid" href="reserve.html">Reserve a seat</a>
+      <a class="btn" href="tel:6024995195">(602) 499-5195</a>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING CTA -->
+<section class="section--ink">
+  <div class="container" style="text-align:center;padding-top:clamp(60px,9vw,104px);padding-bottom:clamp(60px,9vw,104px)">
+    <h2 class="disp" style="color:var(--cream);font-size:clamp(2rem,5vw,3.4rem);max-width:20ch;margin:0 auto 18px">Pull up a chair this Sunday</h2>
+    <p style="color:#dcd7c6;max-width:50ch;margin:0 auto 30px">One table, one menu, the whole neighborhood. Seats are limited and prepaid — claim yours before the date fills.</p>
+    <a class="btn btn--lg btn--ghost-light" href="reserve.html">Reserve a seat</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div><div class="foot__brand"><img src="../../../assets/brand/AmeliasbyEatLogo-Final-Color.svg" alt="Amelia's by EAT"></div><p style="max-width:34ch;margin:18px 0 0;color:#a8a395;font-size:.92rem">A conscious, made-from-scratch, all-day eating place &amp; market in Scottsdale.</p></div>
+    <div><h4>Visit</h4><a href="location.html">8240 N Hayden Rd, B-105<br>Scottsdale, AZ 85258</a><a href="tel:6024995195">(602) 499-5195</a><a href="mailto:info@ameliasaz.com">info@ameliasaz.com</a></div>
+    <div><h4>Hours</h4><a>Sun &nbsp;7a&ndash;3p</a><a>Mon&ndash;Thu &nbsp;7a&ndash;8p</a><a>Fri&ndash;Sat &nbsp;7a&ndash;close</a></div>
+    <div><h4>More</h4><a href="careers.html">Now Hiring</a><a href="story.html">Our Values</a><a href="purveyors.html">Our Purveyors</a><a href="giftcards.html">Gift Cards</a><a href="https://www.instagram.com/ameliasbyeat/">Instagram</a></div>
+  </div>
+  <div class="foot__base"><span>&copy; 2026 Amelia's by EAT &middot; Scottsdale, Arizona</span><span>Eat &amp; drink local.</span></div>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventory — Amelia's Admin</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;padding:5px 12px;border-radius:999px;background:var(--c-sand-2);color:var(--c-ink-2)}
+  .panel{background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-sm);overflow:hidden;margin-top:20px}
+  .panel__head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border)}
+  .panel__head h3{margin:0}
+  .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .table-wrap{overflow:auto}
+  .table td.col-num,.table th.col-num{text-align:right;font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+  .table .col-actions{text-align:right;width:1%;white-space:nowrap}
+  .table .badge{white-space:nowrap}
+  .note{font-size:.82rem;color:var(--text-muted);padding:14px 18px;border-top:1px solid var(--border);background:var(--bg-soft)}
+  .adj{display:inline-flex;gap:6px;justify-content:flex-end}
+  .adj .btn{min-width:36px;justify-content:center}
+  .ownerchip{background:var(--c-sand-2)}
+</style>
+</head>
+<body>
+<div class="admin">
+  <aside class="admin__side" id="adminside">
+    <div class="brand">Amelia's · Admin</div>
+    <nav class="admin__nav">
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-reservations.html">Reservations</a>
+      <a href="admin-menu.html">Menu &amp; Pricing</a>
+      <a href="admin-inventory.html" class="active">Inventory</a>
+      <a href="admin-customers.html">Customers</a>
+      <a href="admin-feedback.html">Feedback</a>
+      <a href="admin-content.html">Content</a>
+      <a href="admin-team.html">Team</a>
+      <a href="admin-media.html">Media</a>
+      <a href="admin-reports.html">Reports</a>
+      <a href="admin-users.html">Users</a>
+      <a href="admin-settings.html">Settings</a>
+    </nav>
+  </aside>
+  <main class="admin__main">
+    <div class="admin__bar"><button class="admin__burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="adminside" onclick="var n=document.getElementById('adminside');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <h2>Inventory</h2>
+      <div class="flex center gap">
+        <span class="chip">Signed in as Owner</span>
+        <button class="btn btn--ghost btn--sm">Export</button>
+        <button class="btn btn--primary btn--sm">+ Add product</button>
+      </div>
+    </div>
+
+    <div class="grid grid--4">
+      <div class="stat"><div class="stat__n">3</div><div class="stat__l">Out / 86'd</div></div>
+      <div class="stat"><div class="stat__n">5</div><div class="stat__l">Low stock</div></div>
+      <div class="stat"><div class="stat__n">42</div><div class="stat__l">Tracked items</div></div>
+      <div class="stat"><div class="stat__n">18</div><div class="stat__l">Active holds</div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel__head">
+        <h3>Finite goods &mdash; Market &amp; limited menu</h3>
+        <span class="muted" style="font-size:.82rem">Updated 2 min ago</span>
+      </div>
+      <div class="table-wrap" role="region" aria-labelledby="inv-caption" tabindex="0">
+      <table class="table data-table--list">
+        <caption id="inv-caption" class="visually-hidden">Finite goods — Market and limited menu stock levels</caption>
+        <thead>
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col" class="col-num">On-hand</th>
+            <th scope="col" class="col-num col-priority-low">Reserved</th>
+            <th scope="col" class="col-num">Reservable</th>
+            <th scope="col" class="col-num col-priority-low">Threshold</th>
+            <th scope="col">Status</th>
+            <th scope="col" class="col-actions"><span class="visually-hidden">Adjust</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-primary" data-label="Item">Amelia's EVOO 500ml</td>
+            <td class="col-num" data-label="On-hand">64</td><td class="col-num col-priority-low" data-label="Reserved">6</td><td class="col-num" data-label="Reservable">58</td><td class="col-num col-priority-low" data-label="Threshold">12</td>
+            <td data-label="Status"><span class="badge badge--ok">In stock</span></td>
+            <td class="col-actions"><span class="adj"><button class="btn btn--ghost btn--sm" aria-label="Decrease Amelia's EVOO 500ml on-hand">&minus;</button><button class="btn btn--ghost btn--sm" aria-label="Increase Amelia's EVOO 500ml on-hand">+</button></span></td>
+          </tr>
+          <tr>
+            <td class="col-primary" data-label="Item">Saffron Honey jar</td>
+            <td class="col-num" data-label="On-hand">9</td><td class="col-num col-priority-low" data-label="Reserved">2</td><td class="col-num" data-label="Reservable">7</td><td class="col-num col-priority-low" data-label="Threshold">10</td>
+            <td data-label="Status"><span class="badge badge--warn">Low</span></td>
+            <td class="col-actions"><span class="adj"><button class="btn btn--ghost btn--sm" aria-label="Decrease Saffron Honey jar on-hand">&minus;</button><button class="btn btn--ghost btn--sm" aria-label="Increase Saffron Honey jar on-hand">+</button></span></td>
+          </tr>
+          <tr>
+            <td class="col-primary" data-label="Item">Wild Boar Ragù (jar)</td>
+            <td class="col-num" data-label="On-hand">3</td><td class="col-num col-priority-low" data-label="Reserved">3</td><td class="col-num" data-label="Reservable">0</td><td class="col-num col-priority-low" data-label="Threshold">8</td>
+            <td data-label="Status"><span class="badge badge--warn">Low</span></td>
+            <td class="col-actions"><span class="adj"><button class="btn btn--ghost btn--sm" aria-label="Decrease Wild Boar Ragù on-hand">&minus;</button><button class="btn btn--ghost btn--sm" aria-label="Increase Wild Boar Ragù on-hand">+</button></span></td>
+          </tr>
+          <tr>
+            <td class="col-primary" data-label="Item">House Sourdough loaf</td>
+            <td class="col-num" data-label="On-hand">0</td><td class="col-num col-priority-low" data-label="Reserved">0</td><td class="col-num" data-label="Reservable">0</td><td class="col-num col-priority-low" data-label="Threshold">6</td>
+            <td data-label="Status"><span class="badge badge--danger">Out / 86'd</span></td>
+            <td class="col-actions"><span class="adj"><button class="btn btn--ghost btn--sm" aria-label="Decrease House Sourdough loaf on-hand">&minus;</button><button class="btn btn--ghost btn--sm" aria-label="Increase House Sourdough loaf on-hand">+</button></span></td>
+          </tr>
+          <tr>
+            <td class="col-primary" data-label="Item">Branzino (whole, fresh)</td>
+            <td class="col-num" data-label="On-hand">14</td><td class="col-num col-priority-low" data-label="Reserved">5</td><td class="col-num" data-label="Reservable">9</td><td class="col-num col-priority-low" data-label="Threshold">6</td>
+            <td data-label="Status"><span class="badge badge--ok">In stock</span></td>
+            <td class="col-actions"><span class="adj"><button class="btn btn--ghost btn--sm" aria-label="Decrease Branzino on-hand">&minus;</button><button class="btn btn--ghost btn--sm" aria-label="Increase Branzino on-hand">+</button></span></td>
+          </tr>
+          <tr>
+            <td class="col-primary" data-label="Item">Burrata (250g)</td>
+            <td class="col-num" data-label="On-hand">7</td><td class="col-num col-priority-low" data-label="Reserved">4</td><td class="col-num" data-label="Reservable">3</td><td class="col-num col-priority-low" data-label="Threshold">8</td>
+            <td data-label="Status"><span class="badge badge--warn">Low</span></td>
+            <td class="col-actions"><span class="adj"><button class="btn btn--ghost btn--sm" aria-label="Decrease Burrata on-hand">&minus;</button><button class="btn btn--ghost btn--sm" aria-label="Increase Burrata on-hand">+</button></span></td>
+          </tr>
+          <tr>
+            <td class="col-primary" data-label="Item">Tiramisù (whole cake)</td>
+            <td class="col-num" data-label="On-hand">2</td><td class="col-num col-priority-low" data-label="Reserved">2</td><td class="col-num" data-label="Reservable">0</td><td class="col-num col-priority-low" data-label="Threshold">3</td>
+            <td data-label="Status"><span class="badge badge--danger">Out / 86'd</span></td>
+            <td class="col-actions"><span class="adj"><button class="btn btn--ghost btn--sm" aria-label="Decrease Tiramisù on-hand">&minus;</button><button class="btn btn--ghost btn--sm" aria-label="Increase Tiramisù on-hand">+</button></span></td>
+          </tr>
+          <tr>
+            <td class="col-primary" data-label="Item">Truffle Pasta Kit</td>
+            <td class="col-num" data-label="On-hand">21</td><td class="col-num col-priority-low" data-label="Reserved">3</td><td class="col-num" data-label="Reservable">18</td><td class="col-num col-priority-low" data-label="Threshold">10</td>
+            <td data-label="Status"><span class="badge badge--ok">In stock</span></td>
+            <td class="col-actions"><span class="adj"><button class="btn btn--ghost btn--sm" aria-label="Decrease Truffle Pasta Kit on-hand">&minus;</button><button class="btn btn--ghost btn--sm" aria-label="Increase Truffle Pasta Kit on-hand">+</button></span></td>
+          </tr>
+          <tr>
+            <td class="col-primary" data-label="Item">Heirloom Tomato (lb)</td>
+            <td class="col-num" data-label="On-hand">5</td><td class="col-num col-priority-low" data-label="Reserved">1</td><td class="col-num" data-label="Reservable">4</td><td class="col-num col-priority-low" data-label="Threshold">8</td>
+            <td data-label="Status"><span class="badge badge--warn">Low</span></td>
+            <td class="col-actions"><span class="adj"><button class="btn btn--ghost btn--sm" aria-label="Decrease Heirloom Tomato on-hand">&minus;</button><button class="btn btn--ghost btn--sm" aria-label="Increase Heirloom Tomato on-hand">+</button></span></td>
+          </tr>
+          <tr>
+            <td class="col-primary" data-label="Item">Gift Box &mdash; Pantry Trio</td>
+            <td class="col-num" data-label="On-hand">11</td><td class="col-num col-priority-low" data-label="Reserved">0</td><td class="col-num" data-label="Reservable">11</td><td class="col-num col-priority-low" data-label="Threshold">5</td>
+            <td data-label="Status"><span class="badge badge--ok">In stock</span></td>
+            <td class="col-actions"><span class="adj"><button class="btn btn--ghost btn--sm" aria-label="Decrease Gift Box Pantry Trio on-hand">&minus;</button><button class="btn btn--ghost btn--sm" aria-label="Increase Gift Box Pantry Trio on-hand">+</button></span></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="note"><strong>Reservable = on-hand &minus; active holds.</strong> Holds are placed when an order or reservation reserves stock; they release on fulfillment or cancellation. An item is marked <em>Low</em> at or below its threshold and <em>86'd</em> when reservable hits zero.</p>
+    </div>
+  </main>
+</div>
+</body>
+</html>

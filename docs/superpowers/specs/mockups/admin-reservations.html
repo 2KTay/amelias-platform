@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amelia's · Admin — Reservations</title>
+  <link rel="stylesheet" href="brand.css">
+  <style>
+    .role-chip{font-size:.72rem;font-weight:600;color:var(--text-muted);background:#fff;border:1px solid var(--border);padding:5px 11px;border-radius:999px}
+    .admin__bar .actions{display:flex;align-items:center;gap:10px}
+    .num{font-variant-numeric:tabular-nums lining-nums}
+    .panel{background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-sm)}
+    .panel__head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border)}
+    .panel__head h3{margin:0;font-size:1.05rem}
+    .layout{display:grid;grid-template-columns:1fr 320px;gap:20px}
+    .dayhead{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+    .dayhead h3{margin:0;font-size:1.25rem}
+    .navbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:1rem;line-height:1}
+    .row-actions{display:flex;gap:7px;justify-content:flex-end}
+    .side-panel{display:flex;flex-direction:column;gap:20px}
+    .wait{list-style:none;margin:0;padding:0}
+    .wait li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 18px;border-bottom:1px solid var(--border)}
+    .wait li:last-child{border-bottom:0}
+    .wait__name{font-weight:600;font-size:.9rem}
+    .wait__meta{font-size:.78rem;color:var(--text-muted)}
+    .pad{padding:14px 18px}
+    .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+    .table-wrap{overflow:auto}
+    .table .col-num,.table th.col-num{text-align:right;font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+    .table .col-actions{text-align:right;width:1%;white-space:nowrap}
+    .table .badge{white-space:nowrap}
+    .btn--danger{background:transparent;color:var(--c-danger);border-color:var(--c-danger)}
+    .btn--danger:hover{background:var(--c-danger);color:#fff}
+    .navbtn{min-width:44px;min-height:44px}
+    @media(max-width:980px){.layout{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<div class="admin">
+  <aside class="admin__side" id="adminside">
+    <div class="brand">Amelia's · Admin</div>
+    <nav class="admin__nav">
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-reservations.html" class="active">Reservations</a>
+      <a href="admin-menu.html">Menu &amp; Pricing</a>
+      <a href="admin-inventory.html">Inventory</a>
+      <a href="admin-customers.html">Customers</a>
+      <a href="admin-feedback.html">Feedback</a>
+      <a href="admin-content.html">Content</a>
+      <a href="admin-team.html">Team</a>
+      <a href="admin-media.html">Media</a>
+      <a href="admin-reports.html">Reports</a>
+      <a href="admin-users.html">Users</a>
+      <a href="admin-settings.html">Settings</a>
+    </nav>
+  </aside>
+
+  <main class="admin__main">
+    <div class="admin__bar"><button class="admin__burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="adminside" onclick="var n=document.getElementById('adminside');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <h2 style="margin:0">Reservations</h2>
+      <div class="actions">
+        <span class="role-chip">Signed in as Manager</span>
+        <input class="input" style="max-width:170px" type="date" value="2026-06-02">
+        <button class="btn btn--primary btn--sm">New reservation</button>
+      </div>
+    </div>
+
+    <!-- DAY HEADER WITH NAV -->
+    <div class="dayhead">
+      <button class="navbtn" aria-label="Previous day">‹</button>
+      <h3>Tuesday, June 2 · 2026</h3>
+      <button class="navbtn" aria-label="Next day">›</button>
+      <span class="muted" style="font-size:.85rem">42 covers booked · 18 tables turning</span>
+    </div>
+
+    <div class="layout">
+      <!-- RESERVATIONS TABLE -->
+      <div class="panel">
+        <div class="panel__head">
+          <h3>Service book — dinner</h3>
+          <span class="muted" style="font-size:.8rem">5:00p – 9:30p</span>
+        </div>
+        <div class="table-wrap" role="region" aria-labelledby="book-caption" tabindex="0">
+        <table class="table data-table--list">
+          <caption id="book-caption" class="visually-hidden">Dinner service book for Tuesday, June 2, 2026</caption>
+          <thead>
+            <tr><th scope="col" class="col-num">Time</th><th scope="col" class="col-num">Party</th><th scope="col">Name</th><th scope="col">Table</th><th scope="col">Status</th><th scope="col">Deposit</th><th scope="col" class="col-actions"><span class="visually-hidden">Actions</span></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-num" data-label="Time">5:30p</td><td class="col-num" data-label="Party">2</td><td class="col-primary" data-label="Name">Whitfield</td><td data-label="Table"><span class="badge">T4</span></td>
+              <td data-label="Status"><span class="badge badge--ok">Seated</span></td><td data-label="Deposit"><span class="badge badge--ok">Paid</span></td>
+              <td class="row-actions col-actions"><button class="btn btn--ghost btn--sm">Turn</button><button class="btn btn--danger btn--sm">Clear</button></td>
+            </tr>
+            <tr>
+              <td class="col-num" data-label="Time">6:00p</td><td class="col-num" data-label="Party">4</td><td class="col-primary" data-label="Name">Bianchi</td><td data-label="Table"><span class="badge">T7</span></td>
+              <td data-label="Status"><span class="badge badge--warn">Confirmed</span></td><td data-label="Deposit"><span class="badge badge--ok">Paid</span></td>
+              <td class="row-actions col-actions"><button class="btn btn--primary btn--sm">Seat</button><button class="btn btn--danger btn--sm">Clear</button></td>
+            </tr>
+            <tr>
+              <td class="col-num" data-label="Time">6:30p</td><td class="col-num" data-label="Party">6</td><td class="col-primary" data-label="Name">Hargrove</td><td data-label="Table"><span class="badge">T9</span></td>
+              <td data-label="Status"><span class="badge badge--warn">Confirmed</span></td><td data-label="Deposit"><span class="badge badge--ok">Paid</span></td>
+              <td class="row-actions col-actions"><button class="btn btn--primary btn--sm">Seat</button><button class="btn btn--danger btn--sm">Clear</button></td>
+            </tr>
+            <tr>
+              <td class="col-num" data-label="Time">7:00p</td><td class="col-num" data-label="Party">2</td><td class="col-primary" data-label="Name">Mensah <span class="badge badge--new">VIP</span></td><td data-label="Table"><span class="badge">T2</span></td>
+              <td data-label="Status"><span class="badge badge--warn">Confirmed</span></td><td data-label="Deposit"><span class="badge badge--ok">Paid</span></td>
+              <td class="row-actions col-actions"><button class="btn btn--primary btn--sm">Seat</button><button class="btn btn--danger btn--sm">Clear</button></td>
+            </tr>
+            <tr>
+              <td class="col-num" data-label="Time">7:45p</td><td class="col-num" data-label="Party">5</td><td class="col-primary" data-label="Name">Delgado</td><td data-label="Table"><span class="badge">T11</span></td>
+              <td data-label="Status"><span class="badge badge--warn">Confirmed</span></td><td data-label="Deposit"><span class="badge badge--danger">No deposit</span></td>
+              <td class="row-actions col-actions"><button class="btn btn--primary btn--sm">Seat</button><button class="btn btn--danger btn--sm">Clear</button></td>
+            </tr>
+            <tr>
+              <td class="col-num" data-label="Time">8:00p</td><td class="col-num" data-label="Party">3</td><td class="col-primary" data-label="Name">Okafor</td><td data-label="Table"><span class="badge">T6</span></td>
+              <td data-label="Status"><span class="badge badge--warn">Confirmed</span></td><td data-label="Deposit"><span class="badge badge--ok">Paid</span></td>
+              <td class="row-actions col-actions"><button class="btn btn--primary btn--sm">Seat</button><button class="btn btn--danger btn--sm">Clear</button></td>
+            </tr>
+            <tr>
+              <td class="col-num" data-label="Time">8:30p</td><td class="col-num" data-label="Party">8</td><td class="col-primary" data-label="Name">Reyes (group)</td><td data-label="Table"><span class="badge">T9+T10</span></td>
+              <td data-label="Status"><span class="badge">Pending</span></td><td data-label="Deposit"><span class="badge badge--warn">Partial</span></td>
+              <td class="row-actions col-actions"><button class="btn btn--ghost btn--sm">Confirm</button><button class="btn btn--danger btn--sm">Clear</button></td>
+            </tr>
+            <tr>
+              <td class="col-num" data-label="Time">9:00p</td><td class="col-num" data-label="Party">2</td><td class="col-primary" data-label="Name">Cohen</td><td data-label="Table"><span class="badge">T3</span></td>
+              <td data-label="Status"><span class="badge">Pending</span></td><td data-label="Deposit"><span class="badge badge--ok">Paid</span></td>
+              <td class="row-actions col-actions"><button class="btn btn--ghost btn--sm">Confirm</button><button class="btn btn--danger btn--sm">Clear</button></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <!-- SIDE PANEL: WAITLIST + WALK-IN -->
+      <div class="side-panel">
+        <div class="panel">
+          <div class="panel__head">
+            <h3>Waitlist</h3>
+            <span class="badge badge--warn">3 waiting</span>
+          </div>
+          <ul class="wait">
+            <li>
+              <div><div class="wait__name">Foster · party of 2</div><div class="wait__meta">Quoted 25 min · 6:10p</div></div>
+              <button class="btn btn--primary btn--sm">Seat</button>
+            </li>
+            <li>
+              <div><div class="wait__name">Iqbal · party of 4</div><div class="wait__meta">Quoted 40 min · 6:25p</div></div>
+              <button class="btn btn--ghost btn--sm">Seat</button>
+            </li>
+            <li>
+              <div><div class="wait__name">Tanaka · party of 2</div><div class="wait__meta">Quoted 45 min · 6:30p</div></div>
+              <button class="btn btn--ghost btn--sm">Seat</button>
+            </li>
+          </ul>
+          <div class="pad">
+            <button class="btn btn--ghost btn--block btn--sm">+ Add to waitlist</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel__head"><h3>Walk-in</h3></div>
+          <div class="pad">
+            <p class="muted" style="margin:0 0 12px;font-size:.85rem">Seat an unbooked party at any open table.</p>
+            <button class="btn btn--accent btn--block">+ Seat walk-in</button>
+            <div class="mt muted" style="font-size:.8rem">Open now: T1, T5, T8, T12</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>

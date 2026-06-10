@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team — Amelia's Admin</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;padding:5px 12px;border-radius:999px;background:var(--c-sand-2);color:var(--c-ink-2)}
+  .ph{background:var(--c-sand-2);border:1px dashed var(--border);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:.82rem;text-align:center;padding:8px}
+  .member .ph{aspect-ratio:4/3;margin-bottom:12px}
+  .member__head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+  .drag{cursor:grab;color:var(--text-muted);font-size:1.1rem;line-height:1}
+  .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .btn--danger-text{color:var(--c-danger);border-color:var(--c-danger)}
+  .btn--danger-text:hover{background:var(--c-danger);color:#fff}
+  .drag-handle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:none;cursor:grab;color:var(--text-muted);font-size:1.1rem;line-height:1}
+  .toggle{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:500;cursor:pointer}
+  .toggle input{position:absolute;opacity:0;width:0;height:0}
+  .toggle .track{width:34px;height:20px;border-radius:999px;background:var(--c-sand-2);position:relative;border:1px solid var(--border);flex:none;transition:.15s}
+  .toggle .track::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:var(--shadow-sm);transition:.15s}
+  .toggle input:checked + .track{background:var(--c-olive);border-color:var(--c-olive)}
+  .toggle input:checked + .track::after{left:16px}
+  .toggle input:focus-visible + .track{outline:2px solid var(--c-navy);outline-offset:2px}
+  .member__actions{display:flex;gap:8px;margin-top:12px;align-items:center}
+  .panel{background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-sm);overflow:hidden;margin-top:24px}
+  .panel__head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border)}
+  .panel__head h3{margin:0}
+  .panel__body{padding:18px}
+  .panel__foot{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:14px 18px;border-top:1px solid var(--border);background:var(--bg-soft)}
+  .dropzone{aspect-ratio:1/1;max-width:160px}
+  .editcols{display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+  .full{grid-column:1 / -1}
+  @media(max-width:860px){.editcols,.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="admin">
+  <aside class="admin__side" id="adminside">
+    <div class="brand">Amelia's · Admin</div>
+    <nav class="admin__nav">
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="admin-orders.html">Orders</a>
+      <a href="admin-reservations.html">Reservations</a>
+      <a href="admin-menu.html">Menu &amp; Pricing</a>
+      <a href="admin-inventory.html">Inventory</a>
+      <a href="admin-customers.html">Customers</a>
+      <a href="admin-feedback.html">Feedback</a>
+      <a href="admin-content.html">Content</a>
+      <a href="admin-team.html" class="active">Team</a>
+      <a href="admin-media.html">Media</a>
+      <a href="admin-reports.html">Reports</a>
+      <a href="admin-users.html">Users</a>
+      <a href="admin-settings.html">Settings</a>
+    </nav>
+  </aside>
+  <main class="admin__main">
+    <div class="admin__bar"><button class="admin__burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="adminside" onclick="var n=document.getElementById('adminside');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <div class="flex center gap">
+        <h2 style="margin:0">Team</h2>
+        <span class="muted" style="font-size:.85rem">Members shown on the “Our Team” section</span>
+      </div>
+      <div class="flex center gap">
+        <span class="chip">Signed in as Owner</span>
+        <button type="button" class="btn btn--primary btn--sm">+ Add team member</button>
+      </div>
+    </div>
+
+    <div class="grid grid--3">
+      <!-- Member 1 -->
+      <article class="card member">
+        <div class="card__body">
+          <div class="ph">Stacey portrait</div>
+          <div class="member__head">
+            <div>
+              <h3 style="margin:0">Stacey Weber</h3>
+              <div class="muted" style="font-size:.85rem">Founder &amp; Chef</div>
+            </div>
+            <button type="button" class="drag-handle" aria-label="Drag to reorder Stacey Weber" title="Drag to reorder"><span aria-hidden="true">≡</span></button>
+          </div>
+          <p class="muted" style="font-size:.85rem;margin:10px 0 0">Trained in Provence and obsessed with the Scottsdale farmers market — Stacey builds the menu around whatever's best that week.</p>
+          <div class="member__actions">
+            <label class="toggle"><input type="checkbox" checked><span class="track"></span> <span>Visible</span></label>
+            <button type="button" class="btn btn--ghost btn--sm">Edit</button>
+            <button type="button" class="btn btn--ghost btn--sm btn--danger-text">Delete</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Member 2 -->
+      <article class="card member">
+        <div class="card__body">
+          <div class="ph">Maria portrait</div>
+          <div class="member__head">
+            <div>
+              <h3 style="margin:0">Maria Lopez</h3>
+              <div class="muted" style="font-size:.85rem">General Manager</div>
+            </div>
+            <button type="button" class="drag-handle" aria-label="Drag to reorder Maria Lopez" title="Drag to reorder"><span aria-hidden="true">≡</span></button>
+          </div>
+          <p class="muted" style="font-size:.85rem;margin:10px 0 0">Keeps the floor humming and the regulars happy. Fifteen years running hospitality across the Valley.</p>
+          <div class="member__actions">
+            <label class="toggle"><input type="checkbox" checked><span class="track"></span> <span>Visible</span></label>
+            <button type="button" class="btn btn--ghost btn--sm">Edit</button>
+            <button type="button" class="btn btn--ghost btn--sm btn--danger-text">Delete</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Member 3 -->
+      <article class="card member">
+        <div class="card__body">
+          <div class="ph">Devon portrait</div>
+          <div class="member__head">
+            <div>
+              <h3 style="margin:0">Devon Pierce</h3>
+              <div class="muted" style="font-size:.85rem">Head Baker</div>
+            </div>
+            <button type="button" class="drag-handle" aria-label="Drag to reorder Devon Pierce" title="Drag to reorder"><span aria-hidden="true">≡</span></button>
+          </div>
+          <p class="muted" style="font-size:.85rem;margin:10px 0 0">Up before dawn for the sourdough. Devon's croissants sell out most mornings before 10am.</p>
+          <div class="member__actions">
+            <label class="toggle"><input type="checkbox"><span class="track"></span> <span>Visible on site</span></label>
+            <button type="button" class="btn btn--ghost btn--sm">Edit</button>
+            <button type="button" class="btn btn--ghost btn--sm btn--danger-text">Delete</button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Edit panel -->
+    <section class="panel">
+      <div class="panel__head">
+        <h3>Edit member: Stacey Weber</h3>
+        <span class="badge">Editing</span>
+      </div>
+      <form class="panel__body" id="member-edit-form">
+        <div class="editcols">
+          <div>
+            <div class="field">
+              <label for="member-photo">Photo</label>
+              <input id="member-photo" name="photo" type="file" accept="image/*" class="input" style="padding:8px">
+              <div class="ph dropzone" aria-hidden="true">Drop photo / upload</div>
+            </div>
+          </div>
+          <div>
+            <div class="row">
+              <div class="field">
+                <label for="member-name">Name <abbr class="required" title="required" style="color:var(--c-danger);text-decoration:none">*</abbr></label>
+                <input id="member-name" name="name" class="input" type="text" required value="Stacey Weber">
+              </div>
+              <div class="field">
+                <label for="member-role">Role / Title <abbr class="required" title="required" style="color:var(--c-danger);text-decoration:none">*</abbr></label>
+                <input id="member-role" name="role" class="input" type="text" required value="Founder &amp; Chef">
+              </div>
+              <div class="field full">
+                <label for="member-bio">Bio</label>
+                <textarea id="member-bio" name="bio" class="textarea" rows="4">Trained in Provence and obsessed with the Scottsdale farmers market — Stacey builds the menu around whatever's best that week. She founded Amelia's in 2019 with a single wood oven and a standing order from three local farms.</textarea>
+              </div>
+              <div class="field">
+                <label for="member-order">Display order</label>
+                <input id="member-order" name="display_order" class="input" type="number" min="1" inputmode="numeric" value="1">
+              </div>
+              <div class="field">
+                <span class="muted" style="display:block;font-size:.82rem;font-weight:600;margin-bottom:5px;color:var(--c-ink-2)">Visibility</span>
+                <label class="toggle"><input type="checkbox" name="visible" checked><span class="track"></span> <span>Visible on site</span></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="panel__foot">
+        <button type="button" class="btn btn--ghost btn--sm" style="margin-right:auto">Cancel</button>
+        <button type="submit" form="member-edit-form" class="btn btn--primary btn--sm">Save</button>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>
