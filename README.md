@@ -7,10 +7,9 @@ GoDaddy/cPanel.
 
 ## 🔗 Live (staging / parity)
 
-**https://parityrfp.com/cs/amelias/**
+**https://TBD-new-parity-link/** _(placeholder — update with the new parity URL)_
 
-This is the active parity environment — the latest build of the platform,
-served from the `/cs/amelias/` subdirectory.
+This is the active parity environment — the latest build of the platform.
 
 ## Stack
 
