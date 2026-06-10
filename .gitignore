@@ -38,3 +38,7 @@ _setup_upload.php
 
 # Local Claude tooling/config (skills contain infra creds — never publish)
 .claude/
+
+# Deploy artifacts (never commit)
+amelias_db_dump.sql
+dist/
